@@ -2,13 +2,9 @@ var express = require('express');
 var bodyparser = require('body-parser');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-// var expressSession = require('express-session');
-var database = require('./db/');
 
-var debug = require('debug')('passport-mongo');
-var hash = require('bcrypt-nodejs');
 var path = require('path');
-
+var cors = require('cors');
 
 
 //initiate express
@@ -21,9 +17,6 @@ app.use(bodyparser.urlencoded({
 app.use(bodyparser.json());
 app.use(logger('dev'));
 app.use(cookieParser());
-
-//location to client index.html
-app.use(express.static(__dirname + '/../client'));
 
 
 var apiRoutes = require('./config/api-routes');
@@ -39,14 +32,10 @@ app.use('/api', routes);
 
 
 
-//configure our server with routing file in /server/config/api-router
-require('./config/api-router.js')(app, express);
-
-
 
 
 //set and run the port and server
-app.set('port',process.env.PORT || 9000);
+app.set('port',process.env.PORT || 2000);
 var port = app.get('port');
 app.listen(port);
 console.log("Server listening on PORT", port);
