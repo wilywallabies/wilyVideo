@@ -1,0 +1,25 @@
+{
+  "name": "wilyVideo",
+  "version": "1.0.0",
+  "description": "HRNYC03 Thesis",
+  "main": "index.js",
+  "scripts": {
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilywallabies/wilyVideo.git"
+  },
+  "author": "Navkiran Ghuman, Samantha Gowda, John Kwangmin Jung, Bernard Lin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wilywallabies/wilyVideo/issues"
+  },
+  "homepage": "https://github.com/wilywallabies/wilyVideo#readme",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+  }
+}

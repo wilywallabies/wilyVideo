@@ -1,0 +1,23 @@
+{
+  "name": "wilyVideo",
+  "description": "HRNYC03 Thesis",
+  "main": "index.js",
+  "authors": [
+    "Navkiran Ghuman",
+    "Samantha Gowda",
+    "John Kwangmin Jung",
+    "Bernard Lin"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/wilywallabies/wilyVideo",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+
+  ],
+  "dependencies": {
+
+  }
+}
