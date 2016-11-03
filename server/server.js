@@ -30,7 +30,19 @@ app.use('/api', authRoutes);
 app.use('/api', routes);
 
 
+// webpack loads index.html, looks for script src
+app.get('/public/bundle.js', function(req, res){
+  res.sendFile(path.join(__dirname, '../client/public/bundle.js'));
+});
 
+app.get('/styles/style.css', function(req, res){
+  res.sendFile(path.join(__dirname, '../client/styles/style.css'));
+});
+
+app.get('*', function(req, res){
+  console.log('REQ.URL IS: ', req.url);
+  res.sendFile(path.join(__dirname, '../client/index.html'));
+});
 
 
 
