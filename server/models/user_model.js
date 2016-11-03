@@ -1,6 +1,11 @@
 //User Schema and Model
 
-// var knex = require('./db');
+var knex = require('./db');
 
 
-// module.exports = User
+//User Schema
+var User = {
+
+}
+
+module.exports = User
