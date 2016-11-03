@@ -4,7 +4,7 @@
   "description": "HRNYC03 Thesis",
   "main": "index.js",
   "scripts": {
-    
+    "commit": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -16,10 +16,14 @@
     "url": "https://github.com/wilywallabies/wilyVideo/issues"
   },
   "homepage": "https://github.com/wilywallabies/wilyVideo#readme",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
-
-  }
+    "commitizen": "^2.8.6",
+    "cz-conventional-changelog": "^1.2.0"
+  },
+  "config": {
+   "commitizen": {
+       "path": "node_modules/cz-conventional-changelog"
+   }
+ }
 }
