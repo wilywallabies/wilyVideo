@@ -20,7 +20,7 @@ knex.schema.hasTable('users').then(function(exists){
       table.string('userName', 50).unique();
       table.string('password', 50);
       table.string('firstName');
-      table.string('firstName');
+      table.string('lasttName');
       table.timestamps();
       console.log('USERS Table Created');
     })
