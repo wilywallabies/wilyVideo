@@ -3,11 +3,11 @@
 var knex = require('knex')({
   client: 'mysql',
   connection:{
-    host     : process.env.RDS_HOSTNAME,
-    user     : process.env.RDS_USERNAME,
+    host     : process.env.RDS_HOSTNAME || 'localhost',
+    user     : process.env.RDS_USERNAME || 'root',
     password : process.env.RDS_PASSWORD,
-    port     : process.env.RDS_PORT,
-    database: process.env.RDS_DB_NAME
+    port     : process.env.RDS_PORT || '2000',
+    database: process.env.RDS_DB_NAME || 'wilyData_Test'
   }
 });
 

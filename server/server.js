@@ -20,14 +20,14 @@ app.use(cookieParser());
 
 
 var apiRoutes = require('./config/api-routes');
-var authRoutes = require('./config/authRoutes');
-var routes = require('./config/routes');
+var authRoutes = require('./config/auth-routes');
+var userRoutes = require('./config/user-routes');
 
 
 // All routes prefixed with /api get run through this router
 app.use('/api', apiRoutes);
 app.use('/api', authRoutes);
-app.use('/api', routes);
+app.use('/api', userRoutes);
 
 
 // webpack loads index.html, looks for script src
