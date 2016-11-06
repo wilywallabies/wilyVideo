@@ -8,9 +8,9 @@ var User = require('../models/user-model');
 
 
 router.get('/user', function(req, res){
-  User.fetchAll()
-  .then(function(user){
-    res.send(user)
+  console.log('GET /user API called');
+  User.findOne({}, function(err, user){
+    //do something
   })
 
 
@@ -18,8 +18,16 @@ router.get('/user', function(req, res){
 
 
 router.post('/user', function(req, res){
+  console.log('POST /user API called');
+  console.log(req.body, 'req.body POST /USER');
 
-
+  User.addOne({
+    email: req.body.email,
+    userName: req.body.userName,
+    password: req.body.password,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName
+  })
 
 })
 

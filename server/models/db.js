@@ -8,8 +8,14 @@ var knex = require('knex')({
     password : process.env.RDS_PASSWORD,
     port     : process.env.RDS_PORT || '2000',
     database: process.env.RDS_DB_NAME || 'wilyData_Test'
-  }
+  },
+   pool: { min: 0, max: 7 },
+   acquireConnectionTimeout: 10000
 });
+//
+// acquireConnectionTimeout used to determine how long knex should wait before throwing a timeout error
+
+
 
 //Set up users table if it doesn't exist.
 knex.schema.hasTable('users').then(function(exists){
@@ -20,7 +26,7 @@ knex.schema.hasTable('users').then(function(exists){
       table.string('userName', 50).unique();
       table.string('password', 50);
       table.string('firstName');
-      table.string('lasttName');
+      table.string('lastName');
       table.timestamps();
       console.log('USERS Table Created');
     })

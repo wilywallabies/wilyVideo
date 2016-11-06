@@ -6,21 +6,17 @@ var router = express.Router();
 
 
 
+router.post('/register', function(req, res){
 
+})
 
+router.post('/login', function(req, res, next){
 
+})
 
+router.get('/logout', function(req, res){
 
-
-
-
-
-
-
-
-
-
-
+})
 
 
 
