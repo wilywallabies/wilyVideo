@@ -1,3 +1,6 @@
+// loads environment variables from .env into ENV (process.env)
+require('dotenv').config();
+
 var express = require('express');
 var bodyparser = require('body-parser');
 var logger = require('morgan');
@@ -5,7 +8,6 @@ var cookieParser = require('cookie-parser');
 
 var path = require('path');
 var cors = require('cors');
-
 
 //initiate express
 var app = express();
