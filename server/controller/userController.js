@@ -1,25 +1,17 @@
-'use strict'
-
 //Backend User API call
 
-var express = require('express');
-var router = express.Router();
+var request = require('request');
 
-var User = require('../models/user-model');
+var User = require('../models/userModel');
 
-
-
-router.get('/user', (req, res) => {
+module.exports.getUser = function (req, res){
   console.log('GET /user API called');
   User.findOne({}, (err, user) => {
     //do something
-  })
+  });
+};
 
-
-});
-
-
-router.post('/user', (req, res) => {
+module.exports.addUser = function (req, res){
   console.log('POST /user API called');
   console.log(req.body, 'req.body POST /USER');
 
@@ -29,12 +21,6 @@ router.post('/user', (req, res) => {
     password: req.body.password,
     firstName: req.body.firstName,
     lastName: req.body.lastName
-  })
+  });
+};
 
-});
-
-
-
-
-
-module.exports = router;

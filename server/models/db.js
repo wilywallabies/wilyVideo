@@ -17,9 +17,9 @@ knex.schema.hasTable('users').then(exists => {
   if(!exists){
     return knex.schema.createTable('users', table => {
       table.increments('id').primary()
-      table.string('email', 50).unique();
-      table.string('userName', 50).unique();
-      table.string('password', 50);
+      table.string('email', 250).unique();
+      table.string('userName', 250).unique();
+      table.string('password', 250);
       table.string('firstName');
       table.string('lastName');
       table.timestamps();
