@@ -16,7 +16,10 @@ router.post('/login', (req, res, next) => {
 })
 
 router.get('/logout', (req, res) => {
-
+    // req.logout();
+    // res.status(200).json({
+    //     status: 'Bye!'
+    // });
 })
 
 
