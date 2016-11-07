@@ -9,17 +9,17 @@ var User = require('../models/user-model');
 
 
 
-router.get('/user', function(req, res){
+router.get('/user', (req, res) => {
   console.log('GET /user API called');
-  User.findOne({}, function(err, user){
+  User.findOne({}, (err, user) => {
     //do something
   })
 
 
-})
+});
 
 
-router.post('/user', function(req, res){
+router.post('/user', (req, res) => {
   console.log('POST /user API called');
   console.log(req.body, 'req.body POST /USER');
 
@@ -31,7 +31,7 @@ router.post('/user', function(req, res){
     lastName: req.body.lastName
   })
 
-})
+});
 
 
 
