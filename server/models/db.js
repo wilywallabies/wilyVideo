@@ -1,26 +1,21 @@
+'use strict'
 // This creates the connection and sets up the table if it doesn't exist
 
 var knex = require('knex')({
   client: 'mysql',
   connection:{
-    host     : process.env.RDS_HOSTNAME || 'localhost',
-    user     : process.env.RDS_USERNAME || 'root',
+    host     : process.env.RDS_HOSTNAME,
+    user     : process.env.RDS_USERNAME ,
     password : process.env.RDS_PASSWORD,
-    port     : process.env.RDS_PORT || '2000',
-    database: process.env.RDS_DB_NAME || 'wilyData_Test'
-  },
-   pool: { min: 0, max: 7 },
-   acquireConnectionTimeout: 10000
+    port     : process.env.RDS_PORT ,
+    database: process.env.RDS_DB_NAME
+  }
 });
-//
-// acquireConnectionTimeout used to determine how long knex should wait before throwing a timeout error
-
-
 
 //Set up users table if it doesn't exist.
-knex.schema.hasTable('users').then(function(exists){
+knex.schema.hasTable('users').then(exists => {
   if(!exists){
-    return knex.schema.createTable('users', function(table){
+    return knex.schema.createTable('users', table => {
       table.increments('id').primary()
       table.string('email', 50).unique();
       table.string('userName', 50).unique();
@@ -34,9 +29,9 @@ knex.schema.hasTable('users').then(function(exists){
 });
 
 //Set up friends table if it doesn't exist.
-knex.schema.hasTable('friends').then(function(exists){
+knex.schema.hasTable('friends').then(exists => {
   if(!exists){
-    return knex.schema.createTable('friends', function(table){
+    return knex.schema.createTable('friends', table => {
       table.integer('user_id').unsigned()
       table.foreign('user_id').references('Items.user_id_in_items').inTable('users')
       table.timestamps();
@@ -46,4 +41,4 @@ knex.schema.hasTable('friends').then(function(exists){
 });
 
 // Export for use in the models
-module.exports = knex
+module.exports = knex;

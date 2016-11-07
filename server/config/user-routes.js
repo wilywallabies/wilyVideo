@@ -1,3 +1,5 @@
+'use strict'
+
 //Backend User API call
 
 var express = require('express');

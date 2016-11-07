@@ -1,3 +1,4 @@
+'use strict'
 //Backend router for authentication
 
 var express = require('express');
