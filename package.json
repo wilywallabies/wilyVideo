@@ -51,7 +51,8 @@
     "request": "^2.78.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.3"
+    "webpack": "^1.13.3",
+    "webrtc-adapter": "^2.0.6"
   },
   "devDependencies": {
     "commitizen": "^2.8.6",
