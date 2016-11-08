@@ -3,6 +3,8 @@ node_modules/
 #OS X
 *.DS_Store
 
+.env
+
 client/public
 
 .env
