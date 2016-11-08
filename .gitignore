@@ -8,3 +8,5 @@ node_modules/
 client/public
 
 .env
+.bundle.js
+*.bundle.js
