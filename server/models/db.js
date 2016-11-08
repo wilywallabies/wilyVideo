@@ -15,7 +15,6 @@ var knex = require('knex')({
 console.log('******* TESTING PURPOSE ********');
 console.log(process.env.DB_HOST, 'DB_HOST');
 console.log(process.env.DB_USER, 'DB_USER');
-// console.log(DB_USER)
 console.log('*********************************');
 
 //Set up users table if it doesn't exist.
@@ -39,7 +38,7 @@ knex.schema.hasTable('friends').then(exists => {
   if(!exists){
     return knex.schema.createTable('friends', table => {
       table.integer('user_id').unsigned()
-      table.foreign('user_id').references('Items.user_id_in_items').inTable('users')
+      table.foreign('user_id').references('id').inTable('users')
       table.timestamps();
       console.log('FRIENDS Table Created');
     })
