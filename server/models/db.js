@@ -4,22 +4,28 @@
 var knex = require('knex')({
   client: 'mysql',
   connection:{
-    host     : process.env.RDS_HOSTNAME,
-    user     : process.env.RDS_USERNAME ,
-    password : process.env.RDS_PASSWORD,
-    port     : process.env.RDS_PORT ,
-    database: process.env.RDS_DB_NAME
+    host     : process.env.DB_HOST,
+    user     : process.env.DB_USER ,
+    password : process.env.DB_PASS,
+    port     : process.env.DB_PORT,
+    database: process.env.DB_NAME
   }
 });
+
+console.log('******* TESTING PURPOSE ********');
+console.log(process.env.DB_HOST, 'DB_HOST');
+console.log(process.env.DB_USER, 'DB_USER');
+// console.log(DB_USER)
+console.log('*********************************');
 
 //Set up users table if it doesn't exist.
 knex.schema.hasTable('users').then(exists => {
   if(!exists){
     return knex.schema.createTable('users', table => {
       table.increments('id').primary()
-      table.string('email', 50).unique();
-      table.string('userName', 50).unique();
-      table.string('password', 50);
+      table.string('email', 250).unique();
+      table.string('userName', 250).unique();
+      table.string('password', 250);
       table.string('firstName');
       table.string('lastName');
       table.timestamps();
@@ -42,3 +48,4 @@ knex.schema.hasTable('friends').then(exists => {
 
 // Export for use in the models
 module.exports = knex;
+

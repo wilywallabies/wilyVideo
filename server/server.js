@@ -1,4 +1,6 @@
-'use strict'
+// loads environment variables from .env into ENV (process.env)
+require('dotenv').config();
+
 var express = require('express');
 var bodyparser = require('body-parser');
 var logger = require('morgan');
@@ -6,7 +8,6 @@ var cookieParser = require('cookie-parser');
 
 var path = require('path');
 var cors = require('cors');
-
 
 //initiate express
 var app = express();
@@ -20,15 +21,10 @@ app.use(logger('dev'));
 app.use(cookieParser());
 
 
-var apiRoutes = require('./config/api-routes');
-var authRoutes = require('./config/auth-routes');
-var userRoutes = require('./config/user-routes');
-
+var apiRoutes = require('./route/route');
 
 // All routes prefixed with /api get run through this router
 app.use('/api', apiRoutes);
-app.use('/api', authRoutes);
-app.use('/api', userRoutes);
 
 
 // webpack loads index.html, looks for script src
