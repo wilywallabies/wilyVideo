@@ -1,7 +1,7 @@
 {
   "name": "wilyVideo",
   "description": "HRNYC03 Thesis",
-  "main": "index.js",
+  "main": "router.js",
   "authors": [
     "Navkiran Ghuman",
     "Samantha Gowda",

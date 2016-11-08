@@ -1,10 +1,13 @@
-var webpack = require('webpack');
-var path = require('path');
+"use strict";
 
-var BUILD_DIR = path.resolve(__dirname, 'client/public');
-var APP_DIR = path.resolve(__dirname, 'client');
+const webpack = require('webpack');
+const path = require('path');
 
-var config = {
+let BUILD_DIR = path.resolve(__dirname, 'client/public');
+let APP_DIR = path.resolve(__dirname, 'client');
+
+let config = {
+  //entry point for the app
   entry: [
     APP_DIR + '/router.js'
   ],
@@ -24,9 +27,9 @@ var config = {
        }
      },
      {
-       test: /\.css?$/,
+       test: /\.scss?$/,
        include: path.join(__dirname, 'client'),
-       loaders: ['css']
+       loader: "style!css!sass"
      }
    ]
  }
