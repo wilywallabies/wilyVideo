@@ -1,51 +1,87 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import adapter from 'webrtc-adapter';
+
+import LocalVideo from './LocalVideo';
 
 class Video extends React.Component{
   constructor(props) {
     super(props);
-    var constraints = window.constraints = {
-      audio: false,
-      video: true
-    };
-
-    this.successCallback = this.successCallback.bind(this);
-    this.errorCallback = this.errorCallback.bind(this);
-  }
-
-  successCallback(stream) {
-    window.stream = stream; // stream available to console
-
-    var video = ReactDOM.findDOMNode(this.refs.local)
-    if (window.URL) {
-      video.src = window.URL.createObjectURL(stream);
-    } else {
-      video.src = stream;
+    this.state = {
+      startButton: {
+        disabled: false
+      },
+      hangupButton: {
+        disabled:true
+      },
+      servers: null,
+      localVideo:null
     }
+   this.gotStream = this.gotStream.bind(this);
+   this.start = this.start.bind(this);
+   this.call = this.call.bind(this);
+   this.onIceCandidate = this.onIceCandidate.bind(this);
+   this.getOtherPc = this.getOtherPc.bind(this);
   }
 
-  errorCallback(error) {
-    console.log('navigator.getUserMedia error: ', error);
- }
+  getName(pc) {
+    return (pc === pc1) ? 'pc1' : 'pc2';
+  }
 
-  componentDidMount(){
-    navigator.getUserMedia = navigator.getUserMedia ||
-    navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    navigator.getUserMedia(constraints, this.successCallback, this.errorCallback)
+  getOtherPc(pc) {
+    return (pc === pc1) ? pc2: pc1;
+  }
+
+  //Once local stream has been obtained, set state to stream
+  gotStream(stream) {
+    this.setState({localVideo : stream});
+  }
+
+  //Function for when the start button is clicked.
+  //Obtains local video from webcam
+  start() {
+    navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video:true
+    })
+    .then(this.gotStream)
+    .catch(
+      (e) => {console.log('getUserMedia() error:' + e.name)}
+    );
+
+  }
+
+  call() {
+    let videoTracks = this.state.localVideo.getVideoTracks();
+    let audioTracks = this.state.localvideo.getAudioTracks();
+
+    let servers = null;
+
+    let pc1 = new RTCPeerConnection(servers);
+    pc1.onicecandidate = e => this.onIceCandidate(pc1, e);
+  }
+
+
+  onIceCandidate(pc, event) {
+    if(event.candidate) {
+      getOtherPc(pc).addIceCandidate(
+        new RTCIceCandidate(event.candidate)
+      )
+    }
+
   }
 
   render(){
+
     return (
       <div>
         <h1>
           Test
         </h1>
-    <video className = "local"
-      id = "localVideo"
-      ref = "local" autoPlay></video>
+        <LocalVideo localVideo={this.state.localVideo}></LocalVideo>
 
         <div>
-          <button id="startButton">Start</button>
+          <button id="startButton" onClick={this.start}>Start</button>
           <button id="callButton">Call</button>
           <button id="hangupButton">Hang Up</button>
         </div>
