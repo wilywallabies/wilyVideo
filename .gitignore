@@ -5,6 +5,5 @@ node_modules/
 
 .env
 
-client/public
-
-.env
+client/public/bundle.js
+bundle.js
