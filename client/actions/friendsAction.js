@@ -15,6 +15,9 @@ export function retrieveFriends() {
 
   }
 
-export function addFriend(){
-  return
+export function addFriend(userId){
+  return {
+    type: 'ADD_FRIEND',
+    payload: userId
+  }
 }

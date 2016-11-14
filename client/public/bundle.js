@@ -32271,6 +32271,10 @@
 
 	var _reactRedux = __webpack_require__(195);
 
+	var _redux = __webpack_require__(174);
+
+	var _friendsAction = __webpack_require__(289);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32287,8 +32291,10 @@
 
 	    var _this = _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).call(this, props));
 
+	    console.log(props, ' friendsAddContainer Props');
 	    _this.state = { term: '' };
 	    _this.onInputChange = _this.onInputChange.bind(_this);
+	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
 	    return _this;
 	  }
 
@@ -32297,10 +32303,13 @@
 	    value: function onFormSubmit(e) {
 	      e.preventDefault();
 	      //need to Add Friends to current user
+	      this.props.addFriend(this.state.term);
 	    }
 	  }, {
 	    key: 'onInputChange',
 	    value: function onInputChange(e) {
+	      console.log(this.state.term);
+
 	      this.setState({ term: e.target.value });
 	    }
 	  }, {
@@ -32332,7 +32341,14 @@
 	  return FriendList;
 	}(_react2.default.Component);
 
-	exports.default = FriendList;
+	//binds action and container
+
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ addFriend: _friendsAction.addFriend }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(FriendList);
 
 /***/ },
 /* 287 */
@@ -32501,8 +32517,11 @@
 	  };
 	}
 
-	function addFriend() {
-	  return;
+	function addFriend(userId) {
+	  return {
+	    type: 'ADD_FRIEND',
+	    payload: userId
+	  };
 	}
 
 /***/ },

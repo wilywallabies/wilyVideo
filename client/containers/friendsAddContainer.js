@@ -1,20 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class FriendList extends React.Component {
+import { addFriend } from '../actions/friendsAction'
+
+class FriendList extends React.Component {
   constructor(props){
     super(props);
-
+    console.log(props, ' friendsAddContainer Props')
     this.state = {term: ''};
     this.onInputChange = this.onInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 
   onFormSubmit(e){
     e.preventDefault();
     //need to Add Friends to current user
+    this.props.addFriend(this.state.term)
 
   }
   onInputChange(e){
+    console.log(this.state.term)
+
     this.setState({term: e.target.value});
   }
   render(){
@@ -36,3 +43,11 @@ export default class FriendList extends React.Component {
       )
   }
 }
+
+//binds action and container
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ addFriend }, dispatch)
+}
+
+
+export default connect(null, mapDispatchToProps)(FriendList)
