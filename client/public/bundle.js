@@ -32381,9 +32381,9 @@
 
 	var _friendsAddContainer2 = _interopRequireDefault(_friendsAddContainer);
 
-	var _friendDetailsContainer = __webpack_require__(288);
+	var _friendListContainer = __webpack_require__(316);
 
-	var _friendDetailsContainer2 = _interopRequireDefault(_friendDetailsContainer);
+	var _friendListContainer2 = _interopRequireDefault(_friendListContainer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32408,7 +32408,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'col-md-4 panel panel-default' },
-	        _react2.default.createElement(_friendDetailsContainer2.default, null),
+	        _react2.default.createElement(_friendListContainer2.default, null),
 	        _react2.default.createElement(_friendsAddContainer2.default, null)
 	      );
 	    }
@@ -32420,111 +32420,7 @@
 	exports.default = Friend;
 
 /***/ },
-/* 288 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(195);
-
-	var _redux = __webpack_require__(174);
-
-	var _friendsAction = __webpack_require__(289);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var FriendDetail = function (_React$Component) {
-	  _inherits(FriendDetail, _React$Component);
-
-	  function FriendDetail(props) {
-	    _classCallCheck(this, FriendDetail);
-
-	    var _this = _possibleConstructorReturn(this, (FriendDetail.__proto__ || Object.getPrototypeOf(FriendDetail)).call(this, props));
-
-	    console.log(props, ' friendsDetail Props');
-	    return _this;
-	  }
-
-	  _createClass(FriendDetail, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      //call friends list and render
-	      this.props.retrieveFriends();
-	      console.log('component did mount, friendsDetailContainer');
-	    }
-	  }, {
-	    key: 'renderFriend',
-	    value: function renderFriend(friend) {
-	      console.log(friend, ' friend---');
-	      return friend.map(function (user, i) {
-	        console.log(user[0].user_id2, i, 'hi');
-	        console.log(user[1].user_id2, i, 'hi');
-
-	        return _react2.default.createElement(
-	          'div',
-	          { key: i },
-	          ' User:',
-	          user.user_id2
-	        );
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'panel-group' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel panel-default' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-heading' },
-	            'Contacts'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-body' },
-	            this.renderFriend(this.props.friend)
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return FriendDetail;
-	}(_react2.default.Component);
-
-	function mapStateToProps(state) {
-	  console.log(state, ' state friendDetailContainer.js');
-	  return { friend: state.friend };
-	}
-
-	//binds action and container
-	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ retrieveFriends: _friendsAction.retrieveFriends }, dispatch);
-	}
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendDetail);
-
-/***/ },
+/* 288 */,
 /* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -34073,6 +33969,166 @@
 	};
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+/***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(195);
+
+	var _redux = __webpack_require__(174);
+
+	var _friendsAction = __webpack_require__(289);
+
+	var _friendDetailContainer = __webpack_require__(317);
+
+	var _friendDetailContainer2 = _interopRequireDefault(_friendDetailContainer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FriendList = function (_React$Component) {
+	  _inherits(FriendList, _React$Component);
+
+	  function FriendList(props) {
+	    _classCallCheck(this, FriendList);
+
+	    var _this = _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).call(this, props));
+
+	    console.log(props, ' friendsDetail Props');
+	    return _this;
+	  }
+
+	  _createClass(FriendList, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      //call friends list and render
+	      this.props.retrieveFriends();
+	      console.log('component did mount, friendsDetailContainer');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-group' },
+	          !this.props.friend ? "Loading..." : this.props.friend.map(function (user, i) {
+	            return _react2.default.createElement(_friendDetailContainer2.default, { key: i, friend: user });
+	          })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return FriendList;
+	}(_react2.default.Component);
+
+	function mapStateToProps(state) {
+	  console.log(state, ' state friendListContainer.js');
+	  return { friend: state.friend };
+	}
+
+	//binds action and container
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ retrieveFriends: _friendsAction.retrieveFriends }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendList);
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FriendDetail = function (_React$Component) {
+	  _inherits(FriendDetail, _React$Component);
+
+	  function FriendDetail(props) {
+	    _classCallCheck(this, FriendDetail);
+
+	    var _this = _possibleConstructorReturn(this, (FriendDetail.__proto__ || Object.getPrototypeOf(FriendDetail)).call(this, props));
+
+	    console.log(props, ' FriendDetail props');
+	    return _this;
+	  }
+
+	  _createClass(FriendDetail, [{
+	    key: 'render',
+	    value: function render() {
+	      var user = this.props.friend; //Array of Object
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'panel-default' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel  panel-info text-center' },
+	          'Contacts'
+	        ),
+	        user.map(function (user, i) {
+	          return _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body', key: i },
+	            user.user_id2
+	          );
+	        })
+	      );
+	    }
+	  }]);
+
+	  return FriendDetail;
+	}(_react2.default.Component);
+
+	// const FriendDetail = ({friend}) => (
+	//   // console.log(user, ' FRIEND DETAIL')
+	//   console.log(friend, ' FRIEND DETAIL')
+	//   <div>
+	//     {friend}
+	//   </div>
+	//   )
+
+
+	exports.default = FriendDetail;
 
 /***/ }
 /******/ ]);

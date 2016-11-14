@@ -5,7 +5,7 @@ var db = require('../models/db');
 module.exports.retrieveFriends = function (req, res){
   console.log('GET /friend API called');
   // db('friends').where({user_id: 1}).select('user_id2').returning('user_id2')
-  db('friends').where({user_id: 1}).select('user_id2')
+  db('friends').where({user_id: 9}).select('user_id2')
 
   .then((data) => {
     console.log(data, ': data, retreiveFriends')
