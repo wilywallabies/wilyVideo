@@ -12,8 +12,6 @@ bundle.js
 client/public
 
 .env
-.bundle.js
-*.bundle.js
 
 bundle.js
 client/public/bundle.js

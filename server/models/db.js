@@ -9,7 +9,9 @@ var knex = require('knex')({
     password : process.env.DB_PASS,
     port     : process.env.DB_PORT,
     database: process.env.DB_NAME
-  }
+  }, acquireConnectionTimeout: 15000
+
+
 });
 
 console.log('******* TESTING PURPOSE ********');
@@ -37,9 +39,11 @@ knex.schema.hasTable('users').then(exists => {
 knex.schema.hasTable('friends').then(exists => {
   if(!exists){
     return knex.schema.createTable('friends', table => {
-      table.integer('user_id').unsigned()
-      table.foreign('user_id').references('id').inTable('users')
-      table.timestamps();
+      table.increments('id').primary()
+      table.integer('user_id').unsigned();
+      table.integer('user_id2').unsigned();
+      table.foreign('user_id').references('id').inTable('users');
+      table.foreign('user_id2').references('id').inTable('users');
       console.log('FRIENDS Table Created');
     })
   }

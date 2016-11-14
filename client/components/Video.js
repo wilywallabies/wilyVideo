@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import adapter from 'webrtc-adapter';
 
 import LocalVideo from './LocalVideo';
+import Friend from '../containers/friendsMainContainer';
 
 class Video extends React.Component{
   constructor(props) {
@@ -85,6 +86,8 @@ class Video extends React.Component{
           <button id="callButton">Call</button>
           <button id="hangupButton">Hang Up</button>
         </div>
+        <Friend />
+
       </div>
     )
   }
