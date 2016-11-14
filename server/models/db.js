@@ -9,7 +9,9 @@ var knex = require('knex')({
     password : process.env.DB_PASS,
     port     : process.env.DB_PORT,
     database: process.env.DB_NAME
-  }
+  }, acquireConnectionTimeout: 15000
+
+
 });
 
 console.log('******* TESTING PURPOSE ********');

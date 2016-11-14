@@ -1,0 +1,17 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import FriendAdd from './friendsAddContainer';
+import FriendDetail from './friendDetailsContainer';
+
+
+export default class Friend extends React.Component {
+  render(){
+    return (
+      <div className="col-md-4 panel panel-default">
+        <FriendDetail />
+        <FriendAdd />
+
+      </div>
+      )
+  }
+}
