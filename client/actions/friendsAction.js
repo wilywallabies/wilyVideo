@@ -2,10 +2,18 @@ import axios from 'axios';
 
 
 export function retrieveFriends() {
-  return (dispatch) => {
-    return axios.get('/api/friend')
+
+  const request = axios.get('api/friend')
+  .then((res) =>
+    console.log(res.data, ' res friendsAction ')
+    );
+
+  return {
+    type: 'RETRIEVE_FRIENDS',
+    payload: request
   }
-}
+
+  }
 
 export function addFriend(){
   return
