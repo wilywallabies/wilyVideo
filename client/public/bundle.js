@@ -32282,31 +32282,47 @@
 	var FriendList = function (_React$Component) {
 	  _inherits(FriendList, _React$Component);
 
-	  function FriendList() {
+	  function FriendList(props) {
 	    _classCallCheck(this, FriendList);
 
-	    return _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).call(this, props));
+
+	    _this.state = { term: '' };
+	    _this.onInputChange = _this.onInputChange.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(FriendList, [{
+	    key: 'onFormSubmit',
+	    value: function onFormSubmit(e) {
+	      e.preventDefault();
+	      //need to Add Friends to current user
+	    }
+	  }, {
+	    key: 'onInputChange',
+	    value: function onInputChange(e) {
+	      this.setState({ term: e.target.value });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        null,
+	        'form',
+	        { onSubmit: this.onFormSubmit, className: 'input-group' },
+	        _react2.default.createElement('input', {
+	          placeholder: 'Search User',
+	          className: 'form-control',
+	          value: this.state.term,
+	          onChange: this.onInputChange,
+
+	          type: 'text' }),
 	        _react2.default.createElement(
-	          'form',
-	          { className: 'input-group' },
-	          'Search: ',
-	          _react2.default.createElement('input', { type: 'text' }),
+	          'span',
+	          { className: 'input-group-btn' },
 	          _react2.default.createElement(
-	            'span',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              { type: 'submit', className: 'btn btn-secondary' },
-	              'Add'
-	            )
+	            'button',
+	            { type: 'submit', className: 'btn btn-secondary' },
+	            'Submit'
 	          )
 	        )
 	      );

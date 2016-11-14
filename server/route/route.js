@@ -6,6 +6,7 @@ var router = express.Router();
 
 var authCtrl = require('../controller/authController');
 var userCtrl = require('../controller/userController');
+var friendCtrl = require('../controller/friendController');
 
 
 //Authentication Routes
@@ -16,7 +17,9 @@ router.post('/login', authCtrl.login);
 router.get('/logout', authCtrl.logout);
 
 
-
+//FriendList Routes
+router.get('/friend', friendCtrl.retrieveFriends);
+router.post('/friend', friendCtrl.addFriend);
 
 
 //User Routes
