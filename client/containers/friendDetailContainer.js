@@ -3,7 +3,7 @@ import React from 'react';
 class FriendDetail extends React.Component {
   constructor(props){
     super(props);
-    console.log(props, ' FriendDetail props')
+    console.log(props, ' containers/FriendDetail props')
   }
 
   render(){
@@ -11,9 +11,16 @@ class FriendDetail extends React.Component {
 
     return (
     <div className="panel-default">
-    <div className="panel  panel-info text-center">Contacts</div>
+
       {user.map((user, i) => {
-        return( <div  className="panel-body" key={i}>{user.user_id2}</div> )
+        return(
+          <div
+          className="panel-body"
+          key={i}>
+          <div>User ID: {user.userName}</div>
+          <div>Email: {user.email}</div>
+          </div>
+           )
       })}
     </div>
     )

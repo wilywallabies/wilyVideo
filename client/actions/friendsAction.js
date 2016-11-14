@@ -3,19 +3,23 @@ import axios from 'axios';
 
 export function retrieveFriends() {
 
-  const request = axios.get('api/friend')
+  const request = axios.get('api/friend');
   console.log('Request:', request);
-
-  // .then((res) =>
-  //   console.log(res.data, ' res friendsAction ')
-  //   );
-
   return {
     type: 'RETRIEVE_FRIENDS',
     payload: request
   }
+}
 
+export function getAllUser(){
+  const request = axios.get('api/allUser');
+  return {
+    type: 'GET_ALL_USERS',
+    payload: request
   }
+}
+
+
 
 export function addFriend(userId){
   return {
@@ -23,3 +27,4 @@ export function addFriend(userId){
     payload: userId
   }
 }
+

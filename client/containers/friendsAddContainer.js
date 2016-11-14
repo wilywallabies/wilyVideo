@@ -3,15 +3,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { addFriend } from '../actions/friendsAction'
+import { getAllUser } from '../actions/friendsAction';
 
-class FriendList extends React.Component {
+class FriendAdd extends React.Component {
   constructor(props){
     super(props);
     console.log(props, ' friendsAddContainer Props')
     this.state = {term: ''};
     this.onInputChange = this.onInputChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this)
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+
+    // let userContainer = this.props.getAllUser();
+    // console.log(userContainer, ' userContainer');
+
   }
+
+
 
   onFormSubmit(e){
     e.preventDefault();
@@ -20,13 +27,11 @@ class FriendList extends React.Component {
 
   }
   onInputChange(e){
-    console.log(this.state.term)
-
     this.setState({term: e.target.value});
   }
   render(){
     return (
-
+      // <div>this.props</div>
       <form onSubmit={this.onFormSubmit} className="input-group">
 
         <input
@@ -46,11 +51,11 @@ class FriendList extends React.Component {
 
 //binds action and container
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ addFriend }, dispatch)
+  return bindActionCreators({ addFriend, getAllUser}, dispatch)
 }
 
 function mapStateToProps(state){
   return {friend: state.friend}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FriendList)
+export default connect(mapStateToProps, mapDispatchToProps)(FriendAdd)

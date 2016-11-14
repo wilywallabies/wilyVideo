@@ -1,15 +1,18 @@
-var request = require('request');
-var db = require('../models/db');
+let request = require('request');
+let db = require('../models/db');
+//Table = 'users' || 'friends'
 
 //Retrieve Friend List from DB
 module.exports.retrieveFriends = function (req, res){
-  console.log('GET /friend API called');
-  // db('friends').where({user_id: 1}).select('user_id2').returning('user_id2')
-  db('friends').where({user_id: 9}).select('user_id2')
+  console.log('GET retrieveFriends /friend API called');
+  // db.select('id', 'email', 'userName').from('users')
 
+  let currentUser = 9;//Need to retrieve current user id
+  db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
+  .select('users.userName', 'users.email')
   .then((data) => {
-    console.log(data, ': data, retreiveFriends')
 
+    console.log(data, ': data, retreiveFriends');
     res.send(data);
   })
   .catch((err)=> {

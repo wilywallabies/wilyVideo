@@ -32288,22 +32288,26 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var FriendList = function (_React$Component) {
-	  _inherits(FriendList, _React$Component);
+	var FriendAdd = function (_React$Component) {
+	  _inherits(FriendAdd, _React$Component);
 
-	  function FriendList(props) {
-	    _classCallCheck(this, FriendList);
+	  function FriendAdd(props) {
+	    _classCallCheck(this, FriendAdd);
 
-	    var _this = _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (FriendAdd.__proto__ || Object.getPrototypeOf(FriendAdd)).call(this, props));
 
 	    console.log(props, ' friendsAddContainer Props');
 	    _this.state = { term: '' };
 	    _this.onInputChange = _this.onInputChange.bind(_this);
 	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
+
+	    // let userContainer = this.props.getAllUser();
+	    // console.log(userContainer, ' userContainer');
+
 	    return _this;
 	  }
 
-	  _createClass(FriendList, [{
+	  _createClass(FriendAdd, [{
 	    key: 'onFormSubmit',
 	    value: function onFormSubmit(e) {
 	      e.preventDefault();
@@ -32313,51 +32317,52 @@
 	  }, {
 	    key: 'onInputChange',
 	    value: function onInputChange(e) {
-	      console.log(this.state.term);
-
 	      this.setState({ term: e.target.value });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'form',
-	        { onSubmit: this.onFormSubmit, className: 'input-group' },
-	        _react2.default.createElement('input', {
-	          placeholder: 'Search User',
-	          className: 'form-control',
-	          value: this.state.term,
-	          onChange: this.onInputChange,
-
-	          type: 'text' }),
+	      return (
+	        // <div>this.props</div>
 	        _react2.default.createElement(
-	          'span',
-	          { className: 'input-group-btn' },
+	          'form',
+	          { onSubmit: this.onFormSubmit, className: 'input-group' },
+	          _react2.default.createElement('input', {
+	            placeholder: 'Search User',
+	            className: 'form-control',
+	            value: this.state.term,
+	            onChange: this.onInputChange,
+
+	            type: 'text' }),
 	          _react2.default.createElement(
-	            'button',
-	            { type: 'submit', className: 'btn btn-secondary' },
-	            'Add'
+	            'span',
+	            { className: 'input-group-btn' },
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'submit', className: 'btn btn-secondary' },
+	              'Add'
+	            )
 	          )
 	        )
 	      );
 	    }
 	  }]);
 
-	  return FriendList;
+	  return FriendAdd;
 	}(_react2.default.Component);
 
 	//binds action and container
 
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ addFriend: _friendsAction.addFriend }, dispatch);
+	  return (0, _redux.bindActionCreators)({ addFriend: _friendsAction.addFriend, getAllUser: _friendsAction.getAllUser }, dispatch);
 	}
 
 	function mapStateToProps(state) {
 	  return { friend: state.friend };
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendList);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendAdd);
 
 /***/ },
 /* 287 */
@@ -32430,6 +32435,7 @@
 	  value: true
 	});
 	exports.retrieveFriends = retrieveFriends;
+	exports.getAllUser = getAllUser;
 	exports.addFriend = addFriend;
 
 	var _axios = __webpack_require__(290);
@@ -32442,13 +32448,16 @@
 
 	  var request = _axios2.default.get('api/friend');
 	  console.log('Request:', request);
-
-	  // .then((res) =>
-	  //   console.log(res.data, ' res friendsAction ')
-	  //   );
-
 	  return {
 	    type: 'RETRIEVE_FRIENDS',
+	    payload: request
+	  };
+	}
+
+	function getAllUser() {
+	  var request = _axios2.default.get('api/allUser');
+	  return {
+	    type: 'GET_ALL_USERS',
 	    payload: request
 	  };
 	}
@@ -33960,6 +33969,8 @@
 	  switch (action.type) {
 	    case 'RETRIEVE_FRIENDS':
 	      return [action.payload.data].concat(_toConsumableArray(state));
+	    case 'GET_ALL_USERS':
+	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'ADD_FRIEND':
 	    // return [action.payload, ...state]
@@ -34012,7 +34023,7 @@
 
 	    var _this = _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).call(this, props));
 
-	    console.log(props, ' friendsDetail Props');
+	    console.log(props, ' containers/friendsList Props');
 	    return _this;
 	  }
 
@@ -34033,6 +34044,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-group' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel  panel-info text-center' },
+	            'Contacts'
+	          ),
 	          !this.props.friend ? "Loading..." : this.props.friend.map(function (user, i) {
 	            return _react2.default.createElement(_friendDetailContainer2.default, { key: i, friend: user });
 	          })
@@ -34051,7 +34067,7 @@
 
 	//binds action and container
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ retrieveFriends: _friendsAction.retrieveFriends }, dispatch);
+	  return (0, _redux.bindActionCreators)({ retrieveFriends: _friendsAction.retrieveFriends, getAllUser: _friendsAction.getAllUser }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendList);
@@ -34088,7 +34104,7 @@
 
 	    var _this = _possibleConstructorReturn(this, (FriendDetail.__proto__ || Object.getPrototypeOf(FriendDetail)).call(this, props));
 
-	    console.log(props, ' FriendDetail props');
+	    console.log(props, ' containers/FriendDetail props');
 	    return _this;
 	  }
 
@@ -34100,16 +34116,24 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'panel-default' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel  panel-info text-center' },
-	          'Contacts'
-	        ),
 	        user.map(function (user, i) {
 	          return _react2.default.createElement(
 	            'div',
-	            { className: 'panel-body', key: i },
-	            user.user_id2
+	            {
+	              className: 'panel-body',
+	              key: i },
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              'User ID: ',
+	              user.userName
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              'Email: ',
+	              user.email
+	            )
 	          );
 	        })
 	      );
