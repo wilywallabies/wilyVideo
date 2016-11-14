@@ -32831,13 +32831,21 @@
 	      console.log('call clicked');
 	    }
 	  }, {
+	    key: 'deleteUser',
+	    value: function deleteUser(e) {
+	      e.preventDefault();
+	      console.log('delete clicked');
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      var user = this.props.friend; //Array of Object
 	      console.log(user, ' USER, FRIENDDETAILCONTAINER');
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.onClickCall, className: 'panel-default' },
+	        { className: 'panel-default' },
 	        user.map(function (user, i) {
 	          return _react2.default.createElement(
 	            'div',
@@ -32853,7 +32861,7 @@
 	                ' ',
 	                _react2.default.createElement(
 	                  'button',
-	                  { className: 'btn btn-default' },
+	                  { onClick: _this2.onClickCall, className: 'btn btn-default  btn-lg' },
 	                  ' CALL '
 	                ),
 	                ' '
@@ -32873,7 +32881,19 @@
 	                null,
 	                'Email: ',
 	                user.email
-	              )
+	              ),
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                ' ',
+	                _react2.default.createElement(
+	                  'button',
+	                  { onClick: _this2.deleteUser, className: 'btn btn-danger btn-xs' },
+	                  ' DELETE '
+	                ),
+	                ' '
+	              ),
+	              _react2.default.createElement('hr', null)
 	            )
 	          );
 	        })
