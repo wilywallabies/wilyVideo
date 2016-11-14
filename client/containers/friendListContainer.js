@@ -7,7 +7,7 @@ import FriendDetail from './friendDetailContainer';
 class FriendList extends React.Component {
     constructor(props){
     super(props);
-    console.log(props, ' containers/friendsList Props');
+    // console.log(props, ' containers/friendsList Props');
   }
      componentWillMount(){
       //call friends list and render
@@ -19,7 +19,9 @@ class FriendList extends React.Component {
     return (
           <div >
             <div className="panel-group">
-            <div className="panel panel-info text-center">Contacts</div>
+            <div className="panel  text-center">
+              <h4>Contacts</h4>
+            </div>
               {
                 !friend ? "Loading...":
                <FriendDetail friend={friend}  />

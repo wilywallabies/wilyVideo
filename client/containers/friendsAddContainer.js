@@ -9,14 +9,21 @@ class FriendAdd extends React.Component {
   constructor(props){
     super(props);
     console.log(props, ' friendsAddContainer Props')
-    this.state = {term: ''};
+    this.state = {term: '', friend:[]};
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   componentWillMount() {
      this.props.getAllUser();
-     console.log(this.props, ' this.props line 19, friendadd')
+     // this.setState({friend:this.state.friend});
+  }
+
+  componentWillReceiveProps(nextProps) {
+        // this.setState({friend:nexstProps.friend})
+
+   this.setState({term: '', friend: nextProps.friend})
+        console.log(nextProps.friend, 'this.state componentWillReceiveProps friendadd');
   }
 
   onFormSubmit(e){
@@ -31,19 +38,23 @@ class FriendAdd extends React.Component {
 
   render(){
     return (
+      <div>
+        Available Users:
       <form onSubmit={this.onFormSubmit} className="input-group">
 
-        <input
-         placeholder="Search User"
-         className="form-control"
-         value={this.state.term}
-         onChange={this.onInputChange}
-         type="text"/>
+          <select className="form-control">
+          { !this.state.friend ? 'Loading Users...' :
+            this.state.friend.map( (user, i) => {return(
+            <option value='user.id' key={user.id}>{user.email}</option>) })
+          }
+          </select>
 
         <span className="input-group-btn">
           <button type="submit" className="btn btn-secondary">Add</button>
         </span>
       </form>
+      </div>
+
       )
   }
 }
