@@ -5,7 +5,8 @@ let db = require('../models/db');
 //Retrieve Friend List from DB
 module.exports.retrieveAllUser = function (req, res){
   console.log('GET retrieveFriends /friend API called');
-  db.select('id', 'email', 'userName').from('users')
+  let currentUser = 9;
+  db.select('id', 'email', 'userName').from('users').whereNot('id',currentUser)
 
   .then((data) => {
 

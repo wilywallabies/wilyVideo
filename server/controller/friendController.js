@@ -9,7 +9,7 @@ module.exports.retrieveFriends = function (req, res){
 
   let currentUser = 9;//Need to retrieve current user id
   db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
-  .select('users.userName', 'users.email')
+  .select('users.id', 'users.userName', 'users.email')
   .then((data) => {
 
     console.log(data, ': data, retreiveFriends');

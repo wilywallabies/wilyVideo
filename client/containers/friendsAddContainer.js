@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { addFriend } from '../actions/friendsAction'
-import { getAllUser } from '../actions/friendsAction';
+import {retrieveFriends, getAllUser } from '../actions/friendsAction';
 
 class FriendAdd extends React.Component {
   constructor(props){
@@ -12,26 +12,25 @@ class FriendAdd extends React.Component {
     this.state = {term: ''};
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
-
-    // let userContainer = this.props.getAllUser();
-    // console.log(userContainer, ' userContainer');
-
   }
 
-
+  componentWillMount() {
+     this.props.getAllUser();
+     console.log(this.props, ' this.props line 19, friendadd')
+  }
 
   onFormSubmit(e){
     e.preventDefault();
     //need to Add Friends to current user
     this.props.addFriend(this.state.term)
-
   }
+
   onInputChange(e){
     this.setState({term: e.target.value});
   }
+
   render(){
     return (
-      // <div>this.props</div>
       <form onSubmit={this.onFormSubmit} className="input-group">
 
         <input
@@ -39,8 +38,8 @@ class FriendAdd extends React.Component {
          className="form-control"
          value={this.state.term}
          onChange={this.onInputChange}
-
          type="text"/>
+
         <span className="input-group-btn">
           <button type="submit" className="btn btn-secondary">Add</button>
         </span>
@@ -48,14 +47,14 @@ class FriendAdd extends React.Component {
       )
   }
 }
+function mapStateToProps(state){
+  console.log(state.friend[0], 'AllUser except friend and curr')
+  return {friend: state.friend[0]}//Array of Object(All Users)
+}
 
 //binds action and container
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ addFriend, getAllUser}, dispatch)
-}
-
-function mapStateToProps(state){
-  return {friend: state.friend}
+  return bindActionCreators({ retrieveFriends, addFriend, getAllUser}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendAdd)

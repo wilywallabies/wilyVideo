@@ -8,7 +8,7 @@ class FriendDetail extends React.Component {
 
   render(){
     let user = this.props.friend; //Array of Object
-
+    console.log(user, ' USER, FRIENDDETAILCONTAINER')
     return (
     <div className="panel-default">
 
@@ -16,7 +16,7 @@ class FriendDetail extends React.Component {
         return(
           <div
           className="panel-body"
-          key={i}>
+          key={user.id}>
           <div>User ID: {user.userName}</div>
           <div>Email: {user.email}</div>
           </div>

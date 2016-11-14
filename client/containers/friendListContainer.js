@@ -12,26 +12,24 @@ class FriendList extends React.Component {
      componentWillMount(){
       //call friends list and render
       this.props.retrieveFriends();
-      console.log('component did mount, friendsDetailContainer');
     }
-
   render(){
-
+    let friend = this.props.friend[1];
+      console.log(friend, ' this.props LINE 21, friendDetail');
     return (
           <div >
             <div className="panel-group">
-            <div className="panel  panel-info text-center">Contacts</div>
+            <div className="panel panel-info text-center">Contacts</div>
               {
-                !this.props.friend ? "Loading...":
-                this.props.friend.map((user, i) => (
-               <FriendDetail key={i} friend={user}  />
-                ))
+                !friend ? "Loading...":
+               <FriendDetail friend={friend}  />
               }
             </div>
           </div>
       )
   }
 }
+
 function mapStateToProps(state){
   console.log(state, ' state friendListContainer.js')
   return {friend: state.friend}

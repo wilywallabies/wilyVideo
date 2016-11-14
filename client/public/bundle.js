@@ -32300,14 +32300,16 @@
 	    _this.state = { term: '' };
 	    _this.onInputChange = _this.onInputChange.bind(_this);
 	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
-
-	    // let userContainer = this.props.getAllUser();
-	    // console.log(userContainer, ' userContainer');
-
 	    return _this;
 	  }
 
 	  _createClass(FriendAdd, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.getAllUser();
+	      console.log(this.props, ' this.props line 19, friendadd');
+	    }
+	  }, {
 	    key: 'onFormSubmit',
 	    value: function onFormSubmit(e) {
 	      e.preventDefault();
@@ -32322,26 +32324,22 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return (
-	        // <div>this.props</div>
+	      return _react2.default.createElement(
+	        'form',
+	        { onSubmit: this.onFormSubmit, className: 'input-group' },
+	        _react2.default.createElement('input', {
+	          placeholder: 'Search User',
+	          className: 'form-control',
+	          value: this.state.term,
+	          onChange: this.onInputChange,
+	          type: 'text' }),
 	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: this.onFormSubmit, className: 'input-group' },
-	          _react2.default.createElement('input', {
-	            placeholder: 'Search User',
-	            className: 'form-control',
-	            value: this.state.term,
-	            onChange: this.onInputChange,
-
-	            type: 'text' }),
+	          'span',
+	          { className: 'input-group-btn' },
 	          _react2.default.createElement(
-	            'span',
-	            { className: 'input-group-btn' },
-	            _react2.default.createElement(
-	              'button',
-	              { type: 'submit', className: 'btn btn-secondary' },
-	              'Add'
-	            )
+	            'button',
+	            { type: 'submit', className: 'btn btn-secondary' },
+	            'Add'
 	          )
 	        )
 	      );
@@ -32351,15 +32349,14 @@
 	  return FriendAdd;
 	}(_react2.default.Component);
 
-	//binds action and container
-
-
-	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ addFriend: _friendsAction.addFriend, getAllUser: _friendsAction.getAllUser }, dispatch);
+	function mapStateToProps(state) {
+	  console.log(state.friend[0], 'AllUser except friend and curr');
+	  return { friend: state.friend[0] }; //Array of Object(All Users)
 	}
 
-	function mapStateToProps(state) {
-	  return { friend: state.friend };
+	//binds action and container
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ retrieveFriends: _friendsAction.retrieveFriends, addFriend: _friendsAction.addFriend, getAllUser: _friendsAction.getAllUser }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendAdd);
@@ -34032,12 +34029,12 @@
 	    value: function componentWillMount() {
 	      //call friends list and render
 	      this.props.retrieveFriends();
-	      console.log('component did mount, friendsDetailContainer');
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-
+	      var friend = this.props.friend[1];
+	      console.log(friend, ' this.props LINE 21, friendDetail');
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -34046,12 +34043,10 @@
 	          { className: 'panel-group' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'panel  panel-info text-center' },
+	            { className: 'panel panel-info text-center' },
 	            'Contacts'
 	          ),
-	          !this.props.friend ? "Loading..." : this.props.friend.map(function (user, i) {
-	            return _react2.default.createElement(_friendDetailContainer2.default, { key: i, friend: user });
-	          })
+	          !friend ? "Loading..." : _react2.default.createElement(_friendDetailContainer2.default, { friend: friend })
 	        )
 	      );
 	    }
@@ -34112,7 +34107,7 @@
 	    key: 'render',
 	    value: function render() {
 	      var user = this.props.friend; //Array of Object
-
+	      console.log(user, ' USER, FRIENDDETAILCONTAINER');
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'panel-default' },
@@ -34121,7 +34116,7 @@
 	            'div',
 	            {
 	              className: 'panel-body',
-	              key: i },
+	              key: user.id },
 	            _react2.default.createElement(
 	              'div',
 	              null,
