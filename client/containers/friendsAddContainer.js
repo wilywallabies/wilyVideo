@@ -37,7 +37,7 @@ class FriendList extends React.Component {
 
          type="text"/>
         <span className="input-group-btn">
-          <button type="submit" className="btn btn-secondary">Submit</button>
+          <button type="submit" className="btn btn-secondary">Add</button>
         </span>
       </form>
       )
@@ -49,5 +49,8 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({ addFriend }, dispatch)
 }
 
+function mapStateToProps(state){
+  return {friend: state.friend}
+}
 
-export default connect(null, mapDispatchToProps)(FriendList)
+export default connect(mapStateToProps, mapDispatchToProps)(FriendList)

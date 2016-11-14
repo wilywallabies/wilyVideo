@@ -4,9 +4,11 @@ import axios from 'axios';
 export function retrieveFriends() {
 
   const request = axios.get('api/friend')
-  .then((res) =>
-    console.log(res.data, ' res friendsAction ')
-    );
+  console.log('Request:', request);
+
+  // .then((res) =>
+  //   console.log(res.data, ' res friendsAction ')
+  //   );
 
   return {
     type: 'RETRIEVE_FRIENDS',

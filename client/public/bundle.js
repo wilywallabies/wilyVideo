@@ -31413,11 +31413,16 @@
 
 	var _authReducer2 = _interopRequireDefault(_authReducer);
 
+	var _friendReducer = __webpack_require__(315);
+
+	var _friendReducer2 = _interopRequireDefault(_friendReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var rootReducer = (0, _redux.combineReducers)({
 	  routing: _reactRouterRedux.routerReducer,
-	  isAuthorized: _authReducer2.default
+	  isAuthorized: _authReducer2.default,
+	  friend: _friendReducer2.default
 	});
 
 	exports.default = rootReducer;
@@ -32331,7 +32336,7 @@
 	          _react2.default.createElement(
 	            'button',
 	            { type: 'submit', className: 'btn btn-secondary' },
-	            'Submit'
+	            'Add'
 	          )
 	        )
 	      );
@@ -32348,7 +32353,11 @@
 	  return (0, _redux.bindActionCreators)({ addFriend: _friendsAction.addFriend }, dispatch);
 	}
 
-	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(FriendList);
+	function mapStateToProps(state) {
+	  return { friend: state.friend };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendList);
 
 /***/ },
 /* 287 */
@@ -32460,16 +32469,41 @@
 	      console.log('component did mount, friendsDetailContainer');
 	    }
 	  }, {
+	    key: 'renderFriend',
+	    value: function renderFriend(friend) {
+	      console.log(friend, ' friend---');
+	      return friend.map(function (user, i) {
+	        console.log(user[0].user_id2, i, 'hi');
+	        console.log(user[1].user_id2, i, 'hi');
+
+	        return _react2.default.createElement(
+	          'div',
+	          { key: i },
+	          ' User:',
+	          user.user_id2
+	        );
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'panel-group' },
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Retrieve all friends from user'
+	          'div',
+	          { className: 'panel panel-default' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-heading' },
+	            'Contacts'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body' },
+	            this.renderFriend(this.props.friend)
+	          )
 	        )
 	      );
 	    }
@@ -32478,14 +32512,17 @@
 	  return FriendDetail;
 	}(_react2.default.Component);
 
+	function mapStateToProps(state) {
+	  console.log(state, ' state friendDetailContainer.js');
+	  return { friend: state.friend };
+	}
+
 	//binds action and container
-
-
 	function mapDispatchToProps(dispatch) {
 	  return (0, _redux.bindActionCreators)({ retrieveFriends: _friendsAction.retrieveFriends }, dispatch);
 	}
 
-	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(FriendDetail);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendDetail);
 
 /***/ },
 /* 289 */
@@ -32507,9 +32544,12 @@
 
 	function retrieveFriends() {
 
-	  var request = _axios2.default.get('api/friend').then(function (res) {
-	    return console.log(res.data, ' res friendsAction ');
-	  });
+	  var request = _axios2.default.get('api/friend');
+	  console.log('Request:', request);
+
+	  // .then((res) =>
+	  //   console.log(res.data, ' res friendsAction ')
+	  //   );
 
 	  return {
 	    type: 'RETRIEVE_FRIENDS',
@@ -34004,6 +34044,35 @@
 	  };
 	};
 
+
+/***/ },
+/* 315 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  console.log(action.payload, ' ACTION.PAYLOAD-');
+	  // console.log('Action received!:', action);
+	  switch (action.type) {
+	    case 'RETRIEVE_FRIENDS':
+	      return [action.payload.data].concat(_toConsumableArray(state));
+
+	    case 'ADD_FRIEND':
+	    // return [action.payload, ...state]
+	  };
+
+	  return state;
+	};
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /***/ }
 /******/ ]);
