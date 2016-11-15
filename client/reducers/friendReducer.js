@@ -1,6 +1,6 @@
 export default function(state = [], action){
   // console.log(action.payload, ' ACTION.PAYLOAD-');
-  console.log('Action received!:', action);
+  console.log('Action received!:', action.payload);
   switch (action.type){
 
     case 'RETRIEVE_FRIENDS':
@@ -11,8 +11,8 @@ export default function(state = [], action){
       return [action.payload.data, ...state];
 
     case 'ADD_FRIEND':
-      console.log(action.payload, ' REDUCER DATA')
-    return [action.payload.data, ...state]
+    //   console.log(action.payload, ' REDUCER DATA')
+    // return [action.payload, ...state]
 
     case 'DELETE_FRIEND':
     //   console.log(action.payload, ' REDUCER DATA')

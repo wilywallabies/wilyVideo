@@ -15,20 +15,23 @@ class FriendDetail extends React.Component {
 
     onClickCall(e){
       e.preventDefault();
-      console.log(e.target.value , 'call clicked')
   }
+
     deleteUser(e){
       e.preventDefault();
-      console.log(e.target.value, 'delete clicked')
-      this.props.deleteFriend()
+      this.props.deleteFriend(e.target.value);
   }
 
   render(){
     let user = this.props.friend; //Array of Object
-    // console.log(user, ' USER, FRIENDDETAILCONTAINER')
+    console.log(user, ' USER, FRIENDDETAILCONTAINER')
     return (
+
+
     <form  className="panel-default">
-      {user.map((user, i) => {
+
+      { user.map((user, i) => {
+
         return(
 
           <div
@@ -47,7 +50,7 @@ class FriendDetail extends React.Component {
 
               </div>
               <div>Email: {user.email}</div>
-              <span> <button onClick={this.deleteUser} className='btn btn-danger btn-xs'> DELETE </button> </span>
+              <span> <button onClick={this.deleteUser} value={user.id} className='btn btn-danger btn-xs'> DELETE </button> </span>
               <hr/>
             </div>
           </div>

@@ -31092,7 +31092,7 @@
 	    var _this = _possibleConstructorReturn(this, (FriendAdd.__proto__ || Object.getPrototypeOf(FriendAdd)).call(this, props));
 
 	    console.log(props, ' friendsAddContainer Props LINE 11');
-	    _this.state = { friend: [], selectedVal: '' };
+	    _this.state = { notFriend: [], selectedVal: '' };
 	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    return _this;
@@ -31102,31 +31102,49 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      this.props.getAllUser();
-	      // this.setState({friend:this.state.friend});
 	    }
+
+	    //Sets friend as state after component when props has been changed
+
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      // this.setState({friend:nexstProps.friend})
-
-	      this.setState({ friend: nextProps.friend });
-	      // console.log(nextProps.friend, 'this.state componentWillReceiveProps friendadd');
+	      this.setState({ notFriend: nextProps.notFriend });
+	      console.log(this.state, 'componentWillReceiveProps');
 	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate(nextProps, nextState) {
+	      console.log(this.state, 'ComponentWillUpdate');
+	    }
+
+	    // invoked immediately after updating occurs
+
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(prevProps, prevState) {
+	      // this.setState({selectedVal:this.refs.selectValue.value})
+	      console.log(this.state, ' COMPONENTDIDMOUNT');
+	    }
+
+	    //Add friend to database
+
 	  }, {
 	    key: 'onFormSubmit',
 	    value: function onFormSubmit(e) {
 	      e.preventDefault();
 	      // need to Add Friends to current user
-	      console.log(this.refs.selectValue.value, ' this.ref.selectVal');
-	      this.props.addFriend(this.refs.selectValue.value);
+	      console.log(this.state);
+	      this.props.addFriend(this.state.selectedVal);
+	      console.log(this.state);
+	      // this.props.retrieveFriends();
 	    }
 	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(e) {
 	      console.log(e.target.value, ' :Selected Value');
-	      this.setState({ selectedVal: e.target.value });
-
-	      console.log(this.state, ' this.state after handle change');
+	      var id = e.target.value;
+	      this.setState({ selectedVal: id });
 	    }
 	  }, {
 	    key: 'render',
@@ -31141,10 +31159,10 @@
 	          _react2.default.createElement(
 	            'select',
 	            { onChange: this.handleChange, className: 'form-control' },
-	            !this.state.friend ? 'Loading Users...' : this.state.friend.map(function (user, i) {
+	            !this.state.notFriend ? 'Loading Users...' : this.state.notFriend.map(function (user, i) {
 	              return _react2.default.createElement(
 	                'option',
-	                { ref: 'selectValue', value: user.id, key: user.id },
+	                { value: user.id, key: user.id },
 	                user.email
 	              );
 	            })
@@ -31154,8 +31172,8 @@
 	            { className: 'input-group-btn' },
 	            _react2.default.createElement(
 	              'button',
-	              { className: 'btn btn-secondary' },
-	              'Add'
+	              { className: 'btn btn-primary' },
+	              ' Add '
 	            )
 	          )
 	        )
@@ -31167,8 +31185,11 @@
 	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
-	  console.log(state.friend[0], 'AllUser except friend and curr');
-	  return { friend: state.friend[0] }; //Array of Object(All Users)
+	  console.log(state, 'AllUser except friend and curr, container/friendsAddContainer.js');
+
+	  console.log(state.friend[0], 'AllUser except friend and curr, container/friendsAddContainer.js');
+	  console.log(state.friend[1], 'AllUser except friend and curr, container/friendsAddContainer.js');
+	  return { notFriend: state.friend[0], friend: state.friend[1] };
 	}
 
 	//binds action and container
@@ -31214,18 +31235,18 @@
 	  console.log(userId, ' addFriend Called');
 	  return {
 	    type: 'ADD_FRIEND',
-	    payload: userId
+	    payload: request
 
 	  };
 	}
 
 	function deleteFriend(userId) {
-	  var request = _axios2.default.delete('api/friend', { friendId: userId });
+	  var request = _axios2.default.post('api/friendDelete', { friendId: userId });
+
 	  console.log(userId, ' deleteFriend Called');
 	  return {
 	    type: 'DELETE_FRIEND',
-	    payload: userId
-
+	    payload: request
 	  };
 	}
 
@@ -32871,14 +32892,12 @@
 	    key: 'onClickCall',
 	    value: function onClickCall(e) {
 	      e.preventDefault();
-	      console.log(e.target.value, 'call clicked');
 	    }
 	  }, {
 	    key: 'deleteUser',
 	    value: function deleteUser(e) {
 	      e.preventDefault();
-	      console.log(e.target.value, 'delete clicked');
-	      this.props.deleteFriend();
+	      this.props.deleteFriend(e.target.value);
 	    }
 	  }, {
 	    key: 'render',
@@ -32886,11 +32905,12 @@
 	      var _this2 = this;
 
 	      var user = this.props.friend; //Array of Object
-	      // console.log(user, ' USER, FRIENDDETAILCONTAINER')
+	      console.log(user, ' USER, FRIENDDETAILCONTAINER');
 	      return _react2.default.createElement(
 	        'form',
 	        { className: 'panel-default' },
 	        user.map(function (user, i) {
+
 	          return _react2.default.createElement(
 	            'div',
 	            {
@@ -32930,7 +32950,7 @@
 	                ' ',
 	                _react2.default.createElement(
 	                  'button',
-	                  { onClick: _this2.deleteUser, className: 'btn btn-danger btn-xs' },
+	                  { onClick: _this2.deleteUser, value: user.id, className: 'btn btn-danger btn-xs' },
 	                  ' DELETE '
 	                ),
 	                ' '
@@ -33444,7 +33464,7 @@
 	  var action = arguments[1];
 
 	  // console.log(action.payload, ' ACTION.PAYLOAD-');
-	  console.log('Action received!:', action);
+	  console.log('Action received!:', action.payload);
 	  switch (action.type) {
 
 	    case 'RETRIEVE_FRIENDS':
@@ -33455,8 +33475,8 @@
 	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'ADD_FRIEND':
-	      console.log(action.payload, ' REDUCER DATA');
-	      return [action.payload.data].concat(_toConsumableArray(state));
+	    //   console.log(action.payload, ' REDUCER DATA')
+	    // return [action.payload, ...state]
 
 	    case 'DELETE_FRIEND':
 	    //   console.log(action.payload, ' REDUCER DATA')
