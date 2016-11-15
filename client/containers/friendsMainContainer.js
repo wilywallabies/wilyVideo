@@ -10,7 +10,6 @@ export default class Friend extends React.Component {
       <div className="col-md-5 panel panel-default">
         <FriendDetail />
         <FriendAdd />
-
       </div>
       )
   }

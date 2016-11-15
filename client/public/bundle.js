@@ -31015,7 +31015,7 @@
 
 	var _friendsAddContainer2 = _interopRequireDefault(_friendsAddContainer);
 
-	var _friendListContainer = __webpack_require__(272);
+	var _friendListContainer = __webpack_require__(298);
 
 	var _friendListContainer2 = _interopRequireDefault(_friendListContainer);
 
@@ -31073,7 +31073,7 @@
 
 	var _redux = __webpack_require__(174);
 
-	var _friendsAction = __webpack_require__(273);
+	var _friendsAction = __webpack_require__(272);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31089,9 +31089,9 @@
 	  function FriendAdd(props) {
 	    _classCallCheck(this, FriendAdd);
 
+	    // console.log(props, ' friendsAddContainer Props')
 	    var _this = _possibleConstructorReturn(this, (FriendAdd.__proto__ || Object.getPrototypeOf(FriendAdd)).call(this, props));
 
-	    console.log(props, ' friendsAddContainer Props');
 	    _this.state = { term: '', friend: [] };
 	    _this.onInputChange = _this.onInputChange.bind(_this);
 	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
@@ -31110,12 +31110,13 @@
 	      // this.setState({friend:nexstProps.friend})
 
 	      this.setState({ term: '', friend: nextProps.friend });
-	      console.log(nextProps.friend, 'this.state componentWillReceiveProps friendadd');
+	      // console.log(nextProps.friend, 'this.state componentWillReceiveProps friendadd');
 	    }
 	  }, {
 	    key: 'onFormSubmit',
 	    value: function onFormSubmit(e) {
 	      e.preventDefault();
+	      console.log(e);
 	      //need to Add Friends to current user
 	      this.props.addFriend(this.state.term);
 	    }
@@ -31183,102 +31184,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(195);
-
-	var _redux = __webpack_require__(174);
-
-	var _friendsAction = __webpack_require__(273);
-
-	var _friendDetailContainer = __webpack_require__(299);
-
-	var _friendDetailContainer2 = _interopRequireDefault(_friendDetailContainer);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var FriendList = function (_React$Component) {
-	  _inherits(FriendList, _React$Component);
-
-	  function FriendList(props) {
-	    _classCallCheck(this, FriendList);
-
-	    return _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).call(this, props));
-	    // console.log(props, ' containers/friendsList Props');
-	  }
-
-	  _createClass(FriendList, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      //call friends list and render
-	      this.props.retrieveFriends();
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var friend = this.props.friend[1];
-	      console.log(friend, ' this.props LINE 21, friendDetail');
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-group' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel  text-center' },
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              'Contacts'
-	            )
-	          ),
-	          !friend ? "Loading..." : _react2.default.createElement(_friendDetailContainer2.default, { friend: friend })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return FriendList;
-	}(_react2.default.Component);
-
-	function mapStateToProps(state) {
-	  console.log(state, ' state friendListContainer.js');
-	  return { friend: state.friend };
-	}
-
-	//binds action and container
-	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ retrieveFriends: _friendsAction.retrieveFriends, getAllUser: _friendsAction.getAllUser }, dispatch);
-	}
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendList);
-
-/***/ },
-/* 273 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
 	exports.retrieveFriends = retrieveFriends;
 	exports.getAllUser = getAllUser;
 	exports.addFriend = addFriend;
 
-	var _axios = __webpack_require__(274);
+	var _axios = __webpack_require__(273);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -31287,7 +31197,7 @@
 	function retrieveFriends() {
 
 	  var request = _axios2.default.get('api/friend');
-	  console.log('Request:', request);
+	  console.log('Request Line 7:', request);
 	  return {
 	    type: 'RETRIEVE_FRIENDS',
 	    payload: request
@@ -31296,6 +31206,7 @@
 
 	function getAllUser() {
 	  var request = _axios2.default.get('api/allUser');
+	  console.log('Request Line 16:', request);
 	  return {
 	    type: 'GET_ALL_USERS',
 	    payload: request
@@ -31303,6 +31214,7 @@
 	}
 
 	function addFriend(userId) {
+	  // console.log(userId, ' addFriend Called')
 	  return {
 	    type: 'ADD_FRIEND',
 	    payload: userId
@@ -31310,20 +31222,20 @@
 	}
 
 /***/ },
-/* 274 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(275);
+	module.exports = __webpack_require__(274);
 
 /***/ },
-/* 275 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
-	var bind = __webpack_require__(277);
-	var Axios = __webpack_require__(278);
+	var utils = __webpack_require__(275);
+	var bind = __webpack_require__(276);
+	var Axios = __webpack_require__(277);
 
 	/**
 	 * Create an instance of Axios
@@ -31356,15 +31268,15 @@
 	};
 
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(296);
-	axios.CancelToken = __webpack_require__(297);
-	axios.isCancel = __webpack_require__(293);
+	axios.Cancel = __webpack_require__(295);
+	axios.CancelToken = __webpack_require__(296);
+	axios.isCancel = __webpack_require__(292);
 
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(298);
+	axios.spread = __webpack_require__(297);
 
 	module.exports = axios;
 
@@ -31373,12 +31285,12 @@
 
 
 /***/ },
-/* 276 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var bind = __webpack_require__(277);
+	var bind = __webpack_require__(276);
 
 	/*global toString:true*/
 
@@ -31678,7 +31590,7 @@
 
 
 /***/ },
-/* 277 */
+/* 276 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31695,17 +31607,17 @@
 
 
 /***/ },
-/* 278 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(279);
-	var utils = __webpack_require__(276);
-	var InterceptorManager = __webpack_require__(290);
-	var dispatchRequest = __webpack_require__(291);
-	var isAbsoluteURL = __webpack_require__(294);
-	var combineURLs = __webpack_require__(295);
+	var defaults = __webpack_require__(278);
+	var utils = __webpack_require__(275);
+	var InterceptorManager = __webpack_require__(289);
+	var dispatchRequest = __webpack_require__(290);
+	var isAbsoluteURL = __webpack_require__(293);
+	var combineURLs = __webpack_require__(294);
 
 	/**
 	 * Create a new instance of Axios
@@ -31786,13 +31698,13 @@
 
 
 /***/ },
-/* 279 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(276);
-	var normalizeHeaderName = __webpack_require__(280);
+	var utils = __webpack_require__(275);
+	var normalizeHeaderName = __webpack_require__(279);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -31809,10 +31721,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(281);
+	    adapter = __webpack_require__(280);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(281);
+	    adapter = __webpack_require__(280);
 	  }
 	  return adapter;
 	}
@@ -31879,12 +31791,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 280 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -31897,18 +31809,18 @@
 
 
 /***/ },
-/* 281 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(276);
-	var settle = __webpack_require__(282);
-	var buildURL = __webpack_require__(285);
-	var parseHeaders = __webpack_require__(286);
-	var isURLSameOrigin = __webpack_require__(287);
-	var createError = __webpack_require__(283);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(288);
+	var utils = __webpack_require__(275);
+	var settle = __webpack_require__(281);
+	var buildURL = __webpack_require__(284);
+	var parseHeaders = __webpack_require__(285);
+	var isURLSameOrigin = __webpack_require__(286);
+	var createError = __webpack_require__(282);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(287);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -32004,7 +31916,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(289);
+	      var cookies = __webpack_require__(288);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -32081,12 +31993,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 282 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(283);
+	var createError = __webpack_require__(282);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -32112,12 +32024,12 @@
 
 
 /***/ },
-/* 283 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(284);
+	var enhanceError = __webpack_require__(283);
 
 	/**
 	 * Create an Error with the specified message, config, error code, and response.
@@ -32135,7 +32047,7 @@
 
 
 /***/ },
-/* 284 */
+/* 283 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32160,12 +32072,12 @@
 
 
 /***/ },
-/* 285 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -32234,12 +32146,12 @@
 
 
 /***/ },
-/* 286 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	/**
 	 * Parse headers into an object
@@ -32277,12 +32189,12 @@
 
 
 /***/ },
-/* 287 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -32351,7 +32263,7 @@
 
 
 /***/ },
-/* 288 */
+/* 287 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32393,12 +32305,12 @@
 
 
 /***/ },
-/* 289 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -32452,12 +32364,12 @@
 
 
 /***/ },
-/* 290 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -32510,15 +32422,15 @@
 
 
 /***/ },
-/* 291 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
-	var transformData = __webpack_require__(292);
-	var isCancel = __webpack_require__(293);
-	var defaults = __webpack_require__(279);
+	var utils = __webpack_require__(275);
+	var transformData = __webpack_require__(291);
+	var isCancel = __webpack_require__(292);
+	var defaults = __webpack_require__(278);
 
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -32595,12 +32507,12 @@
 
 
 /***/ },
-/* 292 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	/**
 	 * Transform the data for a request or a response
@@ -32621,7 +32533,7 @@
 
 
 /***/ },
-/* 293 */
+/* 292 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32632,7 +32544,7 @@
 
 
 /***/ },
-/* 294 */
+/* 293 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32652,7 +32564,7 @@
 
 
 /***/ },
-/* 295 */
+/* 294 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32670,7 +32582,7 @@
 
 
 /***/ },
-/* 296 */
+/* 295 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32695,12 +32607,12 @@
 
 
 /***/ },
-/* 297 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Cancel = __webpack_require__(296);
+	var Cancel = __webpack_require__(295);
 
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -32758,7 +32670,7 @@
 
 
 /***/ },
-/* 298 */
+/* 297 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32789,6 +32701,97 @@
 	  };
 	};
 
+
+/***/ },
+/* 298 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(195);
+
+	var _redux = __webpack_require__(174);
+
+	var _friendsAction = __webpack_require__(272);
+
+	var _friendDetailContainer = __webpack_require__(299);
+
+	var _friendDetailContainer2 = _interopRequireDefault(_friendDetailContainer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FriendList = function (_React$Component) {
+	  _inherits(FriendList, _React$Component);
+
+	  function FriendList(props) {
+	    _classCallCheck(this, FriendList);
+
+	    return _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).call(this, props));
+	    // console.log(props, ' containers/friendsList Props');
+	  }
+
+	  _createClass(FriendList, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      //call friends list and render
+	      this.props.retrieveFriends();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var friend = this.props.friend[1];
+	      // console.log(friend, ' this.props LINE 21, friendDetail');
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-group' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel  text-center' },
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'Contacts'
+	            )
+	          ),
+	          !friend ? "Loading..." : _react2.default.createElement(_friendDetailContainer2.default, { friend: friend })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return FriendList;
+	}(_react2.default.Component);
+
+	function mapStateToProps(state) {
+	  // console.log(state, ' state friendListContainer.js')
+	  return { friend: state.friend };
+	}
+
+	//binds action and container
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ retrieveFriends: _friendsAction.retrieveFriends, getAllUser: _friendsAction.getAllUser }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendList);
 
 /***/ },
 /* 299 */
@@ -32842,7 +32845,7 @@
 	      var _this2 = this;
 
 	      var user = this.props.friend; //Array of Object
-	      console.log(user, ' USER, FRIENDDETAILCONTAINER');
+	      // console.log(user, ' USER, FRIENDDETAILCONTAINER')
 	      return _react2.default.createElement(
 	        'form',
 	        { className: 'panel-default' },
@@ -33409,6 +33412,7 @@
 	    case 'RETRIEVE_FRIENDS':
 	      return [action.payload.data].concat(_toConsumableArray(state));
 	    case 'GET_ALL_USERS':
+	      console.log(action.payload.data, ' REDUCER DATA');
 	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'ADD_FRIEND':

@@ -17,7 +17,7 @@ class FriendDetail extends React.Component {
 
   render(){
     let user = this.props.friend; //Array of Object
-    console.log(user, ' USER, FRIENDDETAILCONTAINER')
+    // console.log(user, ' USER, FRIENDDETAILCONTAINER')
     return (
     <form  className="panel-default">
       {user.map((user, i) => {
@@ -37,8 +37,7 @@ class FriendDetail extends React.Component {
               </div>
               <div>Email: {user.email}</div>
               <span> <button onClick={this.deleteUser} className='btn btn-danger btn-xs'> DELETE </button> </span>
-<hr/>
-
+              <hr/>
             </div>
           </div>
            )

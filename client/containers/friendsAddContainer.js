@@ -8,7 +8,7 @@ import {retrieveFriends, getAllUser } from '../actions/friendsAction';
 class FriendAdd extends React.Component {
   constructor(props){
     super(props);
-    console.log(props, ' friendsAddContainer Props')
+    // console.log(props, ' friendsAddContainer Props')
     this.state = {term: '', friend:[]};
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -23,11 +23,12 @@ class FriendAdd extends React.Component {
         // this.setState({friend:nexstProps.friend})
 
    this.setState({term: '', friend: nextProps.friend})
-        console.log(nextProps.friend, 'this.state componentWillReceiveProps friendadd');
+        // console.log(nextProps.friend, 'this.state componentWillReceiveProps friendadd');
   }
 
   onFormSubmit(e){
     e.preventDefault();
+    console.log(e, )
     //need to Add Friends to current user
     this.props.addFriend(this.state.term)
   }
