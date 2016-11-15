@@ -7,7 +7,7 @@ var router = express.Router();
 var authCtrl = require('../controller/authController');
 var userCtrl = require('../controller/userController');
 var friendCtrl = require('../controller/friendController');
-var allUser = require('../controller/allUserController')
+var allUser = require('../controller/availUserController');
 
 //Authentication Routes
 router.post('/register', authCtrl.register);
@@ -19,9 +19,11 @@ router.get('/logout', authCtrl.logout);
 
 //FriendList Routes
 router.get('/friend', friendCtrl.retrieveFriends);
+
 router.post('/friend', friendCtrl.addFriend);
 
-router.get('/allUser', allUser.retrieveAllUser)
+//Available User Routes
+router.get('/allUser', allUser.availableUser)
 
 
 

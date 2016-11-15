@@ -11,7 +11,6 @@ module.exports.retrieveFriends = (req, res) => {
   db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
   .select('users.id', 'users.userName', 'users.email')
   .then((data) => {
-
     console.log(data, ': data, retreiveFriends');
     res.send(data);
   })
@@ -24,8 +23,18 @@ module.exports.retrieveFriends = (req, res) => {
 module.exports.addFriend = (req, res) => {
   console.log('POST /friend API called');
   //insert into friends table
-  // db('friends').insert({user_id:1, user_id2:4})
+  console.log(req.body, 'Received Request')
 
+
+  let currentUser = 9;//Need to retrieve current user id
+  db('friends').insert({user_id:currentUser, user_id2:req.body.friendId})
+  .then((data) => {
+    console.log(data, ': data, retreiveFriends');
+    res.send(data);
+  })
+  .catch((err)=> {
+    console.log(err)
+  })
 }
 
 

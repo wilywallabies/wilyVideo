@@ -8,10 +8,10 @@ import {retrieveFriends, getAllUser } from '../actions/friendsAction';
 class FriendAdd extends React.Component {
   constructor(props){
     super(props);
-    // console.log(props, ' friendsAddContainer Props')
-    this.state = {term: '', friend:[]};
-    this.onInputChange = this.onInputChange.bind(this);
+    console.log(props, ' friendsAddContainer Props LINE 11')
+    this.state = {friend:[], selectedVal:''};
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
@@ -22,19 +22,22 @@ class FriendAdd extends React.Component {
   componentWillReceiveProps(nextProps) {
         // this.setState({friend:nexstProps.friend})
 
-   this.setState({term: '', friend: nextProps.friend})
+   this.setState({friend: nextProps.friend})
         // console.log(nextProps.friend, 'this.state componentWillReceiveProps friendadd');
   }
 
   onFormSubmit(e){
     e.preventDefault();
-    console.log(e, )
-    //need to Add Friends to current user
-    this.props.addFriend(this.state.term)
+    // need to Add Friends to current user
+    console.log(this.refs.selectValue.value, ' this.ref.selectVal')
+    this.props.addFriend(this.refs.selectValue.value)
   }
 
-  onInputChange(e){
-    this.setState({term: e.target.value});
+  handleChange(e){
+    console.log(e.target.value, ' :Selected Value')
+    this.setState( {selectedVal:e.target.value} )
+
+    console.log(this.state, ' this.state after handle change');
   }
 
   render(){
@@ -43,15 +46,18 @@ class FriendAdd extends React.Component {
         Available Users:
       <form onSubmit={this.onFormSubmit} className="input-group">
 
-          <select className="form-control">
-          { !this.state.friend ? 'Loading Users...' :
-            this.state.friend.map( (user, i) => {return(
-            <option value='user.id' key={user.id}>{user.email}</option>) })
+          <select  onChange={this.handleChange} className="form-control">
+          {
+            !this.state.friend ? 'Loading Users...' :
+            this.state.friend.map( (user, i) => {
+              return(
+            <option ref='selectValue' value={user.id} key={user.id}>{user.email}</option>)
+            })
           }
           </select>
 
         <span className="input-group-btn">
-          <button type="submit" className="btn btn-secondary">Add</button>
+          <button className="btn btn-secondary">Add</button>
         </span>
       </form>
       </div>

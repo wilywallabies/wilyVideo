@@ -11,8 +11,29 @@ export function retrieveFriends() {
   }
 }
 
+export function addFriend(userId){
+  const request = axios.post('api/friend', {friendId:userId});
+  console.log(userId, ' addFriend Called')
+  return {
+    type: 'ADD_FRIEND',
+    payload: userId,
+
+  }
+}
+
+export function deleteFriend(userId){
+  const request = axios.post('api/friend', {friendId:userId});
+  console.log(userId, ' deleteFriend Called')
+  return {
+    type: 'DELETE_FRIEND',
+    payload: userId,
+
+  }
+}
+
 export function getAllUser(){
-  const request = axios.get('api/allUser');
+  const request = axios.get('api/allUser')
+
   console.log('Request Line 16:', request);
   return {
     type: 'GET_ALL_USERS',
@@ -21,12 +42,4 @@ export function getAllUser(){
 }
 
 
-
-export function addFriend(userId){
-  // console.log(userId, ' addFriend Called')
-  return {
-    type: 'ADD_FRIEND',
-    payload: userId
-  }
-}
 

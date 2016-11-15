@@ -8,11 +8,11 @@ class FriendDetail extends React.Component {
 
     onClickCall(e){
       e.preventDefault();
-      console.log('call clicked')
+      console.log(e.target.value , 'call clicked')
   }
     deleteUser(e){
       e.preventDefault();
-      console.log('delete clicked')
+      console.log(e.target.value, 'delete clicked')
   }
 
   render(){
@@ -24,11 +24,14 @@ class FriendDetail extends React.Component {
         return(
 
           <div
-          className="panel-body"
-          key={user.id}>
+          key={user.id}
+          className="panel-body">
 
             <div className='col-md-4'>
-            <span> <button onClick={this.onClickCall} className='btn btn-default  btn-lg'> CALL </button> </span>
+            <span>
+              <button onClick={this.onClickCall} className='btn btn-default  btn-lg'> CALL
+              </button>
+            </span>
 
             </div>
               <div className='col-md-8'>

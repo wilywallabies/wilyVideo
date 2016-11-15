@@ -31089,12 +31089,12 @@
 	  function FriendAdd(props) {
 	    _classCallCheck(this, FriendAdd);
 
-	    // console.log(props, ' friendsAddContainer Props')
 	    var _this = _possibleConstructorReturn(this, (FriendAdd.__proto__ || Object.getPrototypeOf(FriendAdd)).call(this, props));
 
-	    _this.state = { term: '', friend: [] };
-	    _this.onInputChange = _this.onInputChange.bind(_this);
+	    console.log(props, ' friendsAddContainer Props LINE 11');
+	    _this.state = { friend: [], selectedVal: '' };
 	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
+	    _this.handleChange = _this.handleChange.bind(_this);
 	    return _this;
 	  }
 
@@ -31109,21 +31109,24 @@
 	    value: function componentWillReceiveProps(nextProps) {
 	      // this.setState({friend:nexstProps.friend})
 
-	      this.setState({ term: '', friend: nextProps.friend });
+	      this.setState({ friend: nextProps.friend });
 	      // console.log(nextProps.friend, 'this.state componentWillReceiveProps friendadd');
 	    }
 	  }, {
 	    key: 'onFormSubmit',
 	    value: function onFormSubmit(e) {
 	      e.preventDefault();
-	      console.log(e);
-	      //need to Add Friends to current user
-	      this.props.addFriend(this.state.term);
+	      // need to Add Friends to current user
+	      console.log(this.refs.selectValue.value, ' this.ref.selectVal');
+	      this.props.addFriend(this.refs.selectValue.value);
 	    }
 	  }, {
-	    key: 'onInputChange',
-	    value: function onInputChange(e) {
-	      this.setState({ term: e.target.value });
+	    key: 'handleChange',
+	    value: function handleChange(e) {
+	      console.log(e.target.value, ' :Selected Value');
+	      this.setState({ selectedVal: e.target.value });
+
+	      console.log(this.state, ' this.state after handle change');
 	    }
 	  }, {
 	    key: 'render',
@@ -31137,11 +31140,11 @@
 	          { onSubmit: this.onFormSubmit, className: 'input-group' },
 	          _react2.default.createElement(
 	            'select',
-	            { className: 'form-control' },
+	            { onChange: this.handleChange, className: 'form-control' },
 	            !this.state.friend ? 'Loading Users...' : this.state.friend.map(function (user, i) {
 	              return _react2.default.createElement(
 	                'option',
-	                { value: 'user.id', key: user.id },
+	                { ref: 'selectValue', value: user.id, key: user.id },
 	                user.email
 	              );
 	            })
@@ -31151,7 +31154,7 @@
 	            { className: 'input-group-btn' },
 	            _react2.default.createElement(
 	              'button',
-	              { type: 'submit', className: 'btn btn-secondary' },
+	              { className: 'btn btn-secondary' },
 	              'Add'
 	            )
 	          )
@@ -31185,8 +31188,9 @@
 	  value: true
 	});
 	exports.retrieveFriends = retrieveFriends;
-	exports.getAllUser = getAllUser;
 	exports.addFriend = addFriend;
+	exports.deleteFriend = deleteFriend;
+	exports.getAllUser = getAllUser;
 
 	var _axios = __webpack_require__(273);
 
@@ -31204,20 +31208,33 @@
 	  };
 	}
 
+	function addFriend(userId) {
+	  var request = _axios2.default.post('api/friend', { friendId: userId });
+	  console.log(userId, ' addFriend Called');
+	  return {
+	    type: 'ADD_FRIEND',
+	    payload: userId
+
+	  };
+	}
+
+	function deleteFriend(userId) {
+	  var request = _axios2.default.post('api/friend', { friendId: userId });
+	  console.log(userId, ' deleteFriend Called');
+	  return {
+	    type: 'DELETE_FRIEND',
+	    payload: userId
+
+	  };
+	}
+
 	function getAllUser() {
 	  var request = _axios2.default.get('api/allUser');
+
 	  console.log('Request Line 16:', request);
 	  return {
 	    type: 'GET_ALL_USERS',
 	    payload: request
-	  };
-	}
-
-	function addFriend(userId) {
-	  // console.log(userId, ' addFriend Called')
-	  return {
-	    type: 'ADD_FRIEND',
-	    payload: userId
 	  };
 	}
 
@@ -32831,13 +32848,13 @@
 	    key: 'onClickCall',
 	    value: function onClickCall(e) {
 	      e.preventDefault();
-	      console.log('call clicked');
+	      console.log(e.target.value, 'call clicked');
 	    }
 	  }, {
 	    key: 'deleteUser',
 	    value: function deleteUser(e) {
 	      e.preventDefault();
-	      console.log('delete clicked');
+	      console.log(e.target.value, 'delete clicked');
 	    }
 	  }, {
 	    key: 'render',
@@ -32853,21 +32870,19 @@
 	          return _react2.default.createElement(
 	            'div',
 	            {
-	              className: 'panel-body',
-	              key: user.id },
+	              key: user.id,
+	              className: 'panel-body' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-md-4' },
 	              _react2.default.createElement(
 	                'span',
 	                null,
-	                ' ',
 	                _react2.default.createElement(
 	                  'button',
 	                  { onClick: _this2.onClickCall, className: 'btn btn-default  btn-lg' },
-	                  ' CALL '
-	                ),
-	                ' '
+	                  ' CALL'
+	                )
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -33406,17 +33421,24 @@
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 	  var action = arguments[1];
 
-	  console.log(action.payload, ' ACTION.PAYLOAD-');
-	  // console.log('Action received!:', action);
+	  // console.log(action.payload, ' ACTION.PAYLOAD-');
+	  console.log('Action received!:', action);
 	  switch (action.type) {
+
 	    case 'RETRIEVE_FRIENDS':
 	      return [action.payload.data].concat(_toConsumableArray(state));
+
 	    case 'GET_ALL_USERS':
-	      console.log(action.payload.data, ' REDUCER DATA');
+	      // console.log(action.payload.data, ' REDUCER DATA')
 	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'ADD_FRIEND':
-	    // return [action.payload, ...state]
+	      console.log(action.payload, ' REDUCER DATA');
+	      return [action.payload.data].concat(_toConsumableArray(state));
+
+	    case 'DELETE_FRIEND':
+	      console.log(action.payload, ' REDUCER DATA');
+	      return [action.payload.data].concat(_toConsumableArray(state));
 	  };
 
 	  return state;
