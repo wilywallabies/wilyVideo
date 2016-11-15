@@ -61,19 +61,6 @@ class FriendDetail extends React.Component {
 }
 
 
-// const FriendDetail = ({friend}) => (
-//   // console.log(user, ' FRIEND DETAIL')
-//   console.log(friend, ' FRIEND DETAIL')
-//   <div>
-//     {friend}
-//   </div>
-//   )
-
-// function mapStateToProps(state){
-//   // console.log(state, ' state friendListContainer.js')
-//   return {friend: state.friend}
-// }
-
 //binds action and container
 function mapDispatchToProps(dispatch){
   return bindActionCreators({ deleteFriend }, dispatch)
