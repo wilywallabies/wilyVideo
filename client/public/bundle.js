@@ -31219,7 +31219,7 @@
 	}
 
 	function deleteFriend(userId) {
-	  var request = _axios2.default.post('api/friend', { friendId: userId });
+	  var request = _axios2.default.delete('api/friend', { friendId: userId });
 	  console.log(userId, ' deleteFriend Called');
 	  return {
 	    type: 'DELETE_FRIEND',
@@ -32826,6 +32826,12 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(195);
+
+	var _redux = __webpack_require__(174);
+
+	var _friendsAction = __webpack_require__(272);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32840,8 +32846,14 @@
 	  function FriendDetail(props) {
 	    _classCallCheck(this, FriendDetail);
 
-	    return _possibleConstructorReturn(this, (FriendDetail.__proto__ || Object.getPrototypeOf(FriendDetail)).call(this, props));
-	    // console.log(props, ' containers/FriendDetail props')
+	    var _this = _possibleConstructorReturn(this, (FriendDetail.__proto__ || Object.getPrototypeOf(FriendDetail)).call(this, props));
+
+	    console.log(props, ' containers/FriendDetail props');
+
+	    _this.onClickCall = _this.onClickCall.bind(_this);
+	    _this.deleteUser = _this.deleteUser.bind(_this);
+
+	    return _this;
 	  }
 
 	  _createClass(FriendDetail, [{
@@ -32855,6 +32867,7 @@
 	    value: function deleteUser(e) {
 	      e.preventDefault();
 	      console.log(e.target.value, 'delete clicked');
+	      this.props.deleteFriend();
 	    }
 	  }, {
 	    key: 'render',
@@ -32930,8 +32943,19 @@
 	//   </div>
 	//   )
 
+	// function mapStateToProps(state){
+	//   // console.log(state, ' state friendListContainer.js')
+	//   return {friend: state.friend}
+	// }
 
-	exports.default = FriendDetail;
+	//binds action and container
+
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ deleteFriend: _friendsAction.deleteFriend }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(FriendDetail);
 
 /***/ },
 /* 300 */
@@ -33437,8 +33461,8 @@
 	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'DELETE_FRIEND':
-	      console.log(action.payload, ' REDUCER DATA');
-	      return [action.payload.data].concat(_toConsumableArray(state));
+	    //   console.log(action.payload, ' REDUCER DATA')
+	    // return [action.payload.data, ...state]
 	  };
 
 	  return state;

@@ -1,9 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { deleteFriend } from '../actions/friendsAction';
 
 class FriendDetail extends React.Component {
   constructor(props){
     super(props);
-    // console.log(props, ' containers/FriendDetail props')
+    console.log(props, ' containers/FriendDetail props')
+
+    this.onClickCall = this.onClickCall.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
+
   }
 
     onClickCall(e){
@@ -13,6 +20,7 @@ class FriendDetail extends React.Component {
     deleteUser(e){
       e.preventDefault();
       console.log(e.target.value, 'delete clicked')
+      this.props.deleteFriend()
   }
 
   render(){
@@ -60,4 +68,15 @@ class FriendDetail extends React.Component {
 //     {friend}
 //   </div>
 //   )
-export default FriendDetail;
+
+// function mapStateToProps(state){
+//   // console.log(state, ' state friendListContainer.js')
+//   return {friend: state.friend}
+// }
+
+//binds action and container
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ deleteFriend }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(FriendDetail)

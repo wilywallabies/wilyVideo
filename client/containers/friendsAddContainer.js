@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { addFriend } from '../actions/friendsAction'
-import {retrieveFriends, getAllUser } from '../actions/friendsAction';
+import { retrieveFriends, getAllUser } from '../actions/friendsAction';
 
 class FriendAdd extends React.Component {
   constructor(props){

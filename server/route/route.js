@@ -22,6 +22,8 @@ router.get('/friend', friendCtrl.retrieveFriends);
 
 router.post('/friend', friendCtrl.addFriend);
 
+router.delete('/friend', friendCtrl.deleteFriend);
+
 //Available User Routes
 router.get('/allUser', allUser.availableUser)
 
