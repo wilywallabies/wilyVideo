@@ -3,7 +3,7 @@ let db = require('../models/db');
 //Table = 'users' || 'friends'
 
 //Retrieve Friend List from DB
-module.exports.retrieveFriends = function (req, res){
+module.exports.retrieveFriends = (req, res) => {
   console.log('GET retrieveFriends /friend API called');
   // db.select('id', 'email', 'userName').from('users')
 
@@ -21,7 +21,7 @@ module.exports.retrieveFriends = function (req, res){
 }
 
 //addFriend Friend List to DB
-module.exports.addFriend = function (req, res){
+module.exports.addFriend = (req, res) => {
   console.log('POST /friend API called');
   //insert into friends table
   // db('friends').insert({user_id:1, user_id2:4})

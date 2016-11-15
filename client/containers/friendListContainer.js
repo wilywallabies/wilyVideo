@@ -15,7 +15,7 @@ class FriendList extends React.Component {
     }
   render(){
     let friend = this.props.friend[1];
-      console.log(friend, ' this.props LINE 21, friendDetail');
+      // console.log(friend, ' this.props LINE 21, friendDetail');
     return (
           <div >
             <div className="panel-group">
@@ -33,7 +33,7 @@ class FriendList extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log(state, ' state friendListContainer.js')
+  // console.log(state, ' state friendListContainer.js')
   return {friend: state.friend}
 }
 

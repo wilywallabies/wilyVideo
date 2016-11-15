@@ -5,6 +5,7 @@ export default function(state = [], action){
     case 'RETRIEVE_FRIENDS':
       return [action.payload.data, ...state];
     case 'GET_ALL_USERS':
+      console.log(action.payload.data, ' REDUCER DATA')
       return [action.payload.data, ...state];
 
     case 'ADD_FRIEND':
