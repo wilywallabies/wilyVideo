@@ -34,7 +34,7 @@ export function deleteFriend(userId){
 export function getAllUser(){
   const request = axios.get('api/allUser')
 
-  console.log('Request Line 16:', request);
+  console.log('Request Received, Line 37', request);
   return {
     type: 'GET_ALL_USERS',
     payload: request
@@ -42,4 +42,12 @@ export function getAllUser(){
 }
 
 
+export function callUser(){
+  // const request = axios.get('api/allUser')
 
+  console.log('Request Received, Line 48', request);
+  return {
+    type: 'CALL_USER',
+    payload: request
+  }
+}

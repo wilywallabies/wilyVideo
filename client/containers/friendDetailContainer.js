@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteFriend } from '../actions/friendsAction';
+import { deleteFriend, callUser } from '../actions/friendsAction';
 
 class FriendDetail extends React.Component {
   constructor(props){
@@ -63,7 +63,7 @@ class FriendDetail extends React.Component {
 
 //binds action and container
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ deleteFriend }, dispatch)
+  return bindActionCreators({ deleteFriend, callUser }, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(FriendDetail)

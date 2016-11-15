@@ -31191,6 +31191,7 @@
 	exports.addFriend = addFriend;
 	exports.deleteFriend = deleteFriend;
 	exports.getAllUser = getAllUser;
+	exports.callUser = callUser;
 
 	var _axios = __webpack_require__(273);
 
@@ -31231,9 +31232,19 @@
 	function getAllUser() {
 	  var request = _axios2.default.get('api/allUser');
 
-	  console.log('Request Line 16:', request);
+	  console.log('Request Received, Line 37', request);
 	  return {
 	    type: 'GET_ALL_USERS',
+	    payload: request
+	  };
+	}
+
+	function callUser() {
+	  // const request = axios.get('api/allUser')
+
+	  console.log('Request Received, Line 48', request);
+	  return {
+	    type: 'CALL_USER',
 	    payload: request
 	  };
 	}
@@ -32939,7 +32950,7 @@
 
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ deleteFriend: _friendsAction.deleteFriend }, dispatch);
+	  return (0, _redux.bindActionCreators)({ deleteFriend: _friendsAction.deleteFriend, callUser: _friendsAction.callUser }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(FriendDetail);
@@ -33448,6 +33459,10 @@
 	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'DELETE_FRIEND':
+	    //   console.log(action.payload, ' REDUCER DATA')
+	    // return [action.payload.data, ...state]
+
+	    case 'CALL_USER':
 	    //   console.log(action.payload, ' REDUCER DATA')
 	    // return [action.payload.data, ...state]
 	  };

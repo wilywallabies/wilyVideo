@@ -17,6 +17,10 @@ export default function(state = [], action){
     case 'DELETE_FRIEND':
     //   console.log(action.payload, ' REDUCER DATA')
     // return [action.payload.data, ...state]
+
+    case 'CALL_USER':
+    //   console.log(action.payload, ' REDUCER DATA')
+    // return [action.payload.data, ...state]
   };
 
   return state;
