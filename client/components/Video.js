@@ -37,11 +37,7 @@ class Video extends React.Component{
           Test
         </h1>
 
-        <div>
-
         <Friend />
-
-
 
 
         <button onClick={this.token}> Get list of tokens </button>
