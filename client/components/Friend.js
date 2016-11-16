@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import FriendAdd from '../containers/friendsAddContainer';
 import FriendDetail from '../containers/friendListContainer';
 

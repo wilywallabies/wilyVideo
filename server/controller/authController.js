@@ -1,3 +1,4 @@
+'use strict';
 //Authentication Controller Logic
 
 var request = require('request');
