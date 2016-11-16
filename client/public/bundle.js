@@ -31140,6 +31140,7 @@
 	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(e) {
+	      // console.log(e.target.value, ' :Selected Value')
 	      var id = e.target.value;
 	      this.setState({ selectedVal: id });
 	    }
@@ -31183,6 +31184,9 @@
 
 	function mapStateToProps(state) {
 	  console.log(state, 'AllUser except friend and curr, container/friendsAddContainer.js');
+
+	  // console.log(state.friend[0], 'AllUser except friend and curr, container/friendsAddContainer.js')
+	  //  console.log(state.friend[1], 'AllUser except friend and curr, container/friendsAddContainer.js')
 	  return { notFriend: state.friend[0], friend: state.friend[1] };
 	}
 
@@ -32905,6 +32909,7 @@
 	        'form',
 	        { className: 'panel-default' },
 	        user.map(function (user, i) {
+
 	          return _react2.default.createElement(
 	            'div',
 	            {
@@ -33484,7 +33489,8 @@
 	      // console.log(action.payload.data, ' REDUCER DATA')
 	      // console.log(...state, ' REDUCER state')
 	      return [action.payload.data].concat(_toConsumableArray(state));
-	    // return [...state];
+	    //   console.log(action.payload, ' REDUCER DATA')
+	    // return [action.payload, ...state]
 
 	    case 'DELETE_FRIEND':
 	      // console.log(action.payload, ' REDUCER DATA')
@@ -33494,9 +33500,7 @@
 	    //   console.log(action.payload, ' REDUCER DATA')
 	    // return [action.payload.data, ...state]
 
-	    case 'CALL_USER':
-	    //   console.log(action.payload, ' REDUCER DATA')
-	    // return [action.payload.data, ...state]
+
 	  };
 
 	  return state;

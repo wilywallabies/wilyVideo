@@ -28,8 +28,11 @@ class FriendDetail extends React.Component {
 
     return (
 
+
     <form  className="panel-default">
+
       { user.map((user, i) => {
+
         return(
           <div
           key={user.id}

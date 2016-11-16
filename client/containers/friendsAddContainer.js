@@ -30,7 +30,6 @@ class FriendAdd extends React.Component {
   }
 
   // invoked immediately after updating occurs
-
   componentDidUpdate(prevProps, prevState) {
        // this.setState({selectedVal:this.refs.selectValue.value})
     console.log(this.state, ' COMPONENTDIDMOUNT')
@@ -45,6 +44,7 @@ class FriendAdd extends React.Component {
   }
 
   handleChange(e){
+    // console.log(e.target.value, ' :Selected Value')
     let id = e.target.value;
     this.setState( {selectedVal:id} );
   }
@@ -74,6 +74,9 @@ class FriendAdd extends React.Component {
 }
 function mapStateToProps(state){
   console.log(state, 'AllUser except friend and curr, container/friendsAddContainer.js')
+
+  // console.log(state.friend[0], 'AllUser except friend and curr, container/friendsAddContainer.js')
+  //  console.log(state.friend[1], 'AllUser except friend and curr, container/friendsAddContainer.js')
   return {notFriend: state.friend[0],friend:state.friend[1]}
 }
 

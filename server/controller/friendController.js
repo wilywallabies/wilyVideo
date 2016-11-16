@@ -36,4 +36,3 @@ module.exports.addFriend = (req, res) => {
   })
 }
 
-

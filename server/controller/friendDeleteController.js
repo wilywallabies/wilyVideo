@@ -22,6 +22,15 @@ module.exports.deleteFriend = (req, res) => {
 
 
 
+  console.log('friendDelete /friend API called');
+  //insert into friends table
+  console.log(req.body, 'Received Request')
+  // console.log(req, 'Received Request')
+
+  db('friends')
+  .where({'user_id':currentUser, 'user_id2':req.body.friendId})
+  .del()
+
 }
 
 
