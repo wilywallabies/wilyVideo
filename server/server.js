@@ -21,10 +21,13 @@ app.use(logger('dev'));
 app.use(cookieParser());
 
 
-var apiRoutes = require('./route/route');
+var apiRoutes = require('./routes/api');
+var accountRoutes = require('./routes/accountRoutes')
 
 // All routes prefixed with /api get run through this router
 app.use('/api', apiRoutes);
+app.use('/api', accountRoutes);
+
 
 
 // webpack loads index.html, looks for script src
