@@ -77,6 +77,7 @@ function mapDispatchToProps(dispatch){
 //   return {friend: state.friend}
 // }
 
+
 }
 
 export default connect(null, mapDispatchToProps)(FriendDetail)

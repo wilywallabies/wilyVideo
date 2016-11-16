@@ -32976,6 +32976,7 @@
 	  //   // console.log(state, ' state friendListContainer.js')
 	  //   return {friend: state.friend}
 	  // }
+
 	}
 
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(FriendDetail);
