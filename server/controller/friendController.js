@@ -12,7 +12,7 @@ module.exports.retrieveFriends = (req, res) => {
   db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
   .select('users.id', 'users.userName', 'users.email')
   .then((data) => {
-    console.log(data, ': data, retreiveFriends');
+    // console.log(data, ': data, retreiveFriends');
     res.send(data);
   })
   .catch((err)=> {
