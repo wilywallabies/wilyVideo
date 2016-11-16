@@ -51682,6 +51682,7 @@
 
 	    console.log(props, ' friendsAddContainer Props LINE 11');
 	    _this.state = { notFriend: [], selectedVal: '' };
+	    _this.state.selectedUserName = '';
 	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    return _this;
@@ -51729,9 +51730,10 @@
 	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(e) {
-	      // console.log(e.target.value, ' :Selected Value')
 	      var id = e.target.value;
+	      console.log(id);
 	      this.setState({ selectedVal: id });
+	      // this.setState( {selectedUserName:id} );
 	    }
 	  }, {
 	    key: 'render',
@@ -51739,17 +51741,23 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Available Users:',
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.onFormSubmit, className: 'input-group' },
 	          _react2.default.createElement(
 	            'select',
 	            { onChange: this.handleChange, className: 'form-control' },
+	            _react2.default.createElement(
+	              'option',
+	              { selected: 'selected', disabled: true },
+	              ' Available Users '
+	            ),
+	            ' )',
 	            !this.state.notFriend ? 'Loading Users...' : this.state.notFriend.map(function (user, i) {
 	              return _react2.default.createElement(
 	                'option',
 	                { value: user.id, key: user.id },
+	                ' Email: ',
 	                user.email
 	              );
 	            })
