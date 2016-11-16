@@ -3,7 +3,7 @@ let db = require('../models/db');
 //Table = 'users' || 'friends'
 
 //Retrieve Friend List from DB
-module.exports.retrieveFriends = function (req, res){
+module.exports.retrieveFriends = (req, res) => {
   console.log('GET retrieveFriends /friend API called');
   // db.select('id', 'email', 'userName').from('users')
 
@@ -11,7 +11,6 @@ module.exports.retrieveFriends = function (req, res){
   db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
   .select('users.id', 'users.userName', 'users.email')
   .then((data) => {
-
     console.log(data, ': data, retreiveFriends');
     res.send(data);
   })
@@ -21,13 +20,47 @@ module.exports.retrieveFriends = function (req, res){
 }
 
 //addFriend Friend List to DB
-module.exports.addFriend = function (req, res){
+module.exports.addFriend = (req, res) => {
   console.log('POST /friend API called');
   //insert into friends table
-  // db('friends').insert({user_id:1, user_id2:4})
+  console.log(req.body, 'Received Request')
 
+  let currentUser = 9;//Need to retrieve current user id
+  db('friends').insert({user_id:currentUser, user_id2:req.body.friendId})
+  .then((data) => {
+    console.log(data, ': data, retreiveFriends');
+    res.send(data);
+  })
+  .catch((err)=> {
+    console.log(err)
+  })
 }
 
+
+
+// //addFriend Friend List to DB
+// module.exports.deleteFriend = (req, res) => {
+//   let currentUser = 9;//Need to retrieve current user id
+
+//   console.log('DELETE /friend API called');
+//   //insert into friends table
+//   console.log(req.body, 'Received Request')
+//   // console.log(req, 'Received Request')
+
+//   db('friends')
+//   .where({'user_id':currentUser, 'user_id2':req.body.friendId})
+//   .del()
+
+
+//   // db('friends').insert({user_id:currentUser, user_id2:req.body.friendId})
+//   // .then((data) => {
+//   //   console.log(data, ': data, retreiveFriends');
+//   //   res.send(data);
+//   // })
+//   // .catch((err)=> {
+//   //   console.log(err)
+//   // })
+// }
 
 
 

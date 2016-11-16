@@ -7,7 +7,7 @@ import FriendDetail from './friendDetailContainer';
 class FriendList extends React.Component {
     constructor(props){
     super(props);
-    console.log(props, ' containers/friendsList Props');
+    // console.log(props, ' containers/friendsList Props');
   }
      componentWillMount(){
       //call friends list and render
@@ -15,11 +15,13 @@ class FriendList extends React.Component {
     }
   render(){
     let friend = this.props.friend[1];
-      console.log(friend, ' this.props LINE 21, friendDetail');
+      // console.log(friend, ' this.props LINE 21, friendDetail');
     return (
           <div >
             <div className="panel-group">
-            <div className="panel panel-info text-center">Contacts</div>
+            <div className="panel  text-center">
+              <h4>Contacts</h4>
+            </div>
               {
                 !friend ? "Loading...":
                <FriendDetail friend={friend}  />
@@ -31,7 +33,7 @@ class FriendList extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log(state, ' state friendListContainer.js')
+  // console.log(state, ' state friendListContainer.js')
   return {friend: state.friend}
 }
 
