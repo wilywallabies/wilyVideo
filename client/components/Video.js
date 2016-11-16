@@ -4,7 +4,7 @@ import adapter from 'webrtc-adapter';
 
 
 import LocalVideo from './LocalVideo';
-import Friend from '../containers/friendsMainContainer';
+import Friend from './Friend';
 
 import webrtcModule from './webrtcModule';
 
