@@ -31237,6 +31237,7 @@
 	  console.log(userId, ' USERID');
 	  var request = _axios2.default.delete('api/friendDelete/' + userId); //1
 
+	  console.log(userId, ' deleteFriend Called');
 	  return {
 	    type: 'DELETE_FRIEND',
 	    payload: request
@@ -32889,6 +32890,7 @@
 	    value: function deleteUser(e) {
 	      e.preventDefault();
 	      this.props.deleteFriend(e.target.value);
+	      console.log(e.target.value, 'delete clicked');
 	    }
 	  }, {
 	    key: 'render',
@@ -32962,6 +32964,18 @@
 
 	function mapDispatchToProps(dispatch) {
 	  return (0, _redux.bindActionCreators)({ deleteFriend: _friendsAction.deleteFriend, callUser: _friendsAction.callUser }, dispatch);
+	  // const FriendDetail = ({friend}) => (
+	  //   // console.log(user, ' FRIEND DETAIL')
+	  //   console.log(friend, ' FRIEND DETAIL')
+	  //   <div>
+	  //     {friend}
+	  //   </div>
+	  //   )
+
+	  // function mapStateToProps(state){
+	  //   // console.log(state, ' state friendListContainer.js')
+	  //   return {friend: state.friend}
+	  // }
 	}
 
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(FriendDetail);

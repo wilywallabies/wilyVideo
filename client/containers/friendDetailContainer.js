@@ -19,6 +19,7 @@ class FriendDetail extends React.Component {
     deleteUser(e){
       e.preventDefault();
       this.props.deleteFriend(e.target.value);
+      console.log(e.target.value, 'delete clicked')
   }
 
   render(){
@@ -63,6 +64,19 @@ class FriendDetail extends React.Component {
 //binds action and container
 function mapDispatchToProps(dispatch){
   return bindActionCreators({ deleteFriend, callUser }, dispatch)
+// const FriendDetail = ({friend}) => (
+//   // console.log(user, ' FRIEND DETAIL')
+//   console.log(friend, ' FRIEND DETAIL')
+//   <div>
+//     {friend}
+//   </div>
+//   )
+
+// function mapStateToProps(state){
+//   // console.log(state, ' state friendListContainer.js')
+//   return {friend: state.friend}
+// }
+
 }
 
 export default connect(null, mapDispatchToProps)(FriendDetail)

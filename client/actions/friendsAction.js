@@ -24,6 +24,7 @@ export function deleteFriend(userId){
   console.log(userId, ' USERID');
   const request = axios.delete('api/friendDelete/' + userId); //1
 
+  console.log(userId, ' deleteFriend Called')
   return {
     type: 'DELETE_FRIEND',
     payload: request,
