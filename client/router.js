@@ -2,6 +2,8 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import App from './components/App';
+import Signup from './components/Signup';
+import Login from './components/Login';
 
 import { Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
@@ -12,6 +14,8 @@ const router = (
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
+        <Route path="/signup" component={Signup}/>
+        <Route path="/login" component={Login}/>
       </Route>
     </Router>
   </Provider>
