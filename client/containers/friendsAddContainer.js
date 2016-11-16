@@ -10,6 +10,7 @@ class FriendAdd extends React.Component {
     super(props);
     console.log(props, ' friendsAddContainer Props LINE 11')
     this.state = {notFriend:[], selectedVal:''};
+    this.state.selectedUserName = '';
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -44,22 +45,24 @@ class FriendAdd extends React.Component {
   }
 
   handleChange(e){
-    // console.log(e.target.value, ' :Selected Value')
     let id = e.target.value;
+    console.log(id)
     this.setState( {selectedVal:id} );
+    // this.setState( {selectedUserName:id} );
   }
 
   render(){
     return (
       <div>
-        Available Users:
       <form onSubmit={this.onFormSubmit} className="input-group">
           <select onChange={this.handleChange} className="form-control">
+            <option selected="selected" disabled> Available Users </option> )
+
           {
             !this.state.notFriend ? 'Loading Users...' :
              this.state.notFriend.map( (user, i) => {
               return(
-            <option  value={user.id} key={user.id}>{user.email}</option> )
+            <option  value={user.id} key={user.id}> Email: {user.email}</option> )
             })
           }
           </select>
