@@ -14,6 +14,7 @@ export function retrieveFriends() {
 export function addFriend(userId){
   const request = axios.post('api/friend', {friendId:userId});
   console.log(userId, ' addFriend Called')
+  console.log(request,  'REQUEST, ADDFRIEND')
   return {
     type: 'ADD_FRIEND',
     payload: request,
@@ -22,9 +23,12 @@ export function addFriend(userId){
 }
 
 export function deleteFriend(userId){
-  const request = axios.post('api/friendDelete', {friendId:userId});
+  console.log(userId, ' USERID');
+  const request = axios.delete('api/friendDelete/' + userId); //1
+  console.log(request, ' REQUEST');
 
   console.log(userId, ' deleteFriend Called')
+
   return {
     type: 'DELETE_FRIEND',
     payload: request,

@@ -31137,7 +31137,7 @@
 	      console.log(this.state);
 	      this.props.addFriend(this.state.selectedVal);
 	      console.log(this.state);
-	      // this.props.retrieveFriends();
+	      this.props.retrieveFriends();
 	    }
 	  }, {
 	    key: 'handleChange',
@@ -31233,6 +31233,7 @@
 	function addFriend(userId) {
 	  var request = _axios2.default.post('api/friend', { friendId: userId });
 	  console.log(userId, ' addFriend Called');
+	  console.log(request, 'REQUEST, ADDFRIEND');
 	  return {
 	    type: 'ADD_FRIEND',
 	    payload: request
@@ -31241,9 +31242,12 @@
 	}
 
 	function deleteFriend(userId) {
-	  var request = _axios2.default.post('api/friendDelete', { friendId: userId });
+	  console.log(userId, ' USERID');
+	  var request = _axios2.default.delete('api/friendDelete/' + userId); //1
+	  console.log(request, ' REQUEST');
 
 	  console.log(userId, ' deleteFriend Called');
+
 	  return {
 	    type: 'DELETE_FRIEND',
 	    payload: request
@@ -33460,6 +33464,8 @@
 	});
 
 	exports.default = function () {
+	  var _console;
+
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 	  var action = arguments[1];
 
@@ -33475,12 +33481,15 @@
 	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'ADD_FRIEND':
-	    //   console.log(action.payload, ' REDUCER DATA')
-	    // return [action.payload, ...state]
+	      console.log(action.payload.data, ' REDUCER DATA');
+	      (_console = console).log.apply(_console, _toConsumableArray(state).concat([' REDUCER state']));
+	      return [action.payload.data[1]].concat(_toConsumableArray(state));
+
+	    // return [...state];
 
 	    case 'DELETE_FRIEND':
-	    //   console.log(action.payload, ' REDUCER DATA')
-	    // return [action.payload.data, ...state]
+	      console.log(action.payload, ' REDUCER DATA');
+	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'CALL_USER':
 	    //   console.log(action.payload, ' REDUCER DATA')

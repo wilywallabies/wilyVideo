@@ -43,7 +43,7 @@ class FriendAdd extends React.Component {
     console.log(this.state)
     this.props.addFriend(this.state.selectedVal)
     console.log(this.state)
-    // this.props.retrieveFriends();
+    this.props.retrieveFriends();
 
   }
 

@@ -27,9 +27,7 @@ router.post('/friend', friendCtrl.addFriend);
 // router.delete('/friend', friendCtrl.deleteFriend);
 
 //FriendDelete ROutes
-router.post('/friendDelete', deleteCtrl.deleteFriend);
-
-
+router.delete('/friendDelete/:friendid', deleteCtrl.deleteFriend);
 
 
 //Available User Routes
