@@ -1,3 +1,4 @@
+'use strict';
 let request = require('request');
 let db = require('../models/db');
 //Table = 'users' || 'friends'

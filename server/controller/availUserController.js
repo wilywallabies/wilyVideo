@@ -1,3 +1,4 @@
+'use strict';
 let request = require('request');
 let db = require('../models/db');
 //Table = 'users' || 'friends'
@@ -11,8 +12,10 @@ module.exports.availableUser = (req, res) => {
   /*****************************************
     Selects All User except current user
   ******************************************/
-  db.select('id', 'email', 'userName').from('users').whereNot('id',currentUser)
 
+
+  db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
+  .select('users.id', 'users.userName', 'users.email')
 
   /*****************************************
     Selects All non-friends and current user
