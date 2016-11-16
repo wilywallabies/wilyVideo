@@ -1,6 +1,7 @@
 // loads environment variables from .env into ENV (process.env)
 require('dotenv').config();
 
+
 var express = require('express');
 var bodyparser = require('body-parser');
 var logger = require('morgan');
@@ -8,6 +9,9 @@ var cookieParser = require('cookie-parser');
 
 var path = require('path');
 var cors = require('cors');
+
+var https = require('https');
+var fs = require('fs');
 
 //initiate express
 var app = express();
@@ -29,6 +33,9 @@ app.use('/api', apiRoutes);
 app.use('/api', accountRoutes);
 
 
+
+var webrtcRouter = require('./webrtcRouter');
+app.use('/webrtc', webrtcRouter)
 
 // webpack loads index.html, looks for script src
 app.get('/public/bundle.js', function(req, res){
