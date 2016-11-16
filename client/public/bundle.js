@@ -31247,6 +31247,7 @@
 	function getAllUser() {
 	  var request = _axios2.default.get('api/allUser');
 
+	  console.log('Request Received, Line 37', request);
 	  return {
 	    type: 'GET_ALL_USERS',
 	    payload: request
@@ -32976,7 +32977,6 @@
 	  //   // console.log(state, ' state friendListContainer.js')
 	  //   return {friend: state.friend}
 	  // }
-
 	}
 
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(FriendDetail);
@@ -33489,6 +33489,10 @@
 	    case 'DELETE_FRIEND':
 	      // console.log(action.payload, ' REDUCER DATA')
 	      return [action.payload.data].concat(_toConsumableArray(state));
+
+	    case 'CALL_USER':
+	    //   console.log(action.payload, ' REDUCER DATA')
+	    // return [action.payload.data, ...state]
 
 	    case 'CALL_USER':
 	    //   console.log(action.payload, ' REDUCER DATA')
