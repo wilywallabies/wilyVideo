@@ -10,7 +10,6 @@ class FriendDetail extends React.Component {
 
     this.onClickCall = this.onClickCall.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
-
   }
 
     onClickCall(e){
@@ -25,15 +24,12 @@ class FriendDetail extends React.Component {
   render(){
     let user = this.props.friend; //Array of Object
     console.log(user, ' USER, FRIENDDETAILCONTAINER')
+
     return (
 
-
     <form  className="panel-default">
-
       { user.map((user, i) => {
-
         return(
-
           <div
           key={user.id}
           className="panel-body">

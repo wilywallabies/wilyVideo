@@ -31134,15 +31134,12 @@
 	    value: function onFormSubmit(e) {
 	      e.preventDefault();
 	      // need to Add Friends to current user
-	      console.log(this.state);
 	      this.props.addFriend(this.state.selectedVal);
-	      console.log(this.state);
 	      this.props.retrieveFriends();
 	    }
 	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(e) {
-	      console.log(e.target.value, ' :Selected Value');
 	      var id = e.target.value;
 	      this.setState({ selectedVal: id });
 	    }
@@ -31186,9 +31183,6 @@
 
 	function mapStateToProps(state) {
 	  console.log(state, 'AllUser except friend and curr, container/friendsAddContainer.js');
-
-	  console.log(state.friend[0], 'AllUser except friend and curr, container/friendsAddContainer.js');
-	  console.log(state.friend[1], 'AllUser except friend and curr, container/friendsAddContainer.js');
 	  return { notFriend: state.friend[0], friend: state.friend[1] };
 	}
 
@@ -31223,7 +31217,7 @@
 	function retrieveFriends() {
 
 	  var request = _axios2.default.get('api/friend');
-	  console.log('Request Line 7:', request);
+
 	  return {
 	    type: 'RETRIEVE_FRIENDS',
 	    payload: request
@@ -31232,21 +31226,16 @@
 
 	function addFriend(userId) {
 	  var request = _axios2.default.post('api/friend', { friendId: userId });
-	  console.log(userId, ' addFriend Called');
-	  console.log(request, 'REQUEST, ADDFRIEND');
+
 	  return {
 	    type: 'ADD_FRIEND',
 	    payload: request
-
 	  };
 	}
 
 	function deleteFriend(userId) {
 	  console.log(userId, ' USERID');
 	  var request = _axios2.default.delete('api/friendDelete/' + userId); //1
-	  console.log(request, ' REQUEST');
-
-	  console.log(userId, ' deleteFriend Called');
 
 	  return {
 	    type: 'DELETE_FRIEND',
@@ -31257,7 +31246,6 @@
 	function getAllUser() {
 	  var request = _axios2.default.get('api/allUser');
 
-	  console.log('Request Received, Line 37', request);
 	  return {
 	    type: 'GET_ALL_USERS',
 	    payload: request
@@ -32888,7 +32876,6 @@
 
 	    _this.onClickCall = _this.onClickCall.bind(_this);
 	    _this.deleteUser = _this.deleteUser.bind(_this);
-
 	    return _this;
 	  }
 
@@ -32910,11 +32897,11 @@
 
 	      var user = this.props.friend; //Array of Object
 	      console.log(user, ' USER, FRIENDDETAILCONTAINER');
+
 	      return _react2.default.createElement(
 	        'form',
 	        { className: 'panel-default' },
 	        user.map(function (user, i) {
-
 	          return _react2.default.createElement(
 	            'div',
 	            {
@@ -33464,8 +33451,6 @@
 	});
 
 	exports.default = function () {
-	  var _console;
-
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 	  var action = arguments[1];
 
@@ -33481,14 +33466,13 @@
 	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'ADD_FRIEND':
-	      console.log(action.payload.data, ' REDUCER DATA');
-	      (_console = console).log.apply(_console, _toConsumableArray(state).concat([' REDUCER state']));
-	      return [action.payload.data[1]].concat(_toConsumableArray(state));
-
+	      // console.log(action.payload.data, ' REDUCER DATA')
+	      // console.log(...state, ' REDUCER state')
+	      return [action.payload.data].concat(_toConsumableArray(state));
 	    // return [...state];
 
 	    case 'DELETE_FRIEND':
-	      console.log(action.payload, ' REDUCER DATA');
+	      // console.log(action.payload, ' REDUCER DATA')
 	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'CALL_USER':

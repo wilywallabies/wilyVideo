@@ -34,7 +34,6 @@ router.delete('/friendDelete/:friendid', deleteCtrl.deleteFriend);
 router.get('/allUser', allUser.availableUser)
 
 
-
 //User Routes
 router.get('/user', userCtrl.getUser);
 

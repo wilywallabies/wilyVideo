@@ -11,14 +11,13 @@ export default function(state = [], action){
       return [action.payload.data, ...state];
 
     case 'ADD_FRIEND':
-      console.log(action.payload.data, ' REDUCER DATA')
-      console.log(...state, ' REDUCER state')
-    return [action.payload.data[1], ...state]
-
+      // console.log(action.payload.data, ' REDUCER DATA')
+      // console.log(...state, ' REDUCER state')
+    return [action.payload.data, ...state]
     // return [...state];
 
     case 'DELETE_FRIEND':
-      console.log(action.payload, ' REDUCER DATA')
+      // console.log(action.payload, ' REDUCER DATA')
     return [action.payload.data, ...state]
 
     case 'CALL_USER':

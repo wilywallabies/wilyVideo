@@ -4,7 +4,7 @@ import axios from 'axios';
 export function retrieveFriends() {
 
   const request = axios.get('api/friend');
-  console.log('Request Line 7:', request);
+
   return {
     type: 'RETRIEVE_FRIENDS',
     payload: request
@@ -13,21 +13,16 @@ export function retrieveFriends() {
 
 export function addFriend(userId){
   const request = axios.post('api/friend', {friendId:userId});
-  console.log(userId, ' addFriend Called')
-  console.log(request,  'REQUEST, ADDFRIEND')
+
   return {
     type: 'ADD_FRIEND',
     payload: request,
-
   }
 }
 
 export function deleteFriend(userId){
   console.log(userId, ' USERID');
   const request = axios.delete('api/friendDelete/' + userId); //1
-  console.log(request, ' REQUEST');
-
-  console.log(userId, ' deleteFriend Called')
 
   return {
     type: 'DELETE_FRIEND',
@@ -38,7 +33,6 @@ export function deleteFriend(userId){
 export function getAllUser(){
   const request = axios.get('api/allUser')
 
-  console.log('Request Received, Line 37', request);
   return {
     type: 'GET_ALL_USERS',
     payload: request
