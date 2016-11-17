@@ -33,7 +33,7 @@ class FriendList extends React.Component {
 }
 
 function mapStateToProps(state){
-  // console.log(state, ' state friendListContainer.js')
+  console.log(state, ' state friendListContainer.js')
   return {friend: state.friend}
 }
 

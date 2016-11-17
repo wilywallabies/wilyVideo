@@ -11,6 +11,7 @@ class FriendAdd extends React.Component {
     console.log(props, ' friendsAddContainer Props LINE 11')
     this.state = {notFriend:[], selectedVal:''};
     this.state.selectedUserName = '';
+    this.state.defaultValue = 'Available Users'
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -41,7 +42,6 @@ class FriendAdd extends React.Component {
     e.preventDefault();
     // need to Add Friends to current user
     this.props.addFriend(this.state.selectedVal)
-    this.props.retrieveFriends();
   }
 
   handleChange(e){
@@ -56,8 +56,7 @@ class FriendAdd extends React.Component {
       <div>
       <form onSubmit={this.onFormSubmit} className="input-group">
           <select onChange={this.handleChange} className="form-control">
-            <option selected="selected" disabled> Available Users </option> )
-
+            <option selected="selected" disabled> Available Users </option>
           {
             !this.state.notFriend ? 'Loading Users...' :
              this.state.notFriend.map( (user, i) => {
