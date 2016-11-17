@@ -6,7 +6,7 @@ import { deleteFriend, callUser } from '../actions/friendsAction';
 class FriendDetail extends React.Component {
   constructor(props){
     super(props);
-    console.log(props, ' containers/FriendDetail props')
+    console.log(props, 'props, friendDetailContainer')
 
     this.onClickCall = this.onClickCall.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
@@ -24,7 +24,7 @@ class FriendDetail extends React.Component {
 
   render(){
     let user = this.props.friend; //Array of Object
-    console.log(user, ' USER, FRIENDDETAILCONTAINER')
+    console.log(user, ' user, friendDetailContainer')
 
     return (
 

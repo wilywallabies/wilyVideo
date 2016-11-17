@@ -13,7 +13,12 @@ class FriendList extends React.Component {
       //call friends list and render
       this.props.retrieveFriends();
     }
+    componentWillReceiveProps(nextProps) {
+      // console.log(this.nextProps, 'this.NEXTPROPS, frinedListContainer');
+      // this.props.retrieveFriends();
+    }
   render(){
+    // console.log("THIS.PROPS.FRIEND", this.props.friend)
     let friend = this.props.friend[1];
       // console.log(friend, ' this.props LINE 21, friendDetail');
     return (
@@ -33,7 +38,7 @@ class FriendList extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log(state, ' state friendListContainer.js')
+  // console.log(state, ' state friendListContainer')
   return {friend: state.friend}
 }
 
