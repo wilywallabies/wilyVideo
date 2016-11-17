@@ -37,7 +37,7 @@ export default function(state = [], action){ //***SITCH TO STATE = {} ?? or [] O
     console.log(...state, ' ...state, ADD_FRIEND');
     console.log([action.payload.data, ...state],' [action.payload.data, ...state] ADD_FRIEND');
     console.log('********************************************************')
-     return [state, action.payload.data]; //THIS ONE WORKS, BUT IT MOVES TO SELECT FIELD
+     return [state[0], action.payload.data]; //THIS ONE WORKS, BUT IT MOVES TO SELECT FIELD
 
 
      // return [...state[state.length-1]];
