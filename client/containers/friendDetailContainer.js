@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteFriend, callUser } from '../actions/friendsAction';
+// import { counter } from '../actions/friendsAction';
 
 class FriendDetail extends React.Component {
   constructor(props){
@@ -23,7 +24,7 @@ class FriendDetail extends React.Component {
   }
 
   render(){
-    let user = this.props.friend; //Array of Object
+    let user = this.props.friend; //Array of Friends Object
     console.log(user, ' user, friendDetailContainer')
 
     return (

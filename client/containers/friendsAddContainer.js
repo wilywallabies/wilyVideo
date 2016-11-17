@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { addFriend } from '../actions/friendsAction'
 import { retrieveFriends, getNonFriends } from '../actions/friendsAction';
+import FriendDetail from './friendDetailContainer';
 
 class FriendAdd extends React.Component {
   constructor(props){
@@ -36,25 +37,30 @@ class FriendAdd extends React.Component {
 
 //invoked immediately before rendering when new props or state are being received.
   componentWillUpdate(nextProps, nextState) {
-     // this.props.getNonFriends();
-    // console.log(this.nextProps, 'nextProps ComponentWillUpdate, friendsAddContainer')
-    // console.log(this.nextState, 'nextState ComponentWillUpdate, friendsAddContainer')
+    console.log('*componentWillUpdate Fired!');
+    console.log(this.state, 'this. state componentWillUpdate ');
+
+    console.log(nextProps, 'nextProps friendsAddContainer')
+    console.log(nextState, 'nextState friendsAddContainer')
+   // this.setState({nonFriends: this.state.friend})
+
+    // <FriendDetail friend={this.state}  />
+
+
 
   }
 
   // invoked immediately after updating occurs
   componentDidUpdate(prevProps, prevState) {
+    console.log('*componentDidUpdate Fired!');
        // this.setState({selectedVal:this.refs.selectValue.value})
+    console.log(prevProps, 'prevProps friendsAddContainer')
+    console.log(prevState, 'prevState friendsAddContainer')
     console.log('get non friends for friend add container', this.state)
      // this.props.getNonFriends();
+     // this.setState({nonFriends: this.state.friend})
 
   }
-
-
-
-
-
-
 
   //Add friend to database
   onFormSubmit(e){
@@ -62,7 +68,7 @@ class FriendAdd extends React.Component {
     // need to Add Friends to current user
     this.props.addFriend(this.state.selectedVal)
 
-    this.props.retrieveFriends();
+    // this.props.retrieveFriends();
   }
 
   handleChange(e){
