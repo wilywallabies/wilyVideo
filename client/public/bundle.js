@@ -51683,6 +51683,7 @@
 	    console.log(props, ' friendsAddContainer Props LINE 11');
 	    _this.state = { notFriend: [], selectedVal: '' };
 	    _this.state.selectedUserName = '';
+	    _this.state.defaultValue = 'Available Users';
 	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    return _this;
@@ -51725,7 +51726,6 @@
 	      e.preventDefault();
 	      // need to Add Friends to current user
 	      this.props.addFriend(this.state.selectedVal);
-	      this.props.retrieveFriends();
 	    }
 	  }, {
 	    key: 'handleChange',
@@ -51752,7 +51752,6 @@
 	              { selected: 'selected', disabled: true },
 	              ' Available Users '
 	            ),
-	            ' )',
 	            !this.state.notFriend ? 'Loading Users...' : this.state.notFriend.map(function (user, i) {
 	              return _react2.default.createElement(
 	                'option',
@@ -51850,7 +51849,7 @@
 
 	  console.log('Request Received, Line 37', request);
 	  return {
-	    type: 'GET_ALL_USERS',
+	    type: 'RETRIEVE_NON_FRIENDS',
 	    payload: request
 	  };
 	}
@@ -51945,7 +51944,7 @@
 	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
-	  // console.log(state, ' state friendListContainer.js')
+	  console.log(state, ' state friendListContainer.js');
 	  return { friend: state.friend };
 	}
 
@@ -52647,19 +52646,27 @@
 	  switch (action.type) {
 
 	    case 'RETRIEVE_FRIENDS':
+	      console.log('RETRIEVE_FRIENDS Action received!:', action);
+
+	      // return [...state, action.payload.data];
 	      return [action.payload.data].concat(_toConsumableArray(state));
 
-	    case 'GET_ALL_USERS':
+	    case 'RETRIEVE_NON_FRIENDS':
+	      console.log('RETRIEVE_NON_FRIENDS Action received!:', action);
+
 	      // console.log(action.payload.data, ' REDUCER DATA')
+	      // return [...state, action.payload.data];
 	      return [action.payload.data].concat(_toConsumableArray(state));
 
 	    case 'ADD_FRIEND':
-	      console.log(action.payload, ' REDUCER DATA');
-	      return [action.payload.data].concat(_toConsumableArray(state));
+	      console.log(action.payload, 'ADD_FRIEND REDUCER DATA');
+	      return [].concat(_toConsumableArray(state), [action.payload.data]);
 
 	    case 'DELETE_FRIEND':
-	      console.log(action.payload, ' REDUCER DATA');
-	      return [action.payload.data].concat(_toConsumableArray(state));
+	      console.log(action.payload, 'DELETE_FRIEND REDUCER DATA');
+	      // return [action.payload.data, ...state];
+	      return [].concat(_toConsumableArray(state), [action.payload.data]);
+
 	  };
 
 	  return state;
