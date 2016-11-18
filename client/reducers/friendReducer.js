@@ -7,7 +7,6 @@ export default function(state = [], action){ //***SITCH TO STATE = {} ?? or [] O
     console.log('RETRIEVE_FRIENDS FIRED!');
     console.log('############################################################')
 
-
       // return [...state, action.payload.data];
     console.log(state, ' state, retrieve_friend');
     console.log(...state, ' ...state, retrieve_friend');
@@ -31,19 +30,12 @@ export default function(state = [], action){ //***SITCH TO STATE = {} ?? or [] O
     console.log('ADD_FRIEND FIRED!');
     // return [ ...state, action.payload.data];
     console.log('********************************************************')
-
-
     console.log(state, ' state, ADD_FRIEND');
     console.log(...state, ' ...state, ADD_FRIEND');
     console.log([action.payload.data, ...state],' [action.payload.data, ...state] ADD_FRIEND');
     console.log('********************************************************')
      return [state[0], action.payload.data]; //THIS ONE WORKS, BUT IT MOVES TO SELECT FIELD
 
-
-     // return [...state[state.length-1]];
-
-
-     // return [...state, action.payload.data];
 
     case 'DELETE_FRIEND':
 
