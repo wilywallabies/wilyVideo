@@ -67,16 +67,8 @@ class FriendAdd extends React.Component {
     .then(()=>{
       console.log('THIS IS .THEN!!!');
       this.props.retrieveFriends();
-
-    this.props.getNonFriends();
-
+      this.props.getNonFriends();
     })
-
-    // this.props.getNonFriends();
-
-
-
-    // this.props.retrieveFriends();
   }
 
   handleChange(e){
@@ -85,8 +77,7 @@ class FriendAdd extends React.Component {
     this.setState( {selectedVal:id} );
   }
 
-  refreshNonFriends(){
-
+  refreshNonFriends(){ //TESTING ONLY
     this.props.getNonFriends()
   }
 
