@@ -47,7 +47,7 @@ export default function(state = [], action){ //***SITCH TO STATE = {} ?? or [] O
       // console.log(...state, ' ...state, DELETE_FRIEND');
       console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
 
-      return [action.payload.data];
+      return [state[0], action.payload.data];
 
   };
 

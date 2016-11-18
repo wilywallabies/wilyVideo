@@ -14,9 +14,14 @@ class FriendList extends React.Component {
       this.props.retrieveFriends();
     }
     componentWillReceiveProps(nextProps) {
-      // console.log(this.nextProps, 'this.NEXTPROPS, frinedListContainer');
-      // this.props.retrieveFriends();
+      console.log(nextProps, 'nextProps componentWillReceiveProps frinedListContainer');
     }
+    componentDidUpdate(prevProps, prevState) {
+      console.log(prevProps, 'prevProps componentDidUpdate frinedListContainer**');
+      console.log(prevState, 'prevState componentDidUpdate frinedListContainer**');
+
+    }
+
   render(){
     // console.log("THIS.PROPS.FRIEND", this.props.friend)
     let friend = this.props.friend[1];

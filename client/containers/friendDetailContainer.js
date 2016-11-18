@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteFriend, callUser, retrieveFriends } from '../actions/friendsAction';
+import { deleteFriend, callUser, retrieveFriends,  getNonFriends } from '../actions/friendsAction';
 
 // import { counter } from '../actions/friendsAction';
 
@@ -22,7 +22,7 @@ class FriendDetail extends React.Component {
       e.preventDefault();
       this.props.deleteFriend(e.target.value);
       console.log(e.target.value, 'delete clicked')
-      // this.props.retrieveFriends();
+      // this.props.getNonFriends();
   }
 
   render(){
@@ -69,7 +69,7 @@ class FriendDetail extends React.Component {
 
 //binds action and container
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ deleteFriend, callUser, retrieveFriends }, dispatch)
+  return bindActionCreators({ deleteFriend, callUser, retrieveFriends, getNonFriends }, dispatch)
 // const FriendDetail = ({friend}) => (
 //   // console.log(user, ' FRIEND DETAIL')
 //   console.log(friend, ' FRIEND DETAIL')
