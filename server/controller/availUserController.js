@@ -5,7 +5,7 @@ let db = require('../models/db');
 
 //Retrieve Friend List from DB
 module.exports.availableUser = (req, res) => {
-  console.log('GET retrieveFriends /friend API called');
+  console.log('GET retrieveFriends /allUser API called');
 
   var currentUser = 9;
 

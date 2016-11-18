@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveFriends, getAllUser } from '../actions/friendsAction';
+import { retrieveFriends } from '../actions/friendsAction';
 import FriendDetail from './friendDetailContainer';
 
 class FriendList extends React.Component {
@@ -44,7 +44,7 @@ function mapStateToProps(state){
 
 //binds action and container
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ retrieveFriends, getAllUser }, dispatch)
+  return bindActionCreators({ retrieveFriends  }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendList)
