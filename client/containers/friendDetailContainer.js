@@ -8,7 +8,6 @@ import { deleteFriend, callUser, retrieveFriends,  getNonFriends } from '../acti
 class FriendDetail extends React.Component {
   constructor(props){
     super(props);
-    console.log(props, 'props, friendDetailContainer')
 
     this.onClickCall = this.onClickCall.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
@@ -19,15 +18,15 @@ class FriendDetail extends React.Component {
   }
 
     deleteUser(e){
-      console.log(e.target.value, 'delete clicked')
+      console.log(e.target.value, 'delete clicked');
 
       e.preventDefault();
-      this.props.deleteFriend(e.target.value)
+      this.props.deleteFriend(e.target.value);
        .then(()=>{
         console.log('THIS IS .THEN!!!');
         this.props.getNonFriends();
         this.props.retrieveFriends();
-    })
+    });
   }
 
   render(){

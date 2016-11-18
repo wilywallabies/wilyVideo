@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { addFriend } from '../actions/friendsAction'
+import { addFriend } from '../actions/friendsAction';
 import { retrieveFriends, getNonFriends } from '../actions/friendsAction';
 import FriendDetail from './friendDetailContainer';
 
@@ -12,11 +12,10 @@ class FriendAdd extends React.Component {
     console.log(props, ' friendsAddContainer Props LINE 11');
     this.state = {nonFriends:[], selectedVal:''};
     this.state.selectedUserName = '';
-    this.state.defaultValue = 'Available Users'
+    this.state.defaultValue = 'Available Users';
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-
 
 //Triggered before render().
   componentWillMount() {
@@ -29,7 +28,6 @@ class FriendAdd extends React.Component {
    this.setState({nonFriends: nextProps.nonFriends});
     // console.log(this.state, 'componentWillReceiveProps, friendsAddContainer');
   }
-
 
   //Add friend to database
   onFormSubmit(e){
@@ -45,10 +43,8 @@ class FriendAdd extends React.Component {
 
   handleChange(e){
     let id = e.target.value;
-    console.log(id)
     this.setState( {selectedVal:id} );
   }
-
 
   render(){
     return (
@@ -57,7 +53,7 @@ class FriendAdd extends React.Component {
       <form onSubmit={this.onFormSubmit} className="input-group">
           <select onChange={this.handleChange} className="form-control">
             <option selected="selected" disabled> Available Users </option>
-          {
+            {
             !this.state.nonFriends ? 'Loading Users...' :
              this.state.nonFriends.map( (user, i) => {
               return(
@@ -65,7 +61,6 @@ class FriendAdd extends React.Component {
             })
           }
           </select>
-
         <span className="input-group-btn">
           <button className="btn btn-primary"> Add </button>
         </span>
@@ -74,6 +69,7 @@ class FriendAdd extends React.Component {
       )
   }
 }
+
 function mapStateToProps(state){
   // console.log(state, 'AllUser except friend and curr, friendsAddContainer')
 

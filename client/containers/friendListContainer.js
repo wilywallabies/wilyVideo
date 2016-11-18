@@ -14,18 +14,17 @@ class FriendList extends React.Component {
       this.props.retrieveFriends();
     }
 
-
   render(){
     let friend = this.props.friend[1];
     return (
-          <div >
+          <div>
             <div className="panel-group">
             <div className="panel  text-center">
               <h4>Contacts</h4>
             </div>
               {
                 !friend ? "Loading...":
-               <FriendDetail friend={friend}  />
+               <FriendDetail friend={friend} />
               }
             </div>
           </div>
@@ -36,12 +35,12 @@ class FriendList extends React.Component {
 
 function mapStateToProps(state){
   // console.log(state, ' state friendListContainer')
-  return {friend: state.friend}
+  return {friend: state.friend};
 }
 
 //binds action and container
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ retrieveFriends  }, dispatch)
+  return bindActionCreators({ retrieveFriends  }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FriendList)
+export default connect(mapStateToProps, mapDispatchToProps)(FriendList);
