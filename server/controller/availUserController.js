@@ -2,14 +2,11 @@
 let request = require('request');
 let db = require('../models/db');
 //Table = 'users' || 'friends'
-let currentUserInfo = require('../routes/accountRoutes');
-let currentUser = currentUserInfo.currentUser;
-
-
 
 //Retrieve Friend List from DB
 module.exports.availableUser = (req, res) => {
   console.log('GET retrieveFriends /allUser API called');
+  var currentUser = global.currentUser_Id;
 
   // var currentUser = 9;
 

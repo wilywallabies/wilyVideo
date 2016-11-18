@@ -66,10 +66,16 @@ class FriendDetail extends React.Component {
   }
 
 }
+function mapStateToProps(state){
+  console.log(state, ' state friendDetail')
+  return {//friend: state.friend,
+          userId: state
 
+  };
+}
 //binds action and container
 function mapDispatchToProps(dispatch){
   return bindActionCreators({ deleteFriend, callUser, retrieveFriends, getNonFriends }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(FriendDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(FriendDetail)

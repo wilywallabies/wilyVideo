@@ -3,14 +3,15 @@ let request = require('request');
 let db = require('../models/db');
 //Table = 'users' || 'friends'
 
-let currentUserInfo = require('../routes/accountRoutes');
-let currentUser = currentUserInfo.currentUser;
-
-
 //Retrieve Friend List from DB
 module.exports.retrieveFriends = (req, res) => {
+  console.log(global.currentUser_Id, 'ACCESSING GLOBAL CURRENT ID ++++')
+
+  var currentUser = global.currentUser_Id;
+
   // let currentUser = currentUser();
   console.log('GET retrieveFriends /friend API called');
+  console.log(' retrieving Friends for currentUser', currentUser)
   // db.select('id', 'email', 'userName').from('users')
 
   // let currentUser = 9;//Need to retrieve current user id
@@ -27,6 +28,8 @@ module.exports.retrieveFriends = (req, res) => {
 
 //addFriend Friend List to DB
 module.exports.addFriend = (req, res) => {
+  var currentUser = global.currentUser_Id;
+  console.log(global.currentUser_Id, 'ACCESSING GLOBAL CURRENT ID ++++')
 
   console.log('POST /friend API called');
   //insert into friends table

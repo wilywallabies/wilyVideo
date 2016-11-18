@@ -13,11 +13,8 @@ export function retrieveFriends() {
 
 export function addFriend(userId){
   console.log(userId, 'ADDFRIEND ID')
+  // console.log(currentUser_Id,  ' CURRENT USER ID!!_____________')
   const request = axios.post('api/friend', {friendId:userId})
-      // .then((res) => console.log('ADD FRIEND RES'))
-    // .catch((err) => console.error(err));
-
-  ;
 
   return {
     type: 'ADD_FRIEND',

@@ -1,13 +1,12 @@
 'use strict';
 let request = require('request');
 let db = require('../models/db');
-let currentUserInfo = require('../routes/accountRoutes');
-let currentUser = currentUserInfo.currentUser;
-
 
 
 //addFriend Friend List to DB
 module.exports.deleteFriend = (req, res) => {
+  var currentUser = global.currentUser_Id;
+  console.log(global.currentUser_Id, 'ACCESSING GLOBAL CURRENT ID ++++')
 
   // let currentUser = 9;//Need to retrieve current user id
   let reqId = req.params.friendid;

@@ -26,7 +26,6 @@ class FriendAdd extends React.Component {
   //Called before render when props change. Access to old props. It is not triggered after the component is mounted.
   componentWillReceiveProps(nextProps) {
    this.setState({nonFriends: nextProps.nonFriends});
-    // console.log(this.state, 'componentWillReceiveProps, friendsAddContainer');
   }
 
   //Add friend to database
@@ -48,16 +47,18 @@ class FriendAdd extends React.Component {
 
   render(){
     return (
-      <div>
+      <div> <h5 className="text-center">Search Users</h5>
 
       <form onSubmit={this.onFormSubmit} className="input-group">
           <select onChange={this.handleChange} className="form-control">
-            <option selected="selected" disabled> Available Users </option>
+            <option disabled> {this.state.defaultValue} </option>
             {
             !this.state.nonFriends ? 'Loading Users...' :
              this.state.nonFriends.map( (user, i) => {
               return(
-            <option  value={user.id} key={user.id}> Email: {user.email}</option> )
+            // <option disabled> {this.state.defaultValue} </option>
+
+            <option value={user.id} key={user.id}> Email: {user.email} </option> )
             })
           }
           </select>

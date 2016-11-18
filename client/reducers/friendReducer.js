@@ -1,4 +1,4 @@
-export default function(state = {}, action){ //***SITCH TO STATE = {} ?? or [] OBJECT
+export default function(state = {}, action){
   console.log('Action received!:', action);
   switch (action.type){
 
@@ -19,12 +19,15 @@ export default function(state = {}, action){ //***SITCH TO STATE = {} ?? or [] O
       console.log(action.payload, 'ADD_FRIEND');
 
      return [action.payload.data];
+      // return [action.payload.data, ...state];
+
 
     case 'DELETE_FRIEND':
       console.log('DELETE_FRIEND FIRED!');
       console.log(action.payload, 'DELETE_FRIEND');
 
       return [action.payload.data];
+      // return [action.payload.data, ...state];
 
   };
 
