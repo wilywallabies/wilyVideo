@@ -21,7 +21,7 @@ class FriendDetail extends React.Component {
       console.log(e.target.value, 'delete clicked');
 
       e.preventDefault();
-      this.props.deleteFriend(e.target.value);
+      this.props.deleteFriend(e.target.value)
        .then(()=>{
         console.log('THIS IS .THEN!!!');
         this.props.getNonFriends();

@@ -31,10 +31,10 @@ class FriendAdd extends React.Component {
 
   //Add friend to database
   onFormSubmit(e){
-    e.preventDefault();
+    e.preventDefault()
     // need to Add Friends to current user
     this.props.addFriend(this.state.selectedVal)
-    .then(()=>{
+      .then(()=>{
       console.log('THIS IS .THEN!!!');
       this.props.retrieveFriends();
       this.props.getNonFriends();
