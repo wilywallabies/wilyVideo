@@ -1,11 +1,15 @@
 'use strict';
 let request = require('request');
 let db = require('../models/db');
+let currentUserInfo = require('../routes/accountRoutes');
+let currentUser = currentUserInfo.currentUser;
+
+
 
 //addFriend Friend List to DB
 module.exports.deleteFriend = (req, res) => {
 
-  let currentUser = 9;//Need to retrieve current user id
+  // let currentUser = 9;//Need to retrieve current user id
   let reqId = req.params.friendid;
   console.log(reqId, 'friendDelete /friend API called');
 

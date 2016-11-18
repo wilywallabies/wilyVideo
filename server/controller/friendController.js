@@ -3,12 +3,17 @@ let request = require('request');
 let db = require('../models/db');
 //Table = 'users' || 'friends'
 
+let currentUserInfo = require('../routes/accountRoutes');
+let currentUser = currentUserInfo.currentUser;
+
+
 //Retrieve Friend List from DB
 module.exports.retrieveFriends = (req, res) => {
+  // let currentUser = currentUser();
   console.log('GET retrieveFriends /friend API called');
   // db.select('id', 'email', 'userName').from('users')
 
-  let currentUser = 9;//Need to retrieve current user id
+  // let currentUser = 9;//Need to retrieve current user id
   db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
   .select('users.id', 'users.userName', 'users.email')
   .then((data) => {
@@ -22,11 +27,12 @@ module.exports.retrieveFriends = (req, res) => {
 
 //addFriend Friend List to DB
 module.exports.addFriend = (req, res) => {
+
   console.log('POST /friend API called');
   //insert into friends table
   console.log(req.body, 'Received Request')
 
-  let currentUser = 9;//Need to retrieve current user id
+  // let currentUser = 9;//Need to retrieve current user id
   console.log("ADDING FRIEND ID: ", req.body.friendId);
   db('friends').insert({user_id:currentUser, user_id2:req.body.friendId})
   .then((data) => {

@@ -7,6 +7,9 @@ var bcrypt = require('bcrypt-nodejs');
 var authUtil = require('../utils/authUtil');
 
 
+let currentUser;
+module.exports.currentUser = currentUser;
+
 router.post('/signup', (req, res) => {
   console.log('server-side signup with', req.body);
   var email = req.body.email;
@@ -40,6 +43,7 @@ router.post('/login', (req, res) => {
     })
     .then(function(dbRes) {
       var user = dbRes[0];
+      var userId = user.id;
       console.log('user is', user);
       if (user) {
         bcrypt.compare(password, user.password, function(err, match) {
