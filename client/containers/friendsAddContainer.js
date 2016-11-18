@@ -74,6 +74,7 @@ class FriendAdd extends React.Component {
   handleChange(e){
     let id = e.target.value;
     // console.log('selected target.value', id)
+    console.log(id)
     this.setState( {selectedVal:id} );
     // this.setState( {selectedUserName:id} );
   }

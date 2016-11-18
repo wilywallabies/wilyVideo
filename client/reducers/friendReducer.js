@@ -17,7 +17,10 @@ export default function(state = [], action){ //***SITCH TO STATE = {} ?? or [] O
     console.log('############################################################')
 
       return [...state, action.payload.data];
+   console.log('RETRIEVE_FRIENDS Action received!:', action);
 
+      // return [...state, action.payload.data];
+    // return [action.payload.data, ...state]
 
     case 'RETRIEVE_NON_FRIENDS':
     console.log('RETRIEVE_NON_FRIENDS Action received!:', action);
@@ -39,7 +42,14 @@ export default function(state = [], action){ //***SITCH TO STATE = {} ?? or [] O
 
     case 'DELETE_FRIEND':
 
+    return [action.payload.data, ...state]
 
+    case 'ADD_FRIEND':
+      console.log(action.payload, 'ADD_FRIEND REDUCER DATA')
+    return [ ...state, action.payload.data]
+
+    case 'DELETE_FRIEND':
+      console.log(action.payload, 'DELETE_FRIEND REDUCER DATA')
     // return [action.payload.data, ...state];
       return [...state, action.payload.data];
 
