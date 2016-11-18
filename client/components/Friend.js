@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import FriendAdd from './friendsAddContainer';
-import FriendDetail from './friendListContainer';
+import FriendAdd from '../containers/friendsAddContainer';
+import FriendDetail from '../containers/friendListContainer';
 
 
 export default class Friend extends React.Component {

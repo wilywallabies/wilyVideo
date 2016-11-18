@@ -1,4 +1,5 @@
 //Backend User API call
+'use strict';
 
 var request = require('request');
 

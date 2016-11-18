@@ -31,12 +31,12 @@ export function deleteFriend(userId){
   }
 }
 
-export function getAllUser(){
+export function getNonFriends(){
   const request = axios.get('api/allUser')
 
-  console.log('Request Received, Line 37', request);
+  // console.log('Request Received, Line 37', request);
   return {
-    type: 'GET_ALL_USERS',
+    type: 'RETRIEVE_NON_FRIENDS',
     payload: request
   }
 }

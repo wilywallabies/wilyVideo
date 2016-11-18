@@ -3,36 +3,63 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { addFriend } from '../actions/friendsAction'
-import { retrieveFriends, getAllUser } from '../actions/friendsAction';
+import { retrieveFriends, getNonFriends } from '../actions/friendsAction';
+import FriendDetail from './friendDetailContainer';
 
 class FriendAdd extends React.Component {
   constructor(props){
     super(props);
     console.log(props, ' friendsAddContainer Props LINE 11')
-    this.state = {notFriend:[], selectedVal:''};
+    this.state = {nonFriends:[], selectedVal:''};
+    this.state.selectedUserName = '';
+    this.state.defaultValue = 'Available Users'
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
+
+
+//Triggered before render().
   componentWillMount() {
-     this.props.getAllUser();
+     this.props.getNonFriends();
   }
 
 
   //Sets friend as state after component when props has been changed
+  //Called before render when props change. Access to old props. It is not triggered after the component is mounted.
   componentWillReceiveProps(nextProps) {
-   this.setState({notFriend: nextProps.notFriend})
-    console.log(this.state, 'componentWillReceiveProps');
+    // console.log(this.nextProps, 'THIS.NEXTPROPS frindsAddContainer');
+
+   this.setState({nonFriends: nextProps.nonFriends})
+    console.log(this.state, 'componentWillReceiveProps, friendsAddContainer');
   }
 
+
+//invoked immediately before rendering when new props or state are being received.
   componentWillUpdate(nextProps, nextState) {
-    console.log(this.state, 'ComponentWillUpdate')
+    console.log('*componentWillUpdate Fired!');
+    console.log(this.state, 'this. state componentWillUpdate ');
+
+    console.log(nextProps, 'nextProps friendsAddContainer')
+    console.log(nextState, 'nextState friendsAddContainer')
+   // this.setState({nonFriends: this.state.friend})
+
+    // <FriendDetail friend={this.state}  />
+
+
+
   }
 
   // invoked immediately after updating occurs
   componentDidUpdate(prevProps, prevState) {
+    console.log('*componentDidUpdate Fired!');
        // this.setState({selectedVal:this.refs.selectValue.value})
-    console.log(this.state, ' COMPONENTDIDMOUNT')
+    console.log(prevProps, 'prevProps friendsAddContainer')
+    console.log(prevState, 'prevState friendsAddContainer')
+    console.log('get non friends for friend add container', this.state)
+     // this.props.getNonFriends();
+     // this.setState({nonFriends: this.state.friend})
+
   }
 
   //Add friend to database
@@ -40,26 +67,29 @@ class FriendAdd extends React.Component {
     e.preventDefault();
     // need to Add Friends to current user
     this.props.addFriend(this.state.selectedVal)
-    this.props.retrieveFriends();
+
+    // this.props.retrieveFriends();
   }
 
   handleChange(e){
-    // console.log(e.target.value, ' :Selected Value')
     let id = e.target.value;
+    // console.log('selected target.value', id)
+    console.log(id)
     this.setState( {selectedVal:id} );
+    // this.setState( {selectedUserName:id} );
   }
 
   render(){
     return (
       <div>
-        Available Users:
       <form onSubmit={this.onFormSubmit} className="input-group">
           <select onChange={this.handleChange} className="form-control">
+            <option selected="selected" disabled> Available Users </option>
           {
-            !this.state.notFriend ? 'Loading Users...' :
-             this.state.notFriend.map( (user, i) => {
+            !this.state.nonFriends ? 'Loading Users...' :
+             this.state.nonFriends.map( (user, i) => {
               return(
-            <option  value={user.id} key={user.id}>{user.email}</option> )
+            <option  value={user.id} key={user.id}> Email: {user.email}</option> )
             })
           }
           </select>
@@ -73,16 +103,17 @@ class FriendAdd extends React.Component {
   }
 }
 function mapStateToProps(state){
-  console.log(state, 'AllUser except friend and curr, container/friendsAddContainer.js')
+  console.log(state, 'AllUser except friend and curr, friendsAddContainer')
 
   // console.log(state.friend[0], 'AllUser except friend and curr, container/friendsAddContainer.js')
   //  console.log(state.friend[1], 'AllUser except friend and curr, container/friendsAddContainer.js')
-  return {notFriend: state.friend[0],friend:state.friend[1]}
+  // return {nonFriends: state.friend[0],friend:state.friend[1]}
+  return {nonFriends: state.friend[0]}
 }
 
 //binds action and container
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ retrieveFriends, addFriend, getAllUser}, dispatch)
+  return bindActionCreators({ retrieveFriends, addFriend, getNonFriends}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendAdd)

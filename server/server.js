@@ -1,3 +1,4 @@
+'use strict';
 // loads environment variables from .env into ENV (process.env)
 require('dotenv').config();
 
