@@ -27,23 +27,17 @@ class FriendDetail extends React.Component {
         console.log('THIS IS .THEN!!!');
         this.props.getNonFriends();
         this.props.retrieveFriends();
-    //     this.props.getNonFriends();
     })
-      // console.log(e.target.value, 'delete clicked')
-
   }
 
   render(){
+
     let user = this.props.friend; //Array of Friends Object
-    console.log(user, ' user, friendDetailContainer')
 
     return (
-
-
     <form  className="panel-default">
 
       { user.map((user, i) => {
-
         return(
           <div
           key={user.id}
@@ -74,23 +68,9 @@ class FriendDetail extends React.Component {
 
 }
 
-
 //binds action and container
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ deleteFriend, callUser, retrieveFriends, getNonFriends }, dispatch)
-// const FriendDetail = ({friend}) => (
-//   // console.log(user, ' FRIEND DETAIL')
-//   console.log(friend, ' FRIEND DETAIL')
-//   <div>
-//     {friend}
-//   </div>
-//   )
-
-// function mapStateToProps(state){
-//   // console.log(state, ' state friendListContainer.js')
-//   return {friend: state.friend}
-// }
-
+  return bindActionCreators({ deleteFriend, callUser, retrieveFriends, getNonFriends }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(FriendDetail)

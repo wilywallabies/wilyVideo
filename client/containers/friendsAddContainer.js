@@ -15,7 +15,6 @@ class FriendAdd extends React.Component {
     this.state.defaultValue = 'Available Users'
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.refreshNonFriends = this.refreshNonFriends.bind(this);
   }
 
 
@@ -23,41 +22,14 @@ class FriendAdd extends React.Component {
   componentWillMount() {
      this.props.getNonFriends();
   }
+
   //Sets friend as state after component when props has been changed
   //Called before render when props change. Access to old props. It is not triggered after the component is mounted.
   componentWillReceiveProps(nextProps) {
-    // console.log(this.nextProps, 'THIS.NEXTPROPS frindsAddContainer');
-
    this.setState({nonFriends: nextProps.nonFriends});
-    console.log(this.state, 'componentWillReceiveProps, friendsAddContainer');
+    // console.log(this.state, 'componentWillReceiveProps, friendsAddContainer');
   }
 
-
-//invoked immediately before rendering when new props or state are being received.
-  componentWillUpdate(nextProps, nextState) {
-    console.log('*componentWillUpdate Fired!');
-    console.log(this.state, 'this. state componentWillUpdate ');
-
-    console.log(nextProps, 'nextProps friendsAddContainer')
-    console.log(nextState, 'nextState friendsAddContainer')
-   // this.setState({nonFriends: this.state.friend})
-
-    // <FriendDetail friend={this.state}  />
-
-
-  }
-
-  // invoked immediately after updating occurs
-  componentDidUpdate(prevProps, prevState) {
-    console.log('*componentDidUpdate Fired!');
-       // this.setState({selectedVal:this.refs.selectValue.value})
-    console.log(prevProps, 'prevProps friendsAddContainer')
-    console.log(prevState, 'prevState friendsAddContainer')
-    console.log('get non friends for friend add container', this.state)
-     // this.props.getNonFriends();
-     // this.setState({nonFriends: this.state.friend})
-
-  }
 
   //Add friend to database
   onFormSubmit(e){
@@ -77,15 +49,11 @@ class FriendAdd extends React.Component {
     this.setState( {selectedVal:id} );
   }
 
-  refreshNonFriends(){ //TESTING ONLY
-    this.props.getNonFriends()
-  }
 
   render(){
     return (
       <div>
 
-      <button onClick={this.refreshNonFriends}>REFRESH?? TEST!</button>
       <form onSubmit={this.onFormSubmit} className="input-group">
           <select onChange={this.handleChange} className="form-control">
             <option selected="selected" disabled> Available Users </option>
@@ -107,11 +75,8 @@ class FriendAdd extends React.Component {
   }
 }
 function mapStateToProps(state){
-  console.log(state, 'AllUser except friend and curr, friendsAddContainer')
+  // console.log(state, 'AllUser except friend and curr, friendsAddContainer')
 
-  // console.log(state.friend[0], 'AllUser except friend and curr, container/friendsAddContainer.js')
-  //  console.log(state.friend[1], 'AllUser except friend and curr, container/friendsAddContainer.js')
-  // return {nonFriends: state.friend[0],friend:state.friend[1]}
   return {nonFriends: state.friend[0]}
 }
 
