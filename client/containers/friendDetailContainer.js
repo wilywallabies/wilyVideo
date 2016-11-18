@@ -22,7 +22,7 @@ class FriendDetail extends React.Component {
       e.preventDefault();
       this.props.deleteFriend(e.target.value);
       console.log(e.target.value, 'delete clicked')
-      // this.props.getNonFriends();
+      this.props.getNonFriends();
   }
 
   render(){

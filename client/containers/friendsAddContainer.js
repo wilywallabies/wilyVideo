@@ -9,28 +9,26 @@ import FriendDetail from './friendDetailContainer';
 class FriendAdd extends React.Component {
   constructor(props){
     super(props);
-    console.log(props, ' friendsAddContainer Props LINE 11')
+    console.log(props, ' friendsAddContainer Props LINE 11');
     this.state = {nonFriends:[], selectedVal:''};
     this.state.selectedUserName = '';
     this.state.defaultValue = 'Available Users'
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.refreshNonFriends = this.refreshNonFriends.bind(this);
   }
-
 
 
 //Triggered before render().
   componentWillMount() {
      this.props.getNonFriends();
   }
-
-
   //Sets friend as state after component when props has been changed
   //Called before render when props change. Access to old props. It is not triggered after the component is mounted.
   componentWillReceiveProps(nextProps) {
     // console.log(this.nextProps, 'THIS.NEXTPROPS frindsAddContainer');
 
-   this.setState({nonFriends: nextProps.nonFriends})
+   this.setState({nonFriends: nextProps.nonFriends});
     console.log(this.state, 'componentWillReceiveProps, friendsAddContainer');
   }
 
@@ -45,7 +43,6 @@ class FriendAdd extends React.Component {
    // this.setState({nonFriends: this.state.friend})
 
     // <FriendDetail friend={this.state}  />
-
 
 
   }
@@ -67,21 +64,37 @@ class FriendAdd extends React.Component {
     e.preventDefault();
     // need to Add Friends to current user
     this.props.addFriend(this.state.selectedVal)
+    .then(()=>{
+      console.log('THIS IS .THEN!!!');
+      this.props.retrieveFriends();
+
+    this.props.getNonFriends();
+
+    })
+
+    // this.props.getNonFriends();
+
+
 
     // this.props.retrieveFriends();
   }
 
   handleChange(e){
     let id = e.target.value;
-    // console.log('selected target.value', id)
     console.log(id)
     this.setState( {selectedVal:id} );
-    // this.setState( {selectedUserName:id} );
+  }
+
+  refreshNonFriends(){
+
+    this.props.getNonFriends()
   }
 
   render(){
     return (
       <div>
+
+      <button onClick={this.refreshNonFriends}>REFRESH?? TEST!</button>
       <form onSubmit={this.onFormSubmit} className="input-group">
           <select onChange={this.handleChange} className="form-control">
             <option selected="selected" disabled> Available Users </option>

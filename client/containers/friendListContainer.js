@@ -40,6 +40,7 @@ class FriendList extends React.Component {
           </div>
       )
   }
+
 }
 
 function mapStateToProps(state){

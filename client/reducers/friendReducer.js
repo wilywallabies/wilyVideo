@@ -24,9 +24,12 @@ export default function(state = [], action){ //***SITCH TO STATE = {} ?? or [] O
     // return [action.payload.data, ...state]
 
     case 'RETRIEVE_NON_FRIENDS':
+      console.log('**************========================********************')
+
       console.log('RETRIEVE_NON_FRIENDS Action received!:', action);
       // console.log(action.payload.data, ' REDUCER DATA')
       // return [...state, action.payload.data];
+      console.log('**************========================********************')
       return [action.payload.data, ...state];
 
     case 'ADD_FRIEND':
@@ -36,7 +39,8 @@ export default function(state = [], action){ //***SITCH TO STATE = {} ?? or [] O
       console.log(...state, ' ...state, ADD_FRIEND');
       console.log([action.payload.data, ...state],' [action.payload.data, ...state] ADD_FRIEND');
       console.log('********************************************************')
-     return [state[0], action.payload.data]; //THIS ONE WORKS, BUT IT MOVES TO SELECT FIELD
+     return [action.payload.data, ...state]; //THIS ONE WORKS, BUT IT MOVES TO SELECT FIELD
+     // return [state[0], action.payload.data]; //THIS ONE KINDA WORKS
 
     case 'DELETE_FRIEND':
       console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
