@@ -16,7 +16,7 @@ export default function(state = {}, action){
 
     case 'ADD_FRIEND':
       console.log('ADD_FRIEND FIRED!');
-      console.log(action.payload, 'ADD_FRIEND');
+      console.log(action.payload.data, 'ADD_FRIEND');
 
      return [action.payload.data];
       // return [action.payload.data, ...state];

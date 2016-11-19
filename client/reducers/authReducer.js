@@ -21,7 +21,10 @@ const authReducer = function(state = tokenExists, action) {
       window.localStorage.setItem('userToken', token)
       if (token) {
         console.log('LOGGED IN');
-        return true;
+        window.localStorage.setItem('user_Id', action.payload.data.user_id)
+
+        console.log(action.payload.data.user_id, ' action.payload.data LOGGED IN')
+        return [true, action.payload.data.user_id];
       } else {
         console.log('ERROR LOGGING IN', token);
         return false;
@@ -29,6 +32,7 @@ const authReducer = function(state = tokenExists, action) {
 
     case 'LOGOUT_USER':
       window.localStorage.removeItem('userToken');
+      window.localStorage.removeItem('user_Id');
       return false;
 
     default:
