@@ -1,14 +1,9 @@
 import React from 'react';
 import FriendAdd from '../containers/friendsAddContainer';
 import FriendDetail from '../containers/friendListContainer';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
 class Friend extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props, ' FRIENDS PROP')
-  }
+
   render(){
     let style = {"float":"right",
                  "display": "inline",
@@ -24,14 +19,6 @@ class Friend extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    currentUser_Id: state.isAuthorized[1]
-  }
-}
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({}, dispatch);
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Friend);
+export default Friend

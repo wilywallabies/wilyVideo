@@ -5,12 +5,8 @@ let db = require('../models/db');
 
 //Retrieve Friend List from DB
 module.exports.availableUser = (req, res) => {
-  console.log('GET retrieveFriends /allUser API called');
   var currentUser = req.query.currentUserId;
-console.log('*****************************************')
 
-console.log(req.query, ' PARAMS')
-console.log('*****************************************')
   /*****************************************
     Selects All User except current user
   ******************************************/

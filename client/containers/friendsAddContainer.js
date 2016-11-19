@@ -33,8 +33,6 @@ class FriendAdd extends React.Component {
     // need to Add Friends to current user
     this.props.addFriend(this.state.selectedVal)
       .then(()=>{
-        console.log('THIS IS .THEN!!!');
-
         this.props.retrieveFriends();
         this.props.getNonFriends();
     })
@@ -51,8 +49,9 @@ class FriendAdd extends React.Component {
     let style = {
              "display": "inline",
              "width": "60%" ,
-             'float':'right',
+             'float':'left',
              'top': "0",
+             'margin-left' :'20%',
             'position':'absolute'};
 
     return (

@@ -8,7 +8,6 @@ var User = require('../models/userModel');
 module.exports.getUser = function (req, res){
   console.log('GET /user API called');
   User.findOne({}, (err, user) => {
-    //do something
   });
 };
 
