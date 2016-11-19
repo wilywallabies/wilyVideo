@@ -5,9 +5,9 @@ let db = require('../models/db');
 
 //Retrieve Friend List from DB
 module.exports.availableUser = (req, res) => {
-  console.log('GET retrieveFriends /friend API called');
-
-  var currentUser = 9;
+  console.log('GET retrieveFriends /allUser API called');
+  var currentUser = global.currentUser_Id;
+  // var currentUser = 9;
 
   /*****************************************
     Selects All User except current user
@@ -27,6 +27,7 @@ let friends;
         result.push(user);
          }
        });
+      console.log(result, ' NONFRIEND, availUserCtrl')
       res.send(result);
     }
   )

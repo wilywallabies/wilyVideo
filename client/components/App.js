@@ -29,6 +29,7 @@ class Main extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log(window.currentUser_Id,  ' USER ID *********')
   return {
     authenticated: state.isAuthorized
   }
