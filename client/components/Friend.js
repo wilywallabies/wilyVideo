@@ -25,8 +25,6 @@ class Friend extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(window.currentUser_Id,  ' USER ID *********')
-  console.log(state.isAuthorized,  ' state.isAuthorized *********')
   return {
     currentUser_Id: state.isAuthorized[1]
   }
