@@ -82,7 +82,6 @@ class FriendAdd extends React.Component {
 }
 
 function mapStateToProps(state){
-  // console.log(state, 'AllUser except friend and curr, friendsAddContainer')
   return {nonFriends: state.friend[0]}
 }
 

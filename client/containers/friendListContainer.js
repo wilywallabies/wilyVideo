@@ -17,7 +17,7 @@ class FriendList extends React.Component {
   render(){
     let friend = this.props.friend[1];
     return (
-          <div  style={{"width":"95%","height": "400px"}}>
+          <div style={{"width":"95%","height": "400px"}}>
             <div className="panel-group">
             <div className="panel  text-center">
               <h4>Contacts</h4>
@@ -34,7 +34,7 @@ class FriendList extends React.Component {
 }
 
 function mapStateToProps(state){
-  return {friend: state.friend//,
+  return {friend: state.friend
   };
 }
 
