@@ -6,9 +6,9 @@ let db = require('../models/db');
 //Retrieve Friend List from DB
 module.exports.retrieveFriends = (req, res) => {
   console.log('#####################################')
+  console.log(req.body)
   console.log('#####################################')
   var currentUser = 9;
-  // console.log('req.body')
   // let currentUser = currentUser();
   console.log('GET retrieveFriends /friend API called');
   console.log(' retrieving Friends for currentUser', currentUser)

@@ -18,7 +18,7 @@ router.post('/friend', friendCtrl.addFriend);
 // router.delete('/friend', friendCtrl.deleteFriend);
 
 //FriendDelete Routes
-router.delete('/friendDelete/:friendId', deleteCtrl.deleteFriend);
+router.delete('/friendDelete/:friendId/:userId', deleteCtrl.deleteFriend);
 
 //Available User Routes
 router.get('/allUser', allUser.availableUser)

@@ -6,10 +6,12 @@ let db = require('../models/db');
 //addFriend Friend List to DB
 module.exports.deleteFriend = (req, res) => {
   // var currentUser = global.currentUser_Id;
-  var currentUser = 9;
+  // let reqId = req.params.userId;
+  var currentUser = req.params.userId;
+  console.log(req.params, 'req.params /DELETE API called');
 
   let reqId = req.params.friendId;
-  console.log(reqId, 'friendDelete /friend API called');
+  console.log(reqId, 'friendDelete /DELETE API called');
 
   db('friends')
   .where({'user_id':currentUser, 'user_id2':reqId})
