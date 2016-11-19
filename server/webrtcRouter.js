@@ -22,7 +22,7 @@ webrtc.post('/signal/token', function(req, res){
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
 
-    console.log(body);
+    res.send(body);
   }).write(JSON.stringify(params));
 
 });
