@@ -5,6 +5,7 @@ import adapter from 'webrtc-adapter';
 
 import LocalVideo from './LocalVideo';
 import Friend from './Friend';
+import CurrentUser from './CurrentUser';
 
 import webrtcModule from './webrtcModule';
 
@@ -37,6 +38,7 @@ class Video extends React.Component{
           Test
         </h1>
 
+        <CurrentUser />
         <Friend />
 
 
