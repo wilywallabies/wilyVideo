@@ -13,16 +13,34 @@ class Video extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-
+      localVideo: false
     }
-    this.token = this.token.bind(this);
+    this.invite = this.invite.bind(this);
+
     this.ice = this.ice.bind(this);
+
   }
 
-  token() {
-    webrtcModule.getToken()
-    console.log('test')
+  invite() {
+    let p1 = new Promise((resolve, reject) => {
+      resolve(webrtcModule.invite())
+
+    })
+    p1.then((localSrc) => {
+
+
+      console.log("local",localSrc)
+      this.setState({localVideo:true})
+      console.log(this.state)
+    })
+
+
   }
+  componentDidMount(){
+
+  }
+
+
 
   ice(){
     webrtcModule.getIce()
@@ -39,8 +57,9 @@ class Video extends React.Component{
 
         <Friend />
 
-
-        <button onClick={this.token}> Get list of tokens </button>
+        <LocalVideo/>
+        <button onClick={webrtcModule.connect}> Connect </button>
+        <button onClick={this.invite}> Invite </button>
         <button onClick={this.ice}> Get some ice </button>
 
       </div>
