@@ -32,6 +32,7 @@ const authReducer = function(state = tokenExists, action) {
 
     case 'LOGOUT_USER':
       window.localStorage.removeItem('userToken');
+      window.localStorage.removeItem('user_Id');
       return false;
 
     default:
