@@ -34,7 +34,7 @@ class FriendList extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log(state, ' state friendListContainer')
+  // console.log(state, ' state friendListContainer')
   return {friend: state.friend//,
          // authenticated: state.isAuthorized
 

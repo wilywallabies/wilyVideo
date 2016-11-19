@@ -7,7 +7,6 @@ let db = require('../models/db');
 module.exports.availableUser = (req, res) => {
   console.log('GET retrieveFriends /allUser API called');
   var currentUser = global.currentUser_Id;
-
   // var currentUser = 9;
 
   /*****************************************

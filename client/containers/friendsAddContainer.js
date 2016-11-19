@@ -11,7 +11,6 @@ class FriendAdd extends React.Component {
     super(props);
     console.log(props, ' friendsAddContainer Props LINE 11');
     this.state = {nonFriends:[], selectedVal:''};
-    this.state.selectedUserName = '';
     this.state.defaultValue = 'Available Users';
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -25,7 +24,7 @@ class FriendAdd extends React.Component {
   //Sets friend as state after component when props has been changed
   //Called before render when props change. Access to old props. It is not triggered after the component is mounted.
   componentWillReceiveProps(nextProps) {
-   this.setState({nonFriends: nextProps.nonFriends});
+   this.setState( {nonFriends: nextProps.nonFriends} );
   }
 
   //Add friend to database
@@ -34,38 +33,47 @@ class FriendAdd extends React.Component {
     // need to Add Friends to current user
     this.props.addFriend(this.state.selectedVal)
       .then(()=>{
-      console.log('THIS IS .THEN!!!');
-      this.props.retrieveFriends();
-      this.props.getNonFriends();
+        console.log('THIS IS .THEN!!!');
+
+        this.props.retrieveFriends();
+        this.props.getNonFriends();
     })
+      this.props.getNonFriends();
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+
+  // }
 
   handleChange(e){
     let id = e.target.value;
     this.setState( {selectedVal:id} );
+
   }
 
   render(){
     return (
-      <div> <h5 className="text-center">Search Users</h5>
+      <div>
+        <h5 className="text-center">Search Users</h5>
 
-      <form onSubmit={this.onFormSubmit} className="input-group">
-          <select onChange={this.handleChange} className="form-control">
-            <option disabled> {this.state.defaultValue} </option>
-            {
-            !this.state.nonFriends ? 'Loading Users...' :
-             this.state.nonFriends.map( (user, i) => {
-              return(
-            // <option disabled> {this.state.defaultValue} </option>
+        <form onSubmit={this.onFormSubmit} className="input-group">
+            <select onChange={this.handleChange} className="form-control">
+              <option selected defaultValue={this.state.defaultValue}  > {this.state.defaultValue} </option>
+              {
+              !this.state.nonFriends ? 'Loading Users...' :
+                 this.state.nonFriends.map( (user, i) => {
 
-            <option value={user.id} key={user.id}> Email: {user.email} </option> )
-            })
-          }
-          </select>
-        <span className="input-group-btn">
-          <button className="btn btn-primary"> Add </button>
-        </span>
-      </form>
+                  return(
+
+                    <option value={user.id} key={user.id}> Email: {user.email} </option>
+                  )
+                })
+              }
+            </select>
+          <span className="input-group-btn">
+            <button type="submit" className="btn btn-primary"> Add </button>
+          </span>
+        </form>
       </div>
       )
   }
@@ -73,7 +81,6 @@ class FriendAdd extends React.Component {
 
 function mapStateToProps(state){
   // console.log(state, 'AllUser except friend and curr, friendsAddContainer')
-
   return {nonFriends: state.friend[0]}
 }
 

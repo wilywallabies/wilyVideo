@@ -6,7 +6,8 @@ import FriendDetail from '../containers/friendListContainer';
 export default class Friend extends React.Component {
   render(){
     return (
-      <div className="col-md-5 panel panel-default">
+      <div className="col-md-5 panel panel-default"
+          style={{'display':'inline', 'float': 'right'}} >
         <FriendDetail />
         <FriendAdd />
       </div>
