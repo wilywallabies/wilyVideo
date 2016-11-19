@@ -34,8 +34,7 @@ class FriendList extends React.Component {
 }
 
 function mapStateToProps(state){
-  return {friend: state.friend
-  };
+  return {friend: state.friend };
 }
 
 //binds action and container

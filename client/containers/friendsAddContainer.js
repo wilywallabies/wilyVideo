@@ -60,7 +60,7 @@ class FriendAdd extends React.Component {
 
         <form onSubmit={this.onFormSubmit} className="input-group">
             <select  style={style} onChange={this.handleChange} className="form-control dropdown">
-              <option selected defaultValue={this.state.defaultValue}  > {this.state.defaultValue} </option>
+              <option selected defaultValue={this.state.defaultValue} > {this.state.defaultValue} </option>
               {
               !this.state.nonFriends ? 'Loading Users...' :
                  this.state.nonFriends.map( (user, i) => {
