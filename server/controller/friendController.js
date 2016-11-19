@@ -23,6 +23,9 @@ module.exports.addFriend = (req, res) => {
   var currentUser = req.body.userId;
 
   console.log("ADDING FRIEND ID: ", req.body.friendId);
+  db('friends').insert({user_id:req.body.friendId, user_id2:currentUser})
+  .then(() => {
+
   db('friends').insert({user_id:currentUser, user_id2:req.body.friendId})
   .then((data) => {
 
@@ -33,6 +36,7 @@ module.exports.addFriend = (req, res) => {
       res.send(data);
     }).catch((err)=> {console.log(err) })
 
+  })
   })
 
 }

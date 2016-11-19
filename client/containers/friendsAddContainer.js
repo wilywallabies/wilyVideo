@@ -36,7 +36,7 @@ class FriendAdd extends React.Component {
         this.props.retrieveFriends();
         this.props.getNonFriends();
     })
-      this.props.getNonFriends();
+      // this.props.getNonFriends();
   }
 
   handleChange(e){
@@ -51,7 +51,7 @@ class FriendAdd extends React.Component {
              "width": "60%" ,
              'float':'left',
              'top': "0",
-             'margin-left' :'20%',
+             'marginLeft' :'20%',
             'position':'absolute'};
 
     return (

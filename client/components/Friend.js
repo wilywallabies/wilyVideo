@@ -11,9 +11,13 @@ class Friend extends React.Component {
                  "width": "40%",
                  "overflowY":"auto"};
     return (
-      <div className="col-md-4 panel panel-defaults" style={style}>
-        <FriendAdd />
-        <FriendDetail />
+      <div style={{"right":"20px",
+                 "display": "block"}} >
+        <div className="col-md-4 panel panel-defaults" style={style}>
+
+          <FriendAdd />
+          <FriendDetail />
+        </div>
       </div>
       )
   }
