@@ -7,6 +7,7 @@ import Video from './components/Video';
 
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Profile from './components/Profile';
 
 import { Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
@@ -21,6 +22,8 @@ const router = (
         <Route path="/login" component={Login}/>
       </Route>
       <Route path="/video" component={Video}>
+      </Route>
+      <Route path="/profile" component={Profile}>
       </Route>
     </Router>
   </Provider>
