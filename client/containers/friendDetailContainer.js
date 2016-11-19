@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteFriend, callUser } from '../actions/friendsAction';
+import { deleteFriend, callUser, retrieveFriends,  getNonFriends } from '../actions/friendsAction';
+
 // import { counter } from '../actions/friendsAction';
 
 class FriendDetail extends React.Component {
   constructor(props){
     super(props);
-    console.log(props, 'props, friendDetailContainer')
 
     this.onClickCall = this.onClickCall.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
@@ -18,22 +18,25 @@ class FriendDetail extends React.Component {
   }
 
     deleteUser(e){
+      console.log(e.target.value, 'delete clicked');
+
       e.preventDefault();
-      this.props.deleteFriend(e.target.value);
-      console.log(e.target.value, 'delete clicked')
+      this.props.deleteFriend(e.target.value)
+       .then(()=>{
+        console.log('THIS IS .THEN!!!');
+        this.props.getNonFriends();
+        this.props.retrieveFriends();
+    });
   }
 
   render(){
+
     let user = this.props.friend; //Array of Friends Object
-    console.log(user, ' user, friendDetailContainer')
 
     return (
-
-
     <form  className="panel-default">
 
       { user.map((user, i) => {
-
         return(
           <div
           key={user.id}
@@ -63,24 +66,16 @@ class FriendDetail extends React.Component {
   }
 
 }
+function mapStateToProps(state){
+  console.log(state, ' state friendDetail')
+  return {//friend: state.friend,
+          userId: state
 
-
+  };
+}
 //binds action and container
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ deleteFriend, callUser }, dispatch)
-// const FriendDetail = ({friend}) => (
-//   // console.log(user, ' FRIEND DETAIL')
-//   console.log(friend, ' FRIEND DETAIL')
-//   <div>
-//     {friend}
-//   </div>
-//   )
-
-// function mapStateToProps(state){
-//   // console.log(state, ' state friendListContainer.js')
-//   return {friend: state.friend}
-// }
-
+  return bindActionCreators({ deleteFriend, callUser, retrieveFriends, getNonFriends }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(FriendDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(FriendDetail)
