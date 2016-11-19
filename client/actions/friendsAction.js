@@ -5,7 +5,7 @@ let currentUserId = window.localStorage.getItem('user_Id')
 export function retrieveFriends() {
 // let currentUserId = window.localStorage.getItem('user_Id')
 
-  const request = axios.get('api/friend', {userId: currentUserId});
+  const request = axios.get('api/friend/', {params: { currentUserId } });
   console.log(currentUserId, ' ID FROM localStorage1')
   return {
     type: 'RETRIEVE_FRIENDS',
@@ -40,7 +40,7 @@ export function deleteFriend(userId){
 
 export function getNonFriends(){
 
-  const request = axios.get('api/allUser')
+  const request = axios.get('api/allUser/', {params: { currentUserId } });
 
   console.log(currentUserId, ' ID FROM localStorage4')
   // console.log('Request Received, Line 37', request);

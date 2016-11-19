@@ -5,16 +5,9 @@ let db = require('../models/db');
 
 //Retrieve Friend List from DB
 module.exports.retrieveFriends = (req, res) => {
-  console.log('#####################################')
-  console.log(req.body)
-  console.log('#####################################')
-  var currentUser = 9;
-  // let currentUser = currentUser();
+  var currentUser = req.query.currentUserId;
   console.log('GET retrieveFriends /friend API called');
-  console.log(' retrieving Friends for currentUser', currentUser)
-  // db.select('id', 'email', 'userName').from('users')
 
-  // let currentUser = 9;//Need to retrieve current user id
   db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
   .select('users.id', 'users.userName', 'users.email')
   .then((data) => {

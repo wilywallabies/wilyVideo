@@ -10,8 +10,8 @@ var allUser = require('../controller/availUserController');
 var deleteCtrl = require('../controller/friendDeleteController');
 
 //FriendList Routes
-router.get('/friend', friendCtrl.retrieveFriends);
-// router.get('/friend/:userId', friendCtrl.retrieveFriends);
+// router.get('/friend', friendCtrl.retrieveFriends);
+router.get('/friend/', friendCtrl.retrieveFriends);
 
 router.post('/friend', friendCtrl.addFriend);
 
@@ -21,7 +21,7 @@ router.post('/friend', friendCtrl.addFriend);
 router.delete('/friendDelete/:friendId/:userId', deleteCtrl.deleteFriend);
 
 //Available User Routes
-router.get('/allUser', allUser.availableUser)
+router.get('/allUser/', allUser.availableUser)
 
 //User Routes
 router.get('/user', userCtrl.getUser);
