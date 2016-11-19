@@ -5,11 +5,14 @@ import FriendDetail from '../containers/friendListContainer';
 
 export default class Friend extends React.Component {
   render(){
+    let style = {"float":"right",
+                 "display": "inline",
+                 "height": "auto",
+                 "overflowY":"auto"};
     return (
-      <div className="col-md-5 panel panel-default"
-          style={{'display':'inline', 'float': 'right'}} >
-        <FriendDetail />
+      <div className="col-md-4 panel panel-defaults" style={style}>
         <FriendAdd />
+        <FriendDetail />
       </div>
       )
   }

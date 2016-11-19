@@ -41,10 +41,6 @@ class FriendAdd extends React.Component {
       this.props.getNonFriends();
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-
-  // }
-
   handleChange(e){
     let id = e.target.value;
     this.setState( {selectedVal:id} );
@@ -52,12 +48,19 @@ class FriendAdd extends React.Component {
   }
 
   render(){
+    let style = {
+             "display": "inline",
+             "width": "280px" ,
+             'float':'right',
+             'top': "0",
+            'position':'absolute'};
+
     return (
-      <div>
+      <div >
         <h5 className="text-center">Search Users</h5>
 
         <form onSubmit={this.onFormSubmit} className="input-group">
-            <select onChange={this.handleChange} className="form-control">
+            <select  style={style} onChange={this.handleChange} className="form-control dropdown">
               <option selected defaultValue={this.state.defaultValue}  > {this.state.defaultValue} </option>
               {
               !this.state.nonFriends ? 'Loading Users...' :
