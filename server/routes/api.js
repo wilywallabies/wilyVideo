@@ -11,13 +11,14 @@ var deleteCtrl = require('../controller/friendDeleteController');
 
 //FriendList Routes
 router.get('/friend', friendCtrl.retrieveFriends);
+// router.get('/friend/:userId', friendCtrl.retrieveFriends);
 
 router.post('/friend', friendCtrl.addFriend);
 
 // router.delete('/friend', friendCtrl.deleteFriend);
 
 //FriendDelete Routes
-router.delete('/friendDelete/:friendid', deleteCtrl.deleteFriend);
+router.delete('/friendDelete/:friendId', deleteCtrl.deleteFriend);
 
 //Available User Routes
 router.get('/allUser', allUser.availableUser)

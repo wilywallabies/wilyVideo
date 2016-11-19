@@ -6,9 +6,12 @@ let db = require('../models/db');
 //Retrieve Friend List from DB
 module.exports.retrieveFriends = (req, res) => {
   console.log(global.currentUser_Id, 'ACCESSING GLOBAL CURRENT ID ++++')
+  console.log('#####################################')
+  console.log(req.body.params, ' params  token CURRENT ID ++++')
+  console.log('#####################################')
 
-  var currentUser = global.currentUser_Id;
-  // var currentUser = 9;
+  // var currentUser = global.currentUser_Id;
+  var currentUser = 9;
 
   // let currentUser = currentUser();
   console.log('GET retrieveFriends /friend API called');
@@ -29,10 +32,8 @@ module.exports.retrieveFriends = (req, res) => {
 
 //addFriend Friend List to DB
 module.exports.addFriend = (req, res) => {
-  var currentUser = global.currentUser_Id;
-  // var currentUser = 9;
-
-  console.log(global.currentUser_Id, 'ACCESSING GLOBAL CURRENT ID ++++')
+  // var currentUser = global.currentUser_Id;
+  var currentUser = 9;
 
   console.log('POST /friend API called');
   //insert into friends table

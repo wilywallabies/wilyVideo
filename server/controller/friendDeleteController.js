@@ -5,13 +5,10 @@ let db = require('../models/db');
 
 //addFriend Friend List to DB
 module.exports.deleteFriend = (req, res) => {
-  var currentUser = global.currentUser_Id;
-  // var currentUser = 9;
+  // var currentUser = global.currentUser_Id;
+  var currentUser = 9;
 
-  console.log(global.currentUser_Id, 'ACCESSING GLOBAL CURRENT ID ++++')
-
-  // let currentUser = 9;//Need to retrieve current user id
-  let reqId = req.params.friendid;
+  let reqId = req.params.friendId;
   console.log(reqId, 'friendDelete /friend API called');
 
   db('friends')

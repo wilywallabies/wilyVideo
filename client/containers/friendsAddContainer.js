@@ -50,7 +50,7 @@ class FriendAdd extends React.Component {
   render(){
     let style = {
              "display": "inline",
-             "width": "280px" ,
+             "width": "60%" ,
              'float':'right',
              'top': "0",
             'position':'absolute'};

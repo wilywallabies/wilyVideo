@@ -3,7 +3,9 @@ import axios from 'axios';
 
 export function retrieveFriends() {
 
-  const request = axios.get('api/friend');
+  // const request = axios.get('api/friend/'+ window.localStorage.getItem('userToken'));
+  // const request = axios.get('api/friend');
+  const request = axios.get('api/friend', { params:{userId:window.localStorage.getItem('userToken')}});
 
   return {
     type: 'RETRIEVE_FRIENDS',
@@ -15,6 +17,7 @@ export function addFriend(userId){
   console.log(userId, 'ADDFRIEND ID')
   // console.log(currentUser_Id,  ' CURRENT USER ID!!_____________')
   const request = axios.post('api/friend', {friendId:userId})
+  // const request = axios.post('api/friend', {friendId:userId})
 
   return {
     type: 'ADD_FRIEND',
