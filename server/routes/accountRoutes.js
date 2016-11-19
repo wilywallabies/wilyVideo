@@ -41,8 +41,6 @@ router.post('/login', (req, res) => {
     .then(function(dbRes) {
       var user = dbRes[0];
       console.log('user is', user);
-      global.currentUser_Id = user.id;
-      console.log(currentUser_Id, 'GLOBAL CURRENT HAS BEEN SET')
       if (user) {
         bcrypt.compare(password, user.password, function(err, match) {
           if (err) console.log('err', err);

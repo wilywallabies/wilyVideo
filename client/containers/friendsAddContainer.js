@@ -33,12 +33,10 @@ class FriendAdd extends React.Component {
     // need to Add Friends to current user
     this.props.addFriend(this.state.selectedVal)
       .then(()=>{
-        console.log('THIS IS .THEN!!!');
-
         this.props.retrieveFriends();
         this.props.getNonFriends();
     })
-      this.props.getNonFriends();
+      // this.props.getNonFriends();
   }
 
   handleChange(e){
@@ -50,9 +48,10 @@ class FriendAdd extends React.Component {
   render(){
     let style = {
              "display": "inline",
-             "width": "280px" ,
-             'float':'right',
+             "width": "60%" ,
+             'float':'left',
              'top': "0",
+             'marginLeft' :'20%',
             'position':'absolute'};
 
     return (
@@ -83,7 +82,6 @@ class FriendAdd extends React.Component {
 }
 
 function mapStateToProps(state){
-  // console.log(state, 'AllUser except friend and curr, friendsAddContainer')
   return {nonFriends: state.friend[0]}
 }
 

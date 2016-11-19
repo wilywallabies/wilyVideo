@@ -4,27 +4,34 @@ var express = require('express');
 var router = express.Router();
 
 
-var userCtrl = require('../controller/userController');
+// var userCtrl = require('../controller/userController');
 var friendCtrl = require('../controller/friendController');
 var allUser = require('../controller/availUserController');
 var deleteCtrl = require('../controller/friendDeleteController');
+var currentUser = require('../controller/currentUserController');
 
 //FriendList Routes
-router.get('/friend', friendCtrl.retrieveFriends);
+// router.get('/friend', friendCtrl.retrieveFriends);
+router.get('/friend/', friendCtrl.retrieveFriends);
 
-router.post('/friend', friendCtrl.addFriend);
+router.post('/friend/', friendCtrl.addFriend);
 
 // router.delete('/friend', friendCtrl.deleteFriend);
 
 //FriendDelete Routes
-router.delete('/friendDelete/:friendid', deleteCtrl.deleteFriend);
+router.delete('/friendDelete/:friendId/:userId', deleteCtrl.deleteFriend);
 
 //Available User Routes
-router.get('/allUser', allUser.availableUser)
+router.get('/allUser/', allUser.availableUser)
 
-//User Routes
-router.get('/user', userCtrl.getUser);
+// //User Routes
+// router.get('/user', userCtrl.getUser);
 
-router.post('/user', userCtrl.addUser);
+// router.post('/user', userCtrl.addUser);
+
+//Current User Routes
+router.get('/currentUserInfo/', currentUser.getCurrentUser);
+
+
 
 module.exports = router;

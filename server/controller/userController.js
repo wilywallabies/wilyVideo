@@ -1,27 +1,28 @@
-//Backend User API call
-'use strict';
+// //Backend User API call
+// 'use strict';
 
-var request = require('request');
+// var request = require('request');
 
-var User = require('../models/userModel');
+// var User = require('../models/userModel');
 
-module.exports.getUser = function (req, res){
-  console.log('GET /user API called');
-  User.findOne({}, (err, user) => {
-    //do something
-  });
-};
+// module.exports.getUser = function (req, res){
+//   console.log('GET /user API called');
+//   User.findOne({}, (err, user) => {
+//   });
+// };
 
-module.exports.addUser = function (req, res){
-  console.log('POST /user API called');
-  console.log(req.body, 'req.body POST /USER');
+// module.exports.addUser = function (req, res){
+//   console.log('POST /user API called');
+//   console.log(req.body, 'req.body POST /USER');
 
-  User.addOne({
-    email: req.body.email,
-    userName: req.body.userName,
-    password: req.body.password,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName
-  });
-};
+//   User.addOne({
+//     email: req.body.email,
+//     userName: req.body.userName,
+//     password: req.body.password,
+//     firstName: req.body.firstName,
+//     lastName: req.body.lastName
+//   });
+// };
 
+
+//Not Using this file...

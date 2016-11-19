@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteFriend, callUser, retrieveFriends,  getNonFriends } from '../actions/friendsAction';
 
-// import { counter } from '../actions/friendsAction';
-
 class FriendDetail extends React.Component {
   constructor(props){
     super(props);
@@ -19,11 +17,9 @@ class FriendDetail extends React.Component {
 
     deleteUser(e){
       console.log(e.target.value, 'delete clicked');
-
       e.preventDefault();
       this.props.deleteFriend(e.target.value)
        .then(()=>{
-        console.log('THIS IS .THEN!!!');
         this.props.getNonFriends();
         this.props.retrieveFriends();
     });
@@ -66,16 +62,10 @@ class FriendDetail extends React.Component {
   }
 
 }
-function mapStateToProps(state){
-  console.log(state, ' state friendDetail')
-  return {//friend: state.friend,
-          userId: state
 
-  };
-}
 //binds action and container
 function mapDispatchToProps(dispatch){
   return bindActionCreators({ deleteFriend, callUser, retrieveFriends, getNonFriends }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FriendDetail)
+export default connect(null, mapDispatchToProps)(FriendDetail)
