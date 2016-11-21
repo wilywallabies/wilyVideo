@@ -4,7 +4,7 @@ export default function(state = {}, action){
 
     case 'RETRIEVE_FRIENDS':
       console.log('RETRIEVE_FRIENDS FIRED!');
-      console.log('RETRIEVE_FRIENDS Action received!:', action);
+      console.log('RETRIEVE_FRIENDS Action received!:', action.payload);
 
       return [...state, action.payload.data];
 
