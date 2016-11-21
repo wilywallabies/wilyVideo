@@ -48,7 +48,7 @@ class UserInfo extends React.Component {
           </h5>
           <form onChange={this.handleChange}>
             <div> Change Status :
-              <select>
+              <select style={{"width":"20%"}} className="form-control form-control-sm">
                 <option value="y">Online</option>
                 <option value="away">Away</option>
                 <option value="n">Offline Mode</option>
