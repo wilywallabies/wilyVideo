@@ -10,7 +10,7 @@ module.exports.getCurrentUser = (req, res) => {
   .select('email', 'userName')
 
   .then((data)=>{
-    console.log(data, ' RES DATA GET CURRENT **********')
+    // console.log(data, ' RES DATA GET CURRENT **********')
     res.send(data)
   })
   .catch((err) => { console.log(err)} );

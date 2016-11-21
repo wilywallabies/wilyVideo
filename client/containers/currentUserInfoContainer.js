@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getCurrentUserInfo } from '../actions/friendsAction';
-import { toggleOnline } from '../actions/friendsAction';
+import { toggleOnline } from '../actions/onlineStatusActions';
 
 class UserInfo extends React.Component {
     constructor(props){
@@ -44,7 +44,7 @@ function mapStateToProps(state){
 }
 //binds action and container
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getCurrentUserInfo  }, dispatch);
+  return bindActionCreators({ getCurrentUserInfo, toggleOnline }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);
