@@ -7,7 +7,9 @@ export const TOGGLE_OFFLINE = 'TOGGLE_OFFLINE';
 
 
 export function toggleOnline() {
-  const request = axios.put('api/status/', {params: { currentUserId, 'status':'y' } });
+  // const request = axios.put('api/status/', + currentUserId + '/' +  {'status':'y'}  );
+  const request = axios.put('api/status/',  { currentUserId, 'status':'y' } );
+  console.log( ' toggle onlne by', currentUserId)
   return {
     type: TOGGLE_ONLINE,
     payload: request

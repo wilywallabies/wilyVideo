@@ -21,7 +21,7 @@ router.delete('/friendDelete/:friendId/:userId', deleteCtrl.deleteFriend);
 router.get('/allUser/', allUser.availableUser)
 
 //Online Status Routes
-router.put('/status/:userId/:status', statusCtrl.toggleStatus);
+router.put('/status', statusCtrl.toggleStatus);
 
 
 //Current User Routes
