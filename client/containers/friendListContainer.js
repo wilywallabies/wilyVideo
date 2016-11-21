@@ -9,13 +9,20 @@ class FriendList extends React.Component {
     super(props);
   }
      componentWillMount(){
+        this.props.retrieveFriends()
+      // call friends list and render
 
-      //call friends list and render
-      this.props.retrieveFriends();
+      //updates friend status every 5 seconds.
+      setInterval(  ()=>{
+        console.log(' set Interval Called!')
+        this.props.retrieveFriends()
+      }, 5000 );
+
     }
 
   render(){
-    let friend = this.props.friend[1];
+    let friend = this.props.friend[this.props.friend.length-1];
+    // let friend = this.props.friend[1];
     return (
           <div style={{"width":"95%","height": "400px"}}>
             <div className="panel-group">
@@ -34,6 +41,7 @@ class FriendList extends React.Component {
 }
 
 function mapStateToProps(state){
+  // console.log(state.friend , ' AFTER UPDATED!!!!')
   return {friend: state.friend };
 }
 

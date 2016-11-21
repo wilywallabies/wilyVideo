@@ -3,8 +3,6 @@ export default function(state = {}, action){
   switch (action.type){
 
     case 'RETRIEVE_CURRENT_USER':
-      console.log('RETRIEVE_CURRENT_USER FIRED!');
-      console.log('RETRIEVE_CURRENT_USER Action received!:', action);
 
       return Object.assign({}, ...state,
           {
