@@ -28,8 +28,6 @@ class UserInfo extends React.Component {
   }
 
   render(){
-    console.log(this.props, ' @@@@@1@@@@@@')
-    console.log(this.state, ' STATE!@$!@$!@$@!')
     return (
 
       <div>

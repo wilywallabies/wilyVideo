@@ -8,7 +8,12 @@ module.exports.toggleStatus = (req, res) => {
   .update({onlineStatus: req.body.status})
 
   .then((data)=>{
-    res.sendStatus(201);
+    db('users').where('id', req.body.currentUserId)
+    .select('email', 'userName', 'onlineStatus')
+      .then((data)=>{
+
+    res.send(data);
+    })
   })
 
   .catch((err)=> {

@@ -33,7 +33,7 @@ export function toggleOffline() {
 
 export function changeStatus(status){
   console.log(status, 'ACTION RECEIVED AS')
-  const request = axios.put('api/status/',{ currentUserId, 'status':'n' } );
+  const request = axios.put('api/status/',{ currentUserId, status } );
   return {
     type: CHANGE_STATUS,
     payload: request

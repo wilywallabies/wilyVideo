@@ -1,6 +1,8 @@
 import axios from 'axios';
 let currentUserId = window.localStorage.getItem('user_Id')
 
+export const RETRIEVE_CURRENT_USER = 'RETRIEVE_CURRENT_USER';
+
 export function retrieveFriends() {
   const request = axios.get('api/friend/', {params: { currentUserId } });
   return {
