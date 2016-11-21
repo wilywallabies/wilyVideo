@@ -7,7 +7,7 @@ import { toggleOnline } from '../actions/onlineStatusActions';
 class UserInfo extends React.Component {
     constructor(props){
     super(props);
-    this.state = { currentUser: {email:'', userName:''} };
+    this.state = { currentUser: {email:'', userName:'', status:''} };
   }
 
   componentWillMount() {
@@ -15,20 +15,32 @@ class UserInfo extends React.Component {
     this.props.toggleOnline();
   }
 
+  //After receiving new prop, will set as this.setState using nextProps
   componentWillReceiveProps(nextProps) {
-    this.setState( {currentUser:{email:nextProps.user.email,userName:nextProps.user.username}})
+    // console.log(nextProps, ' MY NEXT PROPS!')
+    this.setState( {currentUser:{email:nextProps.user.email,userName:nextProps.user.username, status: nextProps.user.status}})
   }
   render(){
-
+    console.log(this.props, ' @@@@@1@@@@@@')
+    console.log(this.state, ' STATE!@$!@$!@$@!')
     return (
 
       <div>
         <div>
-        <h5>Email:  {this.state.currentUser.email}</h5>
+          <h5>Email:  {this.state.currentUser.email}</h5>
         </div>
 
         <div>
-        <h5>UserID: {this.state.currentUser.userName} </h5>
+         <h5>UserID: {this.state.currentUser.userName} </h5>
+        </div>
+
+        <div>
+          <h5> Status:
+          {
+            this.state.currentUser.status === 'y' ? ' Online' :
+            this.state.currentUser.status === 'away' ? ' Away' : ' Offline Mode'
+          }
+          </h5>
         </div>
       </div>
 
@@ -38,6 +50,7 @@ class UserInfo extends React.Component {
 }
 
 function mapStateToProps(state){
+  console.log(state, ' STATE!')
   return {
     user: state.currentUser
   }

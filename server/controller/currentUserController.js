@@ -6,7 +6,7 @@ module.exports.getCurrentUser = (req, res) => {
   console.log(currentUser,  ' CURRENT USER!!!')
 
   db('users').where('id', currentUser)
-  .select('email', 'userName')
+  .select('email', 'userName','onlineStatus')
   .then((data)=>{
     res.send(data)
   })

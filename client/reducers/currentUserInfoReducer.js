@@ -8,6 +8,7 @@ export default function(state = {}, action){
           {
               email: action.payload.data[0].email,
               username: action.payload.data[0].userName,
+              status: action.payload.data[0].onlineStatus
           });;
   };
 
