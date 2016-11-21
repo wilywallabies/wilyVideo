@@ -29,6 +29,7 @@ knex.schema.hasTable('users').then(exists => {
       table.string('password', 250);
       table.string('firstName');
       table.string('lastName');
+      table.string('userStatus').defaultTo('n');
       table.timestamps();
       console.log('USERS Table Created');
     })
