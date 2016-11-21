@@ -2,15 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getCurrentUserInfo } from '../actions/friendsAction';
+import { toggleOnline } from '../actions/friendsAction';
 
 class UserInfo extends React.Component {
     constructor(props){
     super(props);
-    this.state = {currentUser:{email:'', userName:''}};
+    this.state = { currentUser: {email:'', userName:''} };
   }
+
   componentWillMount() {
     this.props.getCurrentUserInfo();
-
+    this.props.toggleOnline();
   }
 
   componentWillReceiveProps(nextProps) {
