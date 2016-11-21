@@ -9,7 +9,7 @@ module.exports.toggleStatus = (req, res) => {
   .update({onlineStatus: req.body.status})
 
   .then((data)=>{
-    res.status(200);
+    res.sendStatus(201);
   })
 
   .catch((err)=> {
@@ -17,3 +17,21 @@ module.exports.toggleStatus = (req, res) => {
   })
 
 }
+
+
+// module.exports.getStatus = (req, res) => {
+//   console.log('/api online status')
+
+//   var currentUser = req.query.currentUserId;
+
+//   db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
+//   .select('users.id', 'users.userName', 'users.email')
+//   .then((data) => {
+//     // console.log(data, ': data, retreiveFriends');
+//     res.send(data);
+//   })
+//   .catch((err)=> {
+//     console.log(err)
+//   })
+
+// }
