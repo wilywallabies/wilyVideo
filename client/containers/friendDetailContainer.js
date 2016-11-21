@@ -28,6 +28,22 @@ class FriendDetail extends React.Component {
   render(){
 
     let user = this.props.friend; //Array of Friends Object
+    let redDot = {"borderRadius": "50%",
+                   "width": "15px",
+                   "height": "15px",
+                   "top":"0",
+                   "right":"0",
+                   "backgroundColor":"red",
+                   "color":"red"
+                  }
+    let greenDot = {"borderRadius": "50%",
+                   "width": "15px",
+                   "height": "15px",
+                   "top":"0",
+                   "right":"0",
+                   "backgroundColor":"green",
+                   "color":"green"
+                  }
 
     return (
     <form  className="panel-default">
@@ -35,22 +51,28 @@ class FriendDetail extends React.Component {
       { user.map((user, i) => {
         return(
           <div
-          key={user.id}
+          key={ user.id }
           className="panel-body">
 
             <div className='col-md-4'>
             <span>
-              <button onClick={this.onClickCall} className='btn btn-default  btn-lg'> CALL
+
+              <button onClick={ this.onClickCall } className='btn btn-default  btn-lg'> CALL
               </button>
             </span>
 
             </div>
               <div className='col-md-8'>
-              <div>User ID: {user.userName}
-
+              <div>User ID: { user.userName }
               </div>
-              <div>Email: {user.email}</div>
-              <span> <button onClick={this.deleteUser} value={user.id} className='btn btn-danger btn-xs'> DELETE </button> </span>
+
+              <div>Email: { user.email }
+              </div>
+              {
+              user.onlineStatus === 'y' ?
+               <svg style={greenDot} /> : <svg style={redDot} />
+              }
+              <span> <button onClick={ this.deleteUser } value={ user.id } className='btn btn-danger btn-xs'>  DELETE </button> </span>
               <hr/>
             </div>
           </div>

@@ -12,6 +12,7 @@ import SignupForm from './Signup';
 import LogInForm from './Login.js';
 
 import { signUpUser, loginUser, logoutUser } from '../actions/accountActions';
+import { toggleOffline } from '../actions/onlineStatusActions';
 
 class Header extends React.Component {
   constructor(){
@@ -33,6 +34,7 @@ class Header extends React.Component {
     e.preventDefault();
     console.log("LOGOUTSUBMIT", this.props);
     this.props.logoutUser();
+    this.props.toggleOffline()
   }
 
   renderLinks(){
@@ -99,7 +101,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ signUpUser, loginUser, logoutUser }, dispatch)
+	return bindActionCreators({ signUpUser, loginUser, logoutUser, toggleOffline }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
