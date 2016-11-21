@@ -12,8 +12,10 @@ class UserInfo extends React.Component {
   }
 
   componentWillMount() {
+    this.props.toggleOnline()
+    .then(()=>{
     this.props.getCurrentUserInfo();
-    this.props.toggleOnline();
+    })
   }
 
   //After receiving new prop, will set as this.setState using nextProps

@@ -1,5 +1,5 @@
 import { CHANGE_STATUS } from '../actions/onlineStatusActions';
-import { RETRIEVE_CURRENT_USER } from '../actions/friendsAction';
+import { RETRIEVE_CURRENT_USER, TOGGLE_ONLINE } from '../actions/friendsAction';
 
 export default function(state = {}, action){
   console.log(' user Info Action received:', action);
@@ -12,8 +12,16 @@ export default function(state = {}, action){
             username: action.payload.data[0].userName,
             status: action.payload.data[0].onlineStatus
         });
+
     case CHANGE_STATUS:
-    console.log('change_status reducer', action.payload)
+      return Object.assign({}, ...state,
+        {
+            email: action.payload.data[0].email,
+            username: action.payload.data[0].userName,
+            status: action.payload.data[0].onlineStatus
+        })
+
+    case TOGGLE_ONLINE:
       return Object.assign({}, ...state,
         {
             email: action.payload.data[0].email,

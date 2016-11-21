@@ -33,18 +33,22 @@ class FriendDetail extends React.Component {
                    "height": "15px",
                    "top":"0",
                    "right":"0",
-                   "backgroundColor":"red",
-                   "color":"red"
+                   "backgroundColor":"red"
                   }
     let greenDot = {"borderRadius": "50%",
                    "width": "15px",
                    "height": "15px",
                    "top":"0",
                    "right":"0",
-                   "backgroundColor":"green",
-                   "color":"green"
+                   "backgroundColor":"green"
                   }
-
+    let yellowDot = {"borderRadius": "50%",
+                   "width": "15px",
+                   "height": "15px",
+                   "top":"0",
+                   "right":"0",
+                   "backgroundColor":"#E49B0D"
+                  }
     return (
     <form  className="panel-default">
 
@@ -70,7 +74,7 @@ class FriendDetail extends React.Component {
               </div>
               {
               user.onlineStatus === 'y' ?
-               <svg style={greenDot} /> : <svg style={redDot} />
+               <svg style={greenDot} /> : user.onlineStatus === 'away' ? <svg style={yellowDot} /> : <svg style={redDot} />
               }
               <span> <button onClick={ this.deleteUser } value={ user.id } className='btn btn-danger btn-xs'>  DELETE </button> </span>
               <hr/>
