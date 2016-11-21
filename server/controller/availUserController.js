@@ -25,7 +25,6 @@ let friends;
         result.push(user);
          }
        });
-      // console.log(result, ' NONFRIEND, availUserCtrl')
       res.send(result);
     }
   )

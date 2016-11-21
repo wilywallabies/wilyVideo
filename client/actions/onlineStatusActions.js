@@ -31,11 +31,3 @@ export function toggleOffline() {
     payload: request
   }
 }
-
-// export function getStatus(){
-//   const request = axios.get('api/status/', {params:{ currentUserId } } );
-//   return {
-//     type: GET_STATUS,
-//     payload: request
-//   }
-// }
