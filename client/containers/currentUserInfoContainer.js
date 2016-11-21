@@ -16,7 +16,7 @@ class UserInfo extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({currentUser:{email:nextProps.user.email,userName:nextProps.user.username}})
+    this.setState( {currentUser:{email:nextProps.user.email,userName:nextProps.user.username}})
   }
   render(){
 
