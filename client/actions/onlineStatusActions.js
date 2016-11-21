@@ -17,7 +17,7 @@ export function toggleOnline() {
 }
 
 export function toggleAway() {
-  const request = axios.put('api/status/', {params: { currentUserId, 'status':'away' } });
+  const request = axios.put('api/status/', { currentUserId, 'status':'away' } );
   return {
     type: TOGGLE_AWAY,
     payload: request
@@ -25,7 +25,8 @@ export function toggleAway() {
 }
 
 export function toggleOffline() {
-  const request = axios.put('api/status/', {params: { currentUserId, 'status':'n' } });
+  console.log(currentUserId, 'toggleOFFLINE!')
+  const request = axios.put('api/status/',{ currentUserId, 'status':'n' } );
   return {
     type: TOGGLE_OFFLINE,
     payload: request
