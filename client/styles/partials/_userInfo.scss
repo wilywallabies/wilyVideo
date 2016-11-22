@@ -1,10 +1,13 @@
+@import '../modules/variables';
+
+
 .redDot {
     border-radius: 50%;
     width: 15px;
     height: 15px;
     bottom:50%;
     right:50%;
-    background-color:red
+    background-color: $red
     }
 
 .greenDot {
@@ -13,7 +16,7 @@
     height: 15px;
     bottom:50%;
     right:50%;
-    background-color:green;
+    background-color:$green;
     }
 
 .yellowDot {
@@ -22,5 +25,5 @@
     height: 15px;
     bottom:50%;
     right:50%;
-    background-color:#E49B0D;
+    background-color:$yellow;
     }
