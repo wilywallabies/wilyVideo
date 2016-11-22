@@ -2,12 +2,14 @@
 
 import axios from 'axios';
 import adapter from 'webrtc-adapter';
-
+let token = null;
+let myHostname = window.location.hostname;
 const getToken = () => {
   axios.post('/webrtc/signal/token')
   .then((res) => {
     console.log('test2');
     console.log(res.data.d, 'this is the res');
+    token = res.data.d
   })
   .catch((err) => console.error(err))
 };
@@ -36,8 +38,22 @@ let myPeerConnection = null;
 let localSrc = null;
 
 const connect = () => {
-  connection = new WebSocket('ws://endpoint01.uswest.xirsys.com:443/ws', 'json')
-  console.log("connection: " + connection);
+  // axios.post('/webrtc/signal/token')
+  // .then((res) => {
+  //   console.log('test2');
+  //   console.log(res.data.d, 'this is the res');
+  //   token = res.data.d.token
+  // })
+  // .then((res) => {
+  //   console.log('got token: ' + token);
+  //   connection = new WebSocket('ws://endpoint01.uswest.xirsys.com:443/'+token, 'json')
+  //   console.log("connection: " + connection);
+  // })
+
+  let serverUrl;
+  let scheme = "ws";
+    serverUrl = scheme + "://" + myHostname + ":6503";
+    connection = new WebSocket(serverUrl, "json");
   connection.onmessage = (event) => {
     let msg = JSON.parse(event.data);
 
