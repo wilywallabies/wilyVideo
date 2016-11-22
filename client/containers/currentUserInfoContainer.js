@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getCurrentUserInfo } from '../actions/friendsAction';
 import { toggleOnline, changeStatus } from '../actions/onlineStatusActions';
+import { Button, FormControl, FormGroup, DropdownButton, MenuItem } from 'react-bootstrap';
 
 class UserInfo extends React.Component {
     constructor(props){
@@ -25,8 +26,9 @@ class UserInfo extends React.Component {
   }
 
   handleChange(e){
-    e.preventDefault();
-    this.props.changeStatus(e.target.value);
+    console.log(e, ' hello')
+    // e.preventDefault();
+    this.props.changeStatus(e);
   }
 
   render(){
@@ -77,15 +79,11 @@ class UserInfo extends React.Component {
            <svg style={greenDot} /> : this.state.currentUser.status === 'away' ? <svg style={yellowDot} /> : <svg style={redDot} />
           }
           </h5>
-          <form onChange={this.handleChange}>
-            <div> Change Status :
-              <select style={{"width":"25%"}} className="form-control form-control-sm">
-                <option value="y">Online</option>
-                <option value="away">Away</option>
-                <option value="n">Offline Mode</option>
-              </select>
-            </div>
-          </form>
+              <DropdownButton onSelect={ (val) => this.handleChange(val) } title="Change Status" id="bg-nested-dropdown" >
+                <MenuItem eventKey="y">Online</MenuItem>
+                <MenuItem eventKey="away">Away</MenuItem>
+                <MenuItem eventKey="n">Offline Mode</MenuItem>
+              </DropdownButton>
         </div>
       </div>
       )

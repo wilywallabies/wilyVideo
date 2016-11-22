@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteFriend, callUser, retrieveFriends,  getNonFriends } from '../actions/friendsAction';
+import { Button } from 'react-bootstrap';
 
 import webrtcModule from '../components/webrtcModule';
 
@@ -21,7 +22,7 @@ class FriendDetail extends React.Component {
         })
         p1.then((localSrc) => {
 
-    
+
           console.log("local",localSrc)
           this.setState({localVideo:true})
           console.log(this.state)
