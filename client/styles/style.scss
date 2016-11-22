@@ -1,2 +1,8 @@
-@import 'partials/_userInfo';
-@import 'partials/_friendList';
+// MIXIN
+@import './mixins/mixins';
+
+
+
+// Partials
+@import './partials/userInfo';
+@import './partials/friendList';
