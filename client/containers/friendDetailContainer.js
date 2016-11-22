@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteFriend, callUser, retrieveFriends,  getNonFriends } from '../actions/friendsAction';
+import { Button } from 'react-bootstrap';
 
 import webrtcModule from '../components/webrtcModule';
 
