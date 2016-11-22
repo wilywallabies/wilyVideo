@@ -25,9 +25,8 @@ const originIsAllowed = (origin) => {
 
 const isUsernameUnique = (name) => {
   let isUnique = true;
-  let i;
 
-  for (i=0; i<connectionArray.length; i++) {
+  for (let i=0; i<connectionArray.length; i++) {
     if (connectionArray[i].username === name) {
       isUnique = false;
       break;
@@ -141,5 +140,68 @@ wsServer.on('request', (request) => {
   };
   // connection.sendUTF(JSON.stringify(msg));
 
+  connection.on('message', function(message) {
+    if (message.type === 'utf8') {
+      log("Received Message: " + message.utf8Data);
 
+
+      var sendToClients = true;
+      msg = JSON.parse(message.utf8Data);
+      var connect = getConnectionForID(msg.id);
+
+
+
+      switch(msg.type) {
+        // Public, textual message
+        case "message":
+          msg.name = connect.username;
+          msg.text = msg.text.replace(/(<([^>]+)>)/ig, "");
+          break;
+
+        // Username change
+        case "username":
+          var nameChanged = false;
+          var origName = msg.name;
+
+
+          while (!isUsernameUnique(msg.name)) {
+            msg.name = origName + appendToMakeUnique;
+            appendToMakeUnique++;
+            nameChanged = true;
+          }
+
+
+          if (nameChanged) {
+            var changeMsg = {
+              id: msg.id,
+              type: "rejectusername",
+              name: msg.name
+            };
+            connect.sendUTF(JSON.stringify(changeMsg));
+          }
+
+
+          connect.username = msg.name;
+          sendUserListToAll();
+          sendToClients = false;  // We already sent the proper responses
+          break;
+      }
+
+
+
+      if (sendToClients) {
+        var msgString = JSON.stringify(msg);
+        var i;
+
+
+        if (msg.target && msg.target !== undefined && msg.target.length !== 0) {
+          sendToOneUser(msg.target, msgString);
+        } else {
+          for (i=0; i<connectionArray.length; i++) {
+            connectionArray[i].sendUTF(msgString);
+          }
+        }
+      }
+    }
+  });
 });
