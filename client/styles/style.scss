@@ -1,8 +1,15 @@
-// MIXIN
+// Mixins
 @import './mixins/mixins';
 
+// Modules
 
+@import './modules/normalize';
+@import './modules/variables';
 
 // Partials
 @import './partials/userInfo';
 @import './partials/friendList';
+@import './partials/header';
+@import './partials/footer';
+
+
