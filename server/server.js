@@ -28,10 +28,12 @@ app.use(cookieParser());
 
 var apiRoutes = require('./routes/api');
 var accountRoutes = require('./routes/accountRoutes')
+var profilePicUtil = require('./utils/profilePicUtil')
 
 // All routes prefixed with /api get run through this router
 app.use('/api', apiRoutes);
 app.use('/api', accountRoutes);
+app.use('/api', profilePicUtil);
 
 
 
