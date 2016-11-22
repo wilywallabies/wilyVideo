@@ -1,6 +1,8 @@
 import axios from 'axios';
 let currentUserId = window.localStorage.getItem('user_Id')
 
+export const RETRIEVE_CURRENT_USER = 'RETRIEVE_CURRENT_USER';
+
 export function retrieveFriends() {
   const request = axios.get('api/friend/', {params: { currentUserId } });
   return {
@@ -20,9 +22,8 @@ export function addFriend(userId){
 }
 
 export function deleteFriend(userId){
-  const request = axios.delete('api/friendDelete/' + userId + '/' +currentUserId) //1
+  const request = axios.delete('api/friendDelete/' + userId + '/' +currentUserId)
 
-  console.log(userId, ' deleteFriend Called')
   return {
     type: 'DELETE_FRIEND',
     payload: request
