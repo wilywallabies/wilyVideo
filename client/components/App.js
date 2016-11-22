@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 // import {} from '../actions/accountActions.js';
 
 import Header from './Header';
+import Footer from './Footer';
 
 class Main extends React.Component {
   constructor(){
@@ -23,6 +24,8 @@ class Main extends React.Component {
     return (
       <Row id="header">
         <Header />
+        <Footer />
+
       </Row>
     )
   }
@@ -41,3 +44,6 @@ function mapDispatchToProps(dispatch) {
 const App = connect(mapStateToProps, mapDispatchToProps)(Main);
 
 export default App;
+
+
+
