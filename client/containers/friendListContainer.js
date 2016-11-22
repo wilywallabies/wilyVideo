@@ -16,7 +16,7 @@ class FriendList extends React.Component {
       setInterval(  ()=>{
         console.log(' set Interval Called!')
         this.props.retrieveFriends()
-      }, 5000 );
+      }, 30000 );
 
     }
 

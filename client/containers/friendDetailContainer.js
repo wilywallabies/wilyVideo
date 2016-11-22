@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteFriend, callUser, retrieveFriends,  getNonFriends } from '../actions/friendsAction';
 
+import webrtcModule from '../components/webrtcModule';
+
 class FriendDetail extends React.Component {
   constructor(props){
     super(props);
@@ -13,6 +15,17 @@ class FriendDetail extends React.Component {
 
     onClickCall(e){
       e.preventDefault();
+        let p1 = new Promise((resolve, reject) => {
+          resolve(webrtcModule.invite())
+
+        })
+        p1.then((localSrc) => {
+
+    
+          console.log("local",localSrc)
+          this.setState({localVideo:true})
+          console.log(this.state)
+        })
   }
 
     deleteUser(e){
