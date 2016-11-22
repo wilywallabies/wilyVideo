@@ -2,28 +2,13 @@
 
 
 .redDot {
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    bottom:50%;
-    right:50%;
-    background-color: $red
+    @include circleDot($red);
     }
 
 .greenDot {
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    bottom:50%;
-    right:50%;
-    background-color:$green;
+    @include circleDot($green);
     }
 
 .yellowDot {
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    bottom:50%;
-    right:50%;
-    background-color:$yellow;
+    @include circleDot($yellow);
     }
