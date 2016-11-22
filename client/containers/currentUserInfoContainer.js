@@ -14,14 +14,14 @@ class UserInfo extends React.Component {
   componentWillMount() {
     this.props.toggleOnline()
     .then(()=>{
-    this.props.getCurrentUserInfo();
+      this.props.getCurrentUserInfo();
     })
   }
 
   //After receiving new prop, will set as this.setState using nextProps
   componentWillReceiveProps(nextProps) {
     // console.log(nextProps, ' MY NEXT PROPS!')
-    this.setState( {currentUser:{email:nextProps.user.email,userName:nextProps.user.username, status: nextProps.user.status}})
+    this.setState( {currentUser:{email:nextProps.user.email,userName:nextProps.user.username, status: nextProps.user.status}});
   }
 
   handleChange(e){
@@ -30,6 +30,29 @@ class UserInfo extends React.Component {
   }
 
   render(){
+
+    let redDot = {"borderRadius": "50%",
+                   "width": "15px",
+                   "height": "15px",
+                   "bottom":"50%",
+                   "right":"50%",
+                   "backgroundColor":"red"
+                  }
+    let greenDot = {"borderRadius": "50%",
+                   "width": "15px",
+                   "height": "15px",
+                   "bottom":"50%",
+                   "right":"50%",
+                   "backgroundColor":"green",
+                  }
+    let yellowDot = {"borderRadius": "50%",
+                   "width": "15px",
+                   "height": "15px",
+                   "bottom":"50%",
+                   "right":"50%",
+                   "backgroundColor":"#E49B0D"
+                  }
+
     return (
 
       <div>
@@ -42,10 +65,16 @@ class UserInfo extends React.Component {
         </div>
 
         <div>
+
           <h5> Status:
+
           {
-            this.state.currentUser.status === 'y' ? ' Online' :
-            this.state.currentUser.status === 'away' ? ' Away' : ' Offline Mode'
+            this.state.currentUser.status === 'y' ? ' Online ' :
+            this.state.currentUser.status === 'away' ? ' Away ' : ' Offline Mode '
+          }
+          {
+          this.state.currentUser.status === 'y' ?
+           <svg style={greenDot} /> : this.state.currentUser.status === 'away' ? <svg style={yellowDot} /> : <svg style={redDot} />
           }
           </h5>
           <form onChange={this.handleChange}>
@@ -59,10 +88,8 @@ class UserInfo extends React.Component {
           </form>
         </div>
       </div>
-
       )
   }
-
 }
 
 function mapStateToProps(state){
