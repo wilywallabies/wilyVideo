@@ -11,7 +11,6 @@ class UserInfo extends React.Component {
     constructor(props){
     super(props);
     this.state = { currentUser: {email:'', userName:'', status:''} };
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
