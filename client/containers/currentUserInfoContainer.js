@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { getCurrentUserInfo } from '../actions/friendsAction';
 import { toggleOnline, changeStatus } from '../actions/onlineStatusActions';
 
+import webrtcModule from '../components/webrtcModule';
+
 class UserInfo extends React.Component {
     constructor(props){
     super(props);
@@ -21,6 +23,8 @@ class UserInfo extends React.Component {
   //After receiving new prop, will set as this.setState using nextProps
   componentWillReceiveProps(nextProps) {
     // console.log(nextProps, ' MY NEXT PROPS!')
+    window.myUsername = nextProps.user.username;
+    console.log(window.myUsername, " check my user id")
     this.setState( {currentUser:{email:nextProps.user.email,userName:nextProps.user.username, status: nextProps.user.status}});
   }
 

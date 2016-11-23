@@ -16,7 +16,7 @@ class Video extends React.Component{
     this.state = {
       localVideo: false
     }
-    
+
 
     this.ice = this.ice.bind(this);
 
@@ -60,9 +60,13 @@ class Video extends React.Component{
         <Friend />
 
         <LocalVideo/>
+        <video src={window.remoteSrc} autoPlay> </video>
+        <input type="button" id="send" name="send" value="Send"
+          onclick={webrtcModule.handleSendButton} disabled></input>
         <button onClick={webrtcModule.connect}> Connect </button>
         <button onClick={this.invite}> Invite </button>
         <button onClick={this.ice}> Get some ice </button>
+        <button onClick={webrtcModule.hangUpCall}> Hang Up </button>
 
       </div>
     )
