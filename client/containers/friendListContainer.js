@@ -24,9 +24,9 @@ class FriendList extends React.Component {
     let friend = this.props.friend[this.props.friend.length-1];
     // let friend = this.props.friend[1];
     return (
-          <div style={{"width":"95%","height": "400px"}}>
+          <div>
             <div className="panel-group">
-            <div className="panel  text-center">
+            <div className="panel text-center">
               <h4>Contacts</h4>
             </div>
               {

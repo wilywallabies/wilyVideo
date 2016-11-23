@@ -1,0 +1,14 @@
+@import '../modules/variables';
+
+
+.redDot {
+    @include circleDot($red);
+    }
+
+.greenDot {
+    @include circleDot($green);
+    }
+
+.yellowDot {
+    @include circleDot($yellow);
+    }
