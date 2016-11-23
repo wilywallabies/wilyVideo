@@ -6,7 +6,7 @@ import adapter from 'webrtc-adapter';
 import LocalVideo from './LocalVideo';
 import Friend from './Friend';
 import CurrentUser from './CurrentUser';
-
+import Footer from './Footer';
 import webrtcModule from './webrtcModule';
 
 
@@ -61,13 +61,15 @@ class Video extends React.Component{
 
         <LocalVideo/>
         <video src={window.remoteSrc} autoPlay> </video>
-        <input type="button" id="send" name="send" value="Send"
-          onclick={webrtcModule.handleSendButton} disabled></input>
-        <button onClick={webrtcModule.connect}> Connect </button>
-        <button onClick={this.invite}> Invite </button>
-        <button onClick={this.ice}> Get some ice </button>
-        <button onClick={webrtcModule.hangUpCall}> Hang Up </button>
-
+        <div className="ConnectButtons">
+          <input type="button" id="send" name="send" value="Send"
+            onclick={webrtcModule.handleSendButton} disabled></input>
+          <button onClick={webrtcModule.connect}> Connect </button>
+          <button onClick={this.invite}> Invite </button>
+          <button onClick={this.ice}> Get some ice </button>
+          <button onClick={webrtcModule.hangUpCall}> Hang Up </button>
+        </div>
+        <Footer />
       </div>
     )
   }
