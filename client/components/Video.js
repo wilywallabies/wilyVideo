@@ -6,8 +6,9 @@ import adapter from 'webrtc-adapter';
 import LocalVideo from './LocalVideo';
 import Friend from './Friend';
 import CurrentUser from './CurrentUser';
-
+import Footer from './Footer';
 import webrtcModule from './webrtcModule';
+import {  Col, Row, Grid } from 'react-bootstrap';
 
 
 class Video extends React.Component{
@@ -58,16 +59,24 @@ class Video extends React.Component{
 
         <CurrentUser />
         <Friend />
+        <Col xs={6} md={4} >
+          <LocalVideo/>
+          <hr/>
+          <video src={window.remoteSrc} autoPlay> </video>
 
-        <LocalVideo/>
-        <video src={window.remoteSrc} autoPlay> </video>
-        <input type="button" id="send" name="send" value="Send"
-          onclick={webrtcModule.handleSendButton} disabled></input>
-        <button onClick={webrtcModule.connect}> Connect </button>
-        <button onClick={this.invite}> Invite </button>
-        <button onClick={this.ice}> Get some ice </button>
-        <button onClick={webrtcModule.hangUpCall}> Hang Up </button>
+        <Col xs={6} xsOffset={6} />
+          <div >
+            <input type="button" id="send" name="send" value="Send"
+              onclick={webrtcModule.handleSendButton} disabled></input>
+            <button onClick={webrtcModule.connect}> Connect </button>
+            <button onClick={this.invite}> Invite </button>
+            <button onClick={this.ice}> Get some ice </button>
+            <button onClick={webrtcModule.hangUpCall}> Hang Up </button>
 
+          </div>
+        </Col>
+
+        <Footer />
       </div>
     )
   }

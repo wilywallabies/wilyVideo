@@ -1,27 +1,28 @@
 import React from 'react';
 import FriendAdd from '../containers/friendsAddContainer';
 import FriendDetail from '../containers/friendListContainer';
+import {  Col, Row, Grid } from 'react-bootstrap';
 
 class Friend extends React.Component {
 
   render(){
-    let style = {"float":"right",
-                 "display": "inline",
-                 "height": "auto",
-                 "width": "40%",
-                 "overflowY":"auto"};
+
     return (
-      <div>
-        <div className="col-md-4 panel panel-defaults" style={style}>
+      <div >
+
+        <Col  xs={6} md={4} className="panel panel-defaults" className="friendList">
+           <Row className="main-container">
+
+          </Row>
+          <FriendDetail />
+        </Col>
 
           <FriendAdd />
-          <FriendDetail />
-        </div>
+
       </div>
+
       )
   }
 }
-
-
 
 export default Friend

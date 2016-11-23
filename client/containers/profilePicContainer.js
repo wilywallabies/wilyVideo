@@ -10,7 +10,9 @@ class ProfilePic extends Component {
     this.state = {
       data_uri: null,
       processing: false,
-      uploaded_uri: false
+      uploaded_uri: false,
+      filename: file.name,
+      filetype: file.type
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFile = this.handleFile.bind(this);

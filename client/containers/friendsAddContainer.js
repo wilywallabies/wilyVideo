@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { addFriend } from '../actions/friendsAction';
 import { retrieveFriends, getNonFriends } from '../actions/friendsAction';
 import FriendDetail from './friendDetailContainer';
+import { Button, FormControl, FormGroup, DropdownButton, MenuItem } from 'react-bootstrap';
 
 class FriendAdd extends React.Component {
   constructor(props){
@@ -46,20 +47,13 @@ class FriendAdd extends React.Component {
   }
 
   render(){
-    let style = {
-             "display": "inline",
-             "width": "60%" ,
-             'float':'left',
-             'top': "0",
-             'marginLeft' :'20%',
-            'position':'absolute'};
 
     return (
-      <div >
+      <div className="addFriendField">
         <h5 className="text-center">Search Users</h5>
 
-        <form onSubmit={this.onFormSubmit} className="input-group">
-            <select  style={style} onChange={this.handleChange} className="form-control dropdown">
+        <form  onSubmit={this.onFormSubmit} className="input-group">
+            <select  onChange={this.handleChange} className="form-control dropdown ">
               <option  defaultValue={this.state.defaultValue} > {this.state.defaultValue} </option>
               {
               !this.state.nonFriends ? 'Loading Users...' :
@@ -73,7 +67,7 @@ class FriendAdd extends React.Component {
               }
             </select>
           <span className="input-group-btn">
-            <button type="submit" className="btn btn-primary"> Add </button>
+            <button type="submit" className="btn btn-primary addButton"> Add </button>
           </span>
         </form>
       </div>
