@@ -138,7 +138,7 @@ wsServer.on('request', (request) => {
     type: "id",
     id: connection.clientID
   };
-  // connection.sendUTF(JSON.stringify(msg));
+  connection.sendUTF(JSON.stringify(msg));
 
   connection.on('message', function(message) {
     if (message.type === 'utf8') {

@@ -25,7 +25,7 @@ const getIce = () => {
 };
 //Websocket signaling channel variables
 let connection = null;
-
+let clientID = 0;
 
 let mediaConstraints = {
   audio: true,
@@ -58,6 +58,15 @@ const connect = () => {
     let msg = JSON.parse(event.data);
 
     switch(msg.type) {
+      case "id":
+        clientID = msg.id;
+        setUsername();
+        break;
+
+        case "username":
+          console.log("<b>User <em>" + msg.name + "</em> signed in at " + time.toLocaleTimeString() + "</b><br>");
+          break;
+
       case "videoOffer":
         handleVideoOffer(msg);
         break;
@@ -80,10 +89,20 @@ const connect = () => {
 
   }
 }
+
+const setUsername = () => {
+  sendToServer({
+    name: window.myUsername,
+    date: Date.now(),
+    id: clientID,
+    type: "username"
+  })
+}
 const handleVideoOffer= (msg) => {
   let localStream = null;
 
   targetUsername = msg.name;
+  console.log("starting to accept invitation from " + targetUsername)
   createPeerConnection();
 
   let desc = new RTCSessionDescription(msg.sdp);
@@ -109,9 +128,9 @@ const handleVideoOffer= (msg) => {
   })
   .then(() => {
     let msg = {
-      name: myUsername,
-      target: targetUsername,
-      type: "video-answer",
+      name: window.myUsername,
+      target: window.targetUsername,
+      type: "videoAnswer",
       sdp: myPeerConnection.localDescription
     };
     console.log('Send answer back to other peer');
@@ -132,6 +151,8 @@ const handleVideoAnswer = () => {
 
 const handleNewICECandidate = (msg) => {
   let candidate = new RTCIceCandidate(msg.candidate);
+
+  console.log("Add received ICE candidate: " + JSON.stringify(candidate))
   myPeerConnection.addIceCandidate(candidate)
     .catch((err) => {
       console.error(err.name)
@@ -140,13 +161,17 @@ const handleNewICECandidate = (msg) => {
 
 const createPeerConnection = () => {
   let config = getIce()
+  var icePromise = new Promise((resolve, reject) => {
+    resolve(getIce())
+  })
+  icePromise.then()
   myPeerConnection = new RTCPeerConnection(config);
 
   myPeerConnection.onicecandidate = (event) => {
     if(event.candidate){
       sendToServer({
         type: "newIceCandidate",
-        target: targetUsername,
+        target: window.targetUsername,
         candidate: event.candidate
       })
     }
@@ -163,9 +188,9 @@ const createPeerConnection = () => {
       .then(() => {
         console.log('send offer to remote peer');
         sendToServer({
-          name: myUsername,
-          target: targetUsername,
-          type: "video-offer",
+          name: window.myUsername,
+          target: window.targetUsername,
+          type: "videoOffer",
           sdp: myPeerConnection.localDescription
         });
       })
@@ -195,11 +220,30 @@ const invite = (event) => {
        return window.localSrc;
     });
 };
+
+const hangUpCall = () => {
+  closeVideoCall()
+  sendToServer({
+    name: window.myUsername,
+    target: window.targetUsername,
+    type: 'hangUp'
+  })
+}
+
+const handleSendButton = () => {
+  var msg = {
+    text: text.value,
+    type: "message",
+    id: clientID
+  };
+  sendToServer(msg);
+}
 //Send Javascript object by converting to JSON and sending through Websocket connection
 const sendToServer= (msg) => {
   let msgJSON = JSON.stringify(msg);
   connection.send(msgJSON);
 };
+
 
 // Module for use in React component
 let webrtcModule = {

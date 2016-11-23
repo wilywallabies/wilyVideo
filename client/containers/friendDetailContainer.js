@@ -14,6 +14,10 @@ class FriendDetail extends React.Component {
   }
 
     onClickCall(e){
+
+      // console.log('event obj: ' + e.target.value)
+      let target = e.target.value
+      window.targetUsername = e.target.value
       e.preventDefault();
         let p1 = new Promise((resolve, reject) => {
           resolve(webrtcModule.invite())
@@ -21,7 +25,7 @@ class FriendDetail extends React.Component {
         })
         p1.then((localSrc) => {
 
-    
+
           console.log("local",localSrc)
           this.setState({localVideo:true})
           console.log(this.state)
@@ -74,7 +78,7 @@ class FriendDetail extends React.Component {
             <div className='col-md-4'>
             <span>
 
-              <button onClick={ this.onClickCall } className='btn btn-default  btn-lg'> CALL
+              <button value={user.userName} onClick={ this.onClickCall } className='btn btn-default  btn-lg'> CALL
               </button>
             </span>
 
