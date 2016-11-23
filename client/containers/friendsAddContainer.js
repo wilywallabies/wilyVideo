@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { addFriend } from '../actions/friendsAction';
 import { retrieveFriends, getNonFriends } from '../actions/friendsAction';
 import FriendDetail from './friendDetailContainer';
+import { Button, FormControl, FormGroup, DropdownButton, MenuItem } from 'react-bootstrap';
 
 class FriendAdd extends React.Component {
   constructor(props){
