@@ -27,7 +27,7 @@ let config = {
        }
      },
      {
-       test: /\.scss?$/,
+       test: /\.scss$/,
        include: path.join(__dirname, 'client'),
        loader: "style!css!sass"
      }

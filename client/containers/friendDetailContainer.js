@@ -21,7 +21,7 @@ class FriendDetail extends React.Component {
         })
         p1.then((localSrc) => {
 
-    
+
           console.log("local",localSrc)
           this.setState({localVideo:true})
           console.log(this.state)

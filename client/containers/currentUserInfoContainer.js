@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getCurrentUserInfo } from '../actions/friendsAction';
 import { toggleOnline, changeStatus } from '../actions/onlineStatusActions';
+import { Button, FormControl, FormGroup, DropdownButton, MenuItem } from 'react-bootstrap';
+
 
 class UserInfo extends React.Component {
     constructor(props){
@@ -25,33 +27,10 @@ class UserInfo extends React.Component {
   }
 
   handleChange(e){
-    e.preventDefault();
-    this.props.changeStatus(e.target.value);
+    this.props.changeStatus(e);
   }
 
   render(){
-
-    let redDot = {"borderRadius": "50%",
-                   "width": "15px",
-                   "height": "15px",
-                   "bottom":"50%",
-                   "right":"50%",
-                   "backgroundColor":"red"
-                  }
-    let greenDot = {"borderRadius": "50%",
-                   "width": "15px",
-                   "height": "15px",
-                   "bottom":"50%",
-                   "right":"50%",
-                   "backgroundColor":"green",
-                  }
-    let yellowDot = {"borderRadius": "50%",
-                   "width": "15px",
-                   "height": "15px",
-                   "bottom":"50%",
-                   "right":"50%",
-                   "backgroundColor":"#E49B0D"
-                  }
 
     return (
 
@@ -66,7 +45,7 @@ class UserInfo extends React.Component {
 
         <div>
 
-          <h5> Status:
+          <h5 > Status:
 
           {
             this.state.currentUser.status === 'y' ? ' Online ' :
@@ -74,18 +53,14 @@ class UserInfo extends React.Component {
           }
           {
           this.state.currentUser.status === 'y' ?
-           <svg style={greenDot} /> : this.state.currentUser.status === 'away' ? <svg style={yellowDot} /> : <svg style={redDot} />
+           <svg className="greenDot" /> : this.state.currentUser.status === 'away' ? <svg className="yellowDot" /> : <svg className="redDot" />
           }
           </h5>
-          <form onChange={this.handleChange}>
-            <div> Change Status :
-              <select style={{"width":"25%"}} className="form-control form-control-sm">
-                <option value="y">Online</option>
-                <option value="away">Away</option>
-                <option value="n">Offline Mode</option>
-              </select>
-            </div>
-          </form>
+              <DropdownButton bsStyle="info" onSelect={ (val) => this.handleChange(val) } title="Change Status" id="bg-nested-dropdown" >
+                <MenuItem bsStyle="success" eventKey="y">Online</MenuItem>
+                <MenuItem bsStyle="warning" eventKey="away">Away</MenuItem>
+                <MenuItem bsStyle="danger" eventKey="n">Offline Mode</MenuItem>
+              </DropdownButton>
         </div>
       </div>
       )
@@ -93,7 +68,6 @@ class UserInfo extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log(state, ' STATE!')
   return {
     user: state.currentUser
   }
