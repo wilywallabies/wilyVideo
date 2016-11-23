@@ -10,7 +10,11 @@ module.exports.retrieveFriends = (req, res) => {
   db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
   .select('users.id', 'users.userName', 'users.email', 'users.onlineStatus')
   .then((data) => {
-    res.send(data);
+
+     let sortedByOnline = data.sort((a,b)=>{
+      return b.onlineStatus > a.onlineStatus})
+
+    res.send(sortedByOnline);
   })
   .catch((err)=> {
     console.log(err)

@@ -36,7 +36,7 @@ class UserInfo extends React.Component {
 
     return (
 
-      <div>
+      <div className="currentUserInfoBox">
         <div>
           <h5>Email: {this.state.currentUser.email} </h5>
         </div>
