@@ -18,22 +18,21 @@ var fs = require('fs');
 var app = express();
 
 //middleware
-app.use(bodyparser.urlencoded({
-  extended: true
-}));
-app.use(bodyparser.json());
+// app.use(bodyparser.json());
 app.use(logger('dev'));
 app.use(cookieParser());
+app.use(bodyparser.json({limit: '50mb'}));
+app.use(bodyparser.urlencoded({limit: '50mb', extended: true}));
 
 
 var apiRoutes = require('./routes/api');
 var accountRoutes = require('./routes/accountRoutes')
-var profilePicUtil = require('./utils/profilePicUtil')
+var profilePicRoute = require('./routes/profilePicRoute')
 
 // All routes prefixed with /api get run through this router
 app.use('/api', apiRoutes);
 app.use('/api', accountRoutes);
-app.use('/api', profilePicUtil);
+app.use('/api', profilePicRoute);
 
 
 

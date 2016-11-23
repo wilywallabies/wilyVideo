@@ -1,47 +1,38 @@
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 import React, {Component} from 'react';
 import {bindAll} from 'lodash';
-import $ from 'jquery';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { submitProfilePic } from '../actions/profileActions';
 
-export default class ProfilePic extends Component {
+class ProfilePic extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data_uri: null,
-      processing: false
+      processing: false,
+      uploaded_uri: false
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFile = this.handleFile.bind(this);
 
-    bindAll(this, 'handleFile', 'handleSubmit');
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const _this = this;
 
     this.setState({
-      processing: true
+      processing: true,
+      uploaded_uri: true
     });
 
-    const promise = $.ajax({
-      url: '/api/v1/image',
-      type: "POST",
-      data: {
-        data_uri: this.state.data_uri,
-        filename: this.state.filename,
-        filetype: this.state.filetype
-      },
-      dataType: 'json'
+    this.props.submitProfilePic({
+      data_uri: this.state.data_uri,
+      filename: this.state.filename,
+      filetype: this.state.filetype
     });
 
-    promise.done(function(data){
-      _this.setState({
-        processing: false,
-        uploaded_uri: data.uri
-      });
-    });
   }
+
 
   handleFile(e) {
     const reader = new FileReader();
@@ -53,6 +44,7 @@ export default class ProfilePic extends Component {
         filename: file.name,
         filetype: file.type
       });
+      console.log(this.state);
     };
 
     reader.readAsDataURL(file);
@@ -63,10 +55,12 @@ export default class ProfilePic extends Component {
     let uploaded;
 
     if (this.state.uploaded_uri) {
+      console.log('after upload')
+      console.log(this.state)
       uploaded = (
         <div>
           <h4>Image uploaded!</h4>
-          <img className='image-preview' src={this.state.uploaded_uri} />
+          <img className='image-preview' src={this.props.profilePic} />
           <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
         </div>
       );
@@ -87,7 +81,21 @@ export default class ProfilePic extends Component {
           </form>
           {uploaded}
         </div>
+
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  console.log(state, "state in map state to props");
+  return {
+    profilePic: state.profilePic
+  };
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({submitProfilePic}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePic);
