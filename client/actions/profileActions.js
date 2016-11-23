@@ -1,16 +1,16 @@
 import axios from 'axios';
-
+let currentUserId = window.localStorage.getItem('user_Id')
 
 export function submitProfilePic(data) {
-  let response = axios.post('/api/v1/image', {
-    image: data.image,
-    email: data.email,
+  console.log(data, "data from submit profile actions");
+  let response = axios.post('api/image', {
+    currentUserId: currentUserId,
     data_uri: data.data_uri,
     filename: data.filename,
     filetype: data.filetype
   })
-    .then((res) => res.data)
-    .catch((error) => console.error(error));
+
+
 
   return {
     type: 'SUBMIT_PROFILE_PIC',
@@ -19,7 +19,7 @@ export function submitProfilePic(data) {
 }
 
 export function getProfilePic(id) {
-  let response = axios.get('/api/v1/image?id=' + id)
+  let response = axios.get('api/image?id=' + id)
     .then((res) => res.data)
     .catch((error) => console.error(error));
 

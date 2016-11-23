@@ -1,10 +1,14 @@
 var express = require('express');
-var app = express();
+var router = express.Router();
 var profilePicUtil = require('../utils/profilePicUtil');
 
-app.post('/api/v1/image', function (req, res) {
+
+router.post('/image', function (req, res) {
+
+console.log("inside imageeeeeee");
 
   var image = profilePicUtil({
+    currentUserId: req.body.currentUserId,
     data_uri: req.body.data_uri,
     filename: req.body.filename,
     filetype: req.body.filetype
@@ -24,3 +28,5 @@ app.post('/api/v1/image', function (req, res) {
   }
 
 });
+
+module.exports = router;

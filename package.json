@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/wilywallabies/wilyVideo#readme",
   "dependencies": {
-    "Q": "0.0.1",
     "axios": "^0.15.2",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",
