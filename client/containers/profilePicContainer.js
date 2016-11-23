@@ -3,7 +3,6 @@
 // import { bindActionCreators } from 'redux';
 import React, {Component} from 'react';
 import {bindAll} from 'lodash';
-import $ from 'jquery';
 
 export default class ProfilePic extends Component {
   constructor(props) {
