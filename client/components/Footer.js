@@ -4,7 +4,7 @@ const Footer = () => (
     <footer className="footer">
         <p>FOOTER SECTION</p>
         <p>test1</p>
-        <p>test2</p>
+        <p>test22</p>
     </footer>
 )
 

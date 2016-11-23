@@ -16,7 +16,7 @@ class Video extends React.Component{
     this.state = {
       localVideo: false
     }
-    
+
 
     this.ice = this.ice.bind(this);
 

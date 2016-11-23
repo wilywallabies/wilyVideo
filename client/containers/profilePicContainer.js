@@ -9,7 +9,8 @@ export default class ProfilePic extends Component {
     super(props);
     this.state = {
       data_uri: null,
-      processing: false
+      filename: file.name,
+      filetype: file.type
     }
 
     bindAll(this, 'handleFile', 'handleSubmit');
@@ -17,29 +18,7 @@ export default class ProfilePic extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const _this = this;
 
-    this.setState({
-      processing: true
-    });
-
-    const promise = $.ajax({
-      url: '/api/v1/image',
-      type: "POST",
-      data: {
-        data_uri: this.state.data_uri,
-        filename: this.state.filename,
-        filetype: this.state.filetype
-      },
-      dataType: 'json'
-    });
-
-    promise.done(function(data){
-      _this.setState({
-        processing: false,
-        uploaded_uri: data.uri
-      });
-    });
   }
 
   handleFile(e) {

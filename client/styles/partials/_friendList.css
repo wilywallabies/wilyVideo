@@ -1,7 +1,11 @@
 .friendList {
     float:right;
     display: inline;
-    height: auto;
+    height: 400px;
     width: 40%;
     overflow-y:auto;
+    padding: 5px;
+    border: 0.5px solid #F9F0ED;
+    border-radius: 5%;
     }
+
