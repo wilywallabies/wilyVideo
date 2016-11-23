@@ -1,12 +1,13 @@
 import React from 'react';
 import CurrentUserInfoContainer from '../containers/currentUserInfoContainer';
+import {  Col, Row, Grid } from 'react-bootstrap';
 
 class  CurrentUser extends React.Component {
   render(){
     return (
-      <div className="col-md-4">
+      <Col xs={6} md={4}>
        <CurrentUserInfoContainer />
-    </div>)
+    </Col>)
   }
 }
 export default CurrentUser;

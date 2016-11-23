@@ -8,13 +8,11 @@ class Friend extends React.Component {
   render(){
 
     return (
-      <div>
-        <div className="col-md-4 panel panel-defaults" className="friendList">
+        <Col xs={6} md={4}className="panel panel-defaults" className="friendList">
 
           <FriendAdd />
           <FriendDetail />
-        </div>
-      </div>
+        </Col>
 
       )
   }
