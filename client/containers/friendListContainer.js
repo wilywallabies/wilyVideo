@@ -25,15 +25,15 @@ class FriendList extends React.Component {
     // let friend = this.props.friend[1];
     return (
           <div>
+              <h4 className='contactTitle'>Contacts</h4>
+
             <div className="panel-group">
-            <div className="panel text-center">
-              <h4>Contacts</h4>
             </div>
+
               {
                 !friend ? "Loading...":
                <FriendDetail friend={friend} />
               }
-            </div>
           </div>
       )
   }
