@@ -11,8 +11,8 @@ class ProfilePic extends Component {
       data_uri: null,
       processing: false,
       uploaded_uri: false,
-      filename: file.name,
-      filetype: file.type
+      filename: '',
+      filetype: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFile = this.handleFile.bind(this);
@@ -58,12 +58,12 @@ class ProfilePic extends Component {
 
     if (this.state.uploaded_uri) {
       console.log('after upload')
-      console.log(this.state)
+      console.log(this.props, "meowww")
       uploaded = (
         <div>
           <h4>Image uploaded!</h4>
-          <img className='image-preview' src={this.props.profilePic} />
-          <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
+          <img className='image-preview' src={this.props.profilePic.profilePic} />
+          {/* <pre className='image-link-box'>{this.state.uploaded_uri}</pre> */}
         </div>
       );
     }
