@@ -67,8 +67,11 @@ class Video extends React.Component{
   logoutSubmit(e) {
     e.preventDefault();
     console.log("LOGOUTSUBMIT", this.props);
+    this.props.toggleOffline()
+    .then(()=>{
+
     this.props.logoutUser();
-    this.props.toggleOffline();
+    })
     browserHistory.push('/login')
   }
 
