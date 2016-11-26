@@ -7,7 +7,7 @@ export default class Profile extends Component {
     return (
       <div>
         <ProfilePic />
-        <AboutMe />
+        {/* <AboutMe /> */}
       </div>
     );
   }

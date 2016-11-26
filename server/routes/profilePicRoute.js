@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var profilePicUtil = require('../utils/profilePicUtil');
 
-
 router.post('/image', function (req, res) {
 
 console.log("inside imageeeeeee");
