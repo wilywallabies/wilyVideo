@@ -1,18 +1,20 @@
 import axios from 'axios';
-let currentUserId = window.localStorage.getItem('user_Id')
+var currentUserId = window.localStorage.getItem('user_Id')
 
 export const RETRIEVE_CURRENT_USER = 'RETRIEVE_CURRENT_USER';
 
 export function retrieveFriends() {
+var currentUserId = window.localStorage.getItem('user_Id')
+
   const request = axios.get('api/friend/', {params: { currentUserId } });
   return {
     type: 'RETRIEVE_FRIENDS',
-    // data: currentUserId,
     payload: request
   }
 }
 
 export function addFriend(userId){
+var currentUserId = window.localStorage.getItem('user_Id')
   const request = axios.post('api/friend/', {friendId:userId, userId: currentUserId})
 
   return {
@@ -22,6 +24,7 @@ export function addFriend(userId){
 }
 
 export function deleteFriend(userId){
+var currentUserId = window.localStorage.getItem('user_Id')
   const request = axios.delete('api/friendDelete/' + userId + '/' +currentUserId)
 
   return {
@@ -31,6 +34,8 @@ export function deleteFriend(userId){
 }
 
 export function getNonFriends(){
+var currentUserId = window.localStorage.getItem('user_Id')
+
   const request = axios.get('api/allUser/', {params: { currentUserId } });
 
   return {
@@ -40,6 +45,8 @@ export function getNonFriends(){
 }
 
 export function getCurrentUserInfo(){
+var currentUserId = window.localStorage.getItem('user_Id')
+
   const request = axios.get('api/currentUserInfo/', {params: { currentUserId } });
 
   return {
@@ -50,6 +57,8 @@ export function getCurrentUserInfo(){
 }
 
 export function callUser(){
+var currentUserId = window.localStorage.getItem('user_Id')
+
   // const request
   console.log('callUser Request Received', request);
   return {

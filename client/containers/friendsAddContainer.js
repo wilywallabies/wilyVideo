@@ -61,14 +61,14 @@ class FriendAdd extends React.Component {
 
         <form  onSubmit={this.onFormSubmit} className="input-group">
               <ButtonGroup>
-            <DropdownButton title={this.state.defaultVal} onSelect={((e)=> this.handleChange(e) )} >
+            <DropdownButton  title={this.state.defaultVal} onSelect={((e)=> this.handleChange(e) )} >
               {
               !this.state.nonFriends ? 'Loading Users...' :
                  this.state.nonFriends.map( (user, i) => {
 
                   return(
 
-                    <MenuItem eventKey={ [user.id, user.email] } > Email: {user.email} </MenuItem>
+                    <MenuItem key={user.id} eventKey={ [user.id, user.email] } > Email: {user.email} </MenuItem>
                   )
                 })
               }

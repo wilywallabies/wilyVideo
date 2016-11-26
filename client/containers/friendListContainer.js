@@ -37,11 +37,9 @@ class FriendList extends React.Component {
           </div>
       )
   }
-
 }
 
 function mapStateToProps(state){
-  // console.log(state.friend , ' AFTER UPDATED!!!!')
   return {friend: state.friend };
 }
 
