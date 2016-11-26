@@ -6,7 +6,7 @@ let db = require('../models/db');
 //Retrieve Friend List from DB
 module.exports.retrieveFriends = (req, res) => {
   var currentUser = req.query.currentUserId;
-
+  console.log(currentUser, ' CURRENT USER &&&&&&&&&&&&&&&')
   db('users').where({user_id:currentUser}).join('friends', 'users.id', '=', 'friends.user_id2')
   .select('users.id', 'users.userName', 'users.email', 'users.onlineStatus')
   .then((data) => {

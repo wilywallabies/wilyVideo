@@ -1,5 +1,4 @@
 import axios from 'axios';
-let currentUserId = window.localStorage.getItem('user_Id');
 
 export const TOGGLE_ONLINE = 'TOGGLE_ONLINE';
 export const TOGGLE_OFFLINE = 'TOGGLE_OFFLINE';
@@ -7,6 +6,8 @@ export const CHANGE_STATUS = 'GET_STATUS';
 
 
 export function toggleOnline() {
+let currentUserId = window.localStorage.getItem('user_Id');
+
   const request = axios.put('api/status/',  { currentUserId, 'status':'y' } );
   return {
     type: TOGGLE_ONLINE,
@@ -16,6 +17,8 @@ export function toggleOnline() {
 
 
 export function toggleOffline() {
+let currentUserId = window.localStorage.getItem('user_Id');
+
   const request = axios.put('api/status/',{ currentUserId, 'status':'n' } );
   return {
     type: TOGGLE_OFFLINE,
@@ -24,6 +27,8 @@ export function toggleOffline() {
 }
 
 export function changeStatus(status){
+let currentUserId = window.localStorage.getItem('user_Id');
+
   console.log(status, 'ACTION RECEIVED AS')
   const request = axios.put('api/status/',{ currentUserId, status } );
   return {

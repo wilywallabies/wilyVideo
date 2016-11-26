@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getCurrentUserInfo } from '../actions/friendsAction';
+import { retrieveFriends, getNonFriends } from '../actions/friendsAction';
+
 import { toggleOnline, changeStatus } from '../actions/onlineStatusActions';
 import { Button, FormControl, FormGroup, DropdownButton, MenuItem } from 'react-bootstrap';
 
@@ -24,7 +26,6 @@ class UserInfo extends React.Component {
   componentWillReceiveProps(nextProps) {
     // console.log(nextProps, ' MY NEXT PROPS!')
     window.myUsername = nextProps.user.username;
-    console.log(window.myUsername, " check my user id")
     this.setState( {currentUser:{email:nextProps.user.email,userName:nextProps.user.username, status: nextProps.user.status}});
   }
 

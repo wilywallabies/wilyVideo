@@ -5,14 +5,12 @@ import { bindActionCreators } from 'redux';
 import { addFriend } from '../actions/friendsAction';
 import { retrieveFriends, getNonFriends } from '../actions/friendsAction';
 import FriendDetail from './friendDetailContainer';
-import { Button, FormControl, FormGroup, DropdownButton, MenuItem } from 'react-bootstrap';
+import { Button, FormControl, FormGroup, DropdownButton, MenuItem, ButtonGroup } from 'react-bootstrap';
 
 class FriendAdd extends React.Component {
   constructor(props){
     super(props);
-    console.log(props, ' friendsAddContainer Props LINE 11');
-    this.state = {nonFriends:[], selectedVal:''};
-    this.state.defaultValue = 'Available Users';
+    this.state = {nonFriends:[], selectedVal:'', defaultVal:'Available Users', addBtn:false};
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -36,39 +34,49 @@ class FriendAdd extends React.Component {
       .then(()=>{
         this.props.retrieveFriends();
         this.props.getNonFriends();
+       this.setState( {selectedVal:'', defaultVal:'Available Users', addBtn:false } );
+
     })
       // this.props.getNonFriends();
   }
 
   handleChange(e){
-    let id = e.target.value;
-    this.setState( {selectedVal:id} );
+    console.log(e, ' changed')
+    // let id = e.target.value;
+    this.setState( {selectedVal:e[0], defaultVal:e[1], addBtn:true } );
 
   }
 
   render(){
+    let addBtn;
+    if(this.state.addBtn){
+      addBtn =  ( <Button type="submit" bsStyle="info"> Add </Button> )
+    }
+
+
 
     return (
       <div className="addFriendField">
         <h5 className="text-center">Search Users</h5>
 
         <form  onSubmit={this.onFormSubmit} className="input-group">
-            <select  onChange={this.handleChange} className="form-control dropdown ">
-              <option  defaultValue={this.state.defaultValue} > {this.state.defaultValue} </option>
+              <ButtonGroup>
+            <DropdownButton  title={this.state.defaultVal} onSelect={((e)=> this.handleChange(e) )} >
               {
               !this.state.nonFriends ? 'Loading Users...' :
                  this.state.nonFriends.map( (user, i) => {
 
                   return(
 
-                    <option value={user.id} key={user.id}> Email: {user.email} </option>
+                    <MenuItem key={user.id} eventKey={ [user.id, user.email] } > Email: {user.email} </MenuItem>
                   )
                 })
               }
-            </select>
-          <span className="input-group-btn">
-            <button type="submit" className="btn btn-primary addButton"> Add </button>
-          </span>
+
+            </DropdownButton>
+                 {addBtn}
+
+              </ButtonGroup>
         </form>
       </div>
       )

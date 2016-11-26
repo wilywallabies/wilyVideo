@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteFriend, callUser, retrieveFriends,  getNonFriends } from '../actions/friendsAction';
+import { Button,  ButtonGroup } from 'react-bootstrap';
 
 import webrtcModule from '../components/webrtcModule';
 
@@ -72,7 +73,7 @@ class FriendDetail extends React.Component {
               user.onlineStatus === 'y' ?
                <svg className="greenDot" /> : user.onlineStatus === 'away' ? <svg className="yellowDot" /> : <svg className="redDot" />
               }
-              <span> <button onClick={ this.deleteUser } value={ user.id } className='btn btn-danger btn-xs'>  DELETE </button> </span>
+              <Button onClick={ this.deleteUser } value={ user.id }  bsStyle='danger' bsSize="xsmall">  DELETE </Button>
               <hr/>
             </div>
           </div>

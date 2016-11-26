@@ -40,7 +40,10 @@ class Header extends React.Component {
   renderLinks(){
     console.log("PROPS", this.props);
     if(this.props.authenticated){
+      // browserHistory.push('/video')
+
       return <li className="nav-item">
+
         <Button onClick={this.logoutSubmit}>Logout</Button>
       </li>
     } else {
