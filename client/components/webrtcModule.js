@@ -1,256 +1,331 @@
-'use strict'
+let isChannelReady = false;
+let isInitiator = false;
+let isStarted = false;
+let localStream;
+let pc;
+let remoteStream;
+let turnReady;
 
-import axios from 'axios';
-import adapter from 'webrtc-adapter';
-let token = null;
-let myHostname = window.location.hostname;
-const getToken = () => {
-  axios.post('/webrtc/signal/token')
-  .then((res) => {
-    console.log('test2');
-    console.log(res.data.d, 'this is the res');
-    token = res.data.d
-  })
-  .catch((err) => console.error(err))
+let pcConfig = {
+  'iceServers': [{
+    'url': 'stun:stun.l.google.com:19302'
+  }]
 };
 
-const getIce = () => {
-  axios.post('/webrtc/ice')
-  .then((res) => {
-
-    console.log('res', res.data.d.iceServers)
-    return res.data.d;
-  })
-  .catch((err) => console.error(err))
-};
-//Websocket signaling channel variables
-let connection = null;
-let clientID = 0;
-
-let mediaConstraints = {
-  audio: true,
-  video:true
+// Set up audio and video regardless of what devices are present.
+let sdpConstraints = {
+  'mandatory': {
+    'OfferToReceiveAudio': true,
+    'OfferToReceiveVideo': true
+  }
 };
 
-let myUsername = null;
-let targetUsername = null;
-let myPeerConnection = null;
-let localSrc = null;
+/////////////////////////////////////////////
 
-const connect = () => {
-  // axios.post('/webrtc/signal/token')
-  // .then((res) => {
-  //   console.log('test2');
-  //   console.log(res.data.d, 'this is the res');
-  //   token = res.data.d.token
-  // })
-  // .then((res) => {
-  //   console.log('got token: ' + token);
-  //   connection = new WebSocket('ws://endpoint01.uswest.xirsys.com:443/'+token, 'json')
-  //   console.log("connection: " + connection);
-  // })
+let room = 'foo';
+// Could prompt for room name:
+// room = prompt('Enter room name:');
 
-  let serverUrl;
-  let scheme = "ws";
-    serverUrl = scheme + "://" + myHostname + ":6503";
-    connection = new WebSocket(serverUrl, "json");
-  connection.onmessage = (event) => {
-    let msg = JSON.parse(event.data);
+let socket = io.connect();
 
-    switch(msg.type) {
-      case "id":
-        clientID = msg.id;
-        setUsername();
-        break;
+if (room !== '') {
+  socket.emit('create or join', room);
+  console.log('Attempted to create or  join room', room);
+}
 
-        case "username":
-          console.log("<b>User <em>" + msg.name + "</em> signed in at " + time.toLocaleTimeString() + "</b><br>");
-          break;
+socket.on('created', room => {
+  console.log(`Created room ${room}`);
+  isInitiator = true;
+});
 
-      case "videoOffer":
-        handleVideoOffer(msg);
-        break;
+socket.on('full', room => {
+  console.log(`Room ${room} is full`);
+});
 
-      case "videoAnswer":
-        handleVideoAnswer(msg);
-        break;
+socket.on('join', room => {
+  console.log(`Another peer made a request to join room ${room}`);
+  console.log(`This peer is the initiator of room ${room}!`);
+  isChannelReady = true;
+});
 
-      case "newIceCandidate":
-        handleNewICECandidate(msg);
-        break;
+socket.on('joined', room => {
+  console.log(`joined: ${room}`);
+  isChannelReady = true;
+});
 
-      case "hangUp":
-        handleHangUp(msg);
-        break;
+socket.on('log', array => {
+  console.log(...array);
+});
 
-      default:
-        console.error("Unknown message received: " + msg)
+////////////////////////////////////////////////
+
+let sendMessage = (message) => {
+  console.log('Client sending message: ', message);
+  socket.emit('message', message);
+}
+
+// This client receives a message
+socket.on('message', message => {
+  console.log('Client received message:', message);
+  if (message === 'got user media') {
+    maybeStart();
+  } else if (message.type === 'offer') {
+    if (!isInitiator && !isStarted) {
+      maybeStart();
     }
-
-  }
-}
-
-const setUsername = () => {
-  sendToServer({
-    name: window.myUsername,
-    date: Date.now(),
-    id: clientID,
-    type: "username"
-  })
-}
-const handleVideoOffer= (msg) => {
-  let localStream = null;
-
-  targetUsername = msg.name;
-  console.log("starting to accept invitation from " + targetUsername)
-  createPeerConnection();
-
-  let desc = new RTCSessionDescription(msg.sdp);
-
-  myPeerConnection.setRemoteDescription(desc).then(
-    () => {
-      console.log("Set up local media stream")
-      return navigator.mediaDevices.getUserMedia(mediaConstraints)
-    })
-  .then((stream) => {
-    console.log('local video stream obtained')
-    localStream = stream;
-    window.localSrc = URL.createObjectURL(localStream)
-
-  })
-  .then(() => {
-    console.log ('Creating Answer')
-    return myPeerConnection.createAnswer();
-  })
-  .then((answer) => {
-    console.log("set local description after creating answer")
-    return myPeerConnection.setLocalDescription(answer);
-  })
-  .then(() => {
-    let msg = {
-      name: window.myUsername,
-      target: window.targetUsername,
-      type: "videoAnswer",
-      sdp: myPeerConnection.localDescription
-    };
-    console.log('Send answer back to other peer');
-    sendToServer(msg);
-  })
-  .catch((err) => {
-    console.error(err);
-  })
-}
-
-const handleVideoAnswer = () => {
-  console.log("Recipient has accepted call");
-  let desc = new RTCSessionDescription(msg.sdp);
-  myPeerConnection.setRemoteDescription(desc).catch((err) => {
-    console.error(err.name);
-  })
-}
-
-const handleNewICECandidate = (msg) => {
-  let candidate = new RTCIceCandidate(msg.candidate);
-
-  console.log("Add received ICE candidate: " + JSON.stringify(candidate))
-  myPeerConnection.addIceCandidate(candidate)
-    .catch((err) => {
-      console.error(err.name)
-    })
-}
-
-const createPeerConnection = () => {
-  let config = getIce()
-  var icePromise = new Promise((resolve, reject) => {
-    resolve(getIce())
-  })
-  icePromise.then()
-  myPeerConnection = new RTCPeerConnection(config);
-
-  myPeerConnection.onicecandidate = (event) => {
-    if(event.candidate){
-      sendToServer({
-        type: "newIceCandidate",
-        target: window.targetUsername,
-        candidate: event.candidate
-      })
-    }
-  }
-
-  myPeerConnection.onnegotiationneeded = () => {
-    console.log('negotiation needed');
-
-    myPeerConnection.createOffer().then(
-      (offer) => {
-        console.log('create new description to send to remote peer');
-        return myPeerConnection.setLocalDescription(offer);
-      })
-      .then(() => {
-        console.log('send offer to remote peer');
-        sendToServer({
-          name: window.myUsername,
-          target: window.targetUsername,
-          type: "videoOffer",
-          sdp: myPeerConnection.localDescription
-        });
-      })
-      .catch((err) => {
-        console.error(err.name)
-      })
-  }
-  // myPeerConnection.onAddStream = (event) => {
-  //
-  // }
-
-  // myPeerConnection.onIceConnectionStateChange = (event) => {
-  //
-  // }
-};
-
-const invite = (event) => {
-  if (myPeerConnection) {
-    alert("Call already open")
-  }
-  createPeerConnection();
-
-  navigator.mediaDevices.getUserMedia(mediaConstraints)
-    .then((localStream) => {
-       window.localSrc = URL.createObjectURL(localStream);
-       myPeerConnection.addStream(localStream);
-       return window.localSrc;
+    pc.setRemoteDescription(new RTCSessionDescription(message));
+    doAnswer();
+  } else if (message.type === 'answer' && isStarted) {
+    pc.setRemoteDescription(new RTCSessionDescription(message));
+  } else if (message.type === 'candidate' && isStarted) {
+    let candidate = new RTCIceCandidate({
+      sdpMLineIndex: message.label,
+      candidate: message.candidate
     });
-};
+    pc.addIceCandidate(candidate);
+  } else if (message === 'bye' && isStarted) {
+    handleRemoteHangup();
+  }
+});
 
-const hangUpCall = () => {
-  closeVideoCall()
-  sendToServer({
-    name: window.myUsername,
-    target: window.targetUsername,
-    type: 'hangUp'
-  })
+////////////////////////////////////////////////////
+
+let localVideo = document.querySelector('#localVideo');
+let remoteVideo = document.querySelector('#remoteVideo');
+
+let gotStream = (stream) => {
+  console.log('Adding local stream.');
+  localVideo.src = window.URL.createObjectURL(stream);
+  localStream = stream;
+  sendMessage('got user media');
+  if (isInitiator) {
+    maybeStart();
+  }
 }
 
-const handleSendButton = () => {
-  var msg = {
-    text: text.value,
-    type: "message",
-    id: clientID
-  };
-  sendToServer(msg);
+navigator.mediaDevices.getUserMedia({
+  audio: true,
+  video: true
+})
+.then(gotStream)
+.catch(e => {
+  alert(`getUserMedia() error: ${e.name}`);
+});
+
+
+
+let constraints = {
+  video: true
+};
+
+console.log('Getting user media with constraints', constraints);
+
+// if (location.hostname !== 'localhost') {
+//   requestTurn(
+//     'https://computeengineondemand.appspot.com/turn?username=41784574&key=4080218913'
+//   );
+// }
+
+let maybeStart = () => {
+  console.log('>>>>>>> maybeStart() ', isStarted, localStream, isChannelReady);
+  if (!isStarted && typeof localStream !== 'undefined' && isChannelReady) {
+    console.log('>>>>>> creating peer connection');
+    createPeerConnection();
+    pc.addStream(localStream);
+    isStarted = true;
+    console.log('isInitiator', isInitiator);
+    if (isInitiator) {
+      doCall();
+    }
+  }
 }
-//Send Javascript object by converting to JSON and sending through Websocket connection
-const sendToServer= (msg) => {
-  let msgJSON = JSON.stringify(msg);
-  connection.send(msgJSON);
+
+window.onbeforeunload = () => {
+  sendMessage('bye');
 };
 
+/////////////////////////////////////////////////////////
 
-// Module for use in React component
-let webrtcModule = {
-  invite: invite,
-  getIce: getIce,
-  connect: connect
-};
+let createPeerConnection = () => {
+  try {
+    pc = new RTCPeerConnection(pcConfig);
+    pc.onicecandidate = handleIceCandidate;
+    pc.onaddstream = handleRemoteStreamAdded;
+    pc.onremovestream = handleRemoteStreamRemoved;
+    console.log('Created RTCPeerConnnection');
+  } catch (e) {
+    console.log(`Failed to create PeerConnection, exception: ${e.message}`);
+    alert('Cannot create RTCPeerConnection object.');
+    return;
+  }
+}
+
+ let handleIceCandidate = (event) => {
+  console.log('icecandidate event: ', event);
+  if (event.candidate) {
+    sendMessage({
+      type: 'candidate',
+      label: event.candidate.sdpMLineIndex,
+      id: event.candidate.sdpMid,
+      candidate: event.candidate.candidate
+    });
+  } else {
+    console.log('End of candidates.');
+  }
+}
+
+let handleRemoteStreamAdded = (event) => {
+  console.log('Remote stream added.');
+  remoteVideo.src = window.URL.createObjectURL(event.stream);
+  remoteStream = event.stream;
+}
+
+let handleCreateOfferError = (event) => {
+  console.log('createOffer() error: ', event);
+}
+
+let doCall = () => {
+  console.log('Sending offer to peer');
+  pc.createOffer(setLocalAndSendMessage, handleCreateOfferError);
+}
+
+let doAnswer = () => {
+  console.log('Sending answer to peer.');
+  pc.createAnswer().then(
+    setLocalAndSendMessage,
+    onCreateSessionDescriptionError
+  );
+}
+
+let setLocalAndSendMessage = (sessionDescription) => {
+  // Set Opus as the preferred codec in SDP if Opus is present.
+  //  sessionDescription.sdp = preferOpus(sessionDescription.sdp);
+  pc.setLocalDescription(sessionDescription);
+  console.log('setLocalAndSendMessage sending message', sessionDescription);
+  sendMessage(sessionDescription);
+}
+
+let onCreateSessionDescriptionError = (error) => {
+  trace(`Failed to create session description: ${error.toString()}`);
+}
+
+// let requestTurn = (turnURL) => {
+//   let turnExists = false;
+//   for (let i in pcConfig.iceServers) {
+//     if (pcConfig.iceServers[i].url.substr(0, 5) === 'turn:') {
+//       turnExists = true;
+//       turnReady = true;
+//       break;
+//     }
+//   }
+//   if (!turnExists) {
+//     console.log('Getting TURN server from ', turnURL);
+//     // No TURN server. Get one from computeengineondemand.appspot.com:
+//     let xhr = new XMLHttpRequest();
+//
+//   }
+// }
 
 
-export default webrtcModule;
+
+let handleRemoteStreamRemoved = (event) => {
+  console.log('Remote stream removed. Event: ', event);
+}
+
+let hangup = () => {
+  console.log('Hanging up.');
+  stop();
+  sendMessage('bye');
+}
+
+let handleRemoteHangup = () => {
+  console.log('Session terminated.');
+  stop();
+  isInitiator = false;
+}
+
+let stop = () => {
+  isStarted = false;
+  // isAudioMuted = false;
+  // isVideoMuted = false;
+  pc.close();
+  pc = null;
+}
+
+///////////////////////////////////////////
+
+// Set Opus as the default audio codec if it's present.
+let  preferOpus = (sdp) => {
+  let sdpLines = sdp.split('\r\n');
+  let mLineIndex;
+  // Search for m line.
+  for (var i = 0; i < sdpLines.length; i++) {
+    if (sdpLines[i].search('m=audio') !== -1) {
+      mLineIndex = i;
+      break;
+    }
+  }
+  if (mLineIndex === null) {
+    return sdp;
+  }
+
+  // If Opus is available, set it as the default in m line.
+  for (i = 0; i < sdpLines.length; i++) {
+    if (sdpLines[i].search('opus/48000') !== -1) {
+      let opusPayload = extractSdp(sdpLines[i], /:(\d+) opus\/48000/i);
+      if (opusPayload) {
+        sdpLines[mLineIndex] = setDefaultCodec(sdpLines[mLineIndex],
+          opusPayload);
+      }
+      break;
+    }
+  }
+
+  // Remove CN in m line and sdp.
+  sdpLines = removeCN(sdpLines, mLineIndex);
+
+  sdp = sdpLines.join('\r\n');
+  return sdp;
+}
+
+let extractSdp = (sdpLine, pattern) => {
+  let result = sdpLine.match(pattern);
+  return result && result.length === 2 ? result[1] : null;
+}
+
+// Set the selected codec to the first in m line.
+let setDefaultCodec = (mLine, payload) => {
+  let elements = mLine.split(' ');
+  let newLine = [];
+  let index = 0;
+  for (let i = 0; i < elements.length; i++) {
+    if (index === 3) { // Format of media starts from the fourth.
+      newLine[index++] = payload; // Put target payload to the first.
+    }
+    if (elements[i] !== payload) {
+      newLine[index++] = elements[i];
+    }
+  }
+  return newLine.join(' ');
+}
+
+// Strip CN from sdp before CN constraints is ready.
+let removeCN = (sdpLines, mLineIndex) => {
+  let mLineElements = sdpLines[mLineIndex].split(' ');
+  // Scan from end for the convenience of removing an item.
+  for (let i = sdpLines.length - 1; i >= 0; i--) {
+    let payload = extractSdp(sdpLines[i], /a=rtpmap:(\d+) CN\/\d+/i);
+    if (payload) {
+      let cnPos = mLineElements.indexOf(payload);
+      if (cnPos !== -1) {
+        // Remove CN payload from m line.
+        mLineElements.splice(cnPos, 1);
+      }
+      // Remove CN line in sdp
+      sdpLines.splice(i, 1);
+    }
+  }
+
+  sdpLines[mLineIndex] = mLineElements.join(' ');
+  return sdpLines;
+}
